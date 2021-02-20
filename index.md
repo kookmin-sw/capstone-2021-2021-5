@@ -1,37 +1,7 @@
-## Welcome to GitHub Pages
+# 2021-캡스톤5조
 
-You can use the [editor on GitHub](https://github.com/kookmin-sw/cap-template/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+- 프로젝트 소개
+  - 표정이나 음성을 통해 사용자의 감정을 분석하고, 그에 따른 컨텐츠를 챗봇으로 추천해주는 프로젝트
+  - user는 챗봇과의 대화를 통해 그날 그 감정에 따른 일기나 고민상담을 작성 할 수 있다.
+  - 챗봇과의 대화 내용은 원하는 경우 저장할 수 있고, 매달 감정에 대한 통계를 보며 본인이 어떤 감정을 가장 많이 느끼고 있는지 알 수 있다.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kookmin-sw/cap-template/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
