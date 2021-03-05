@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     'django.contrib.sites',
     'rest_framework',
+    'corsheaders',
 ]
 SITE_ID = 1
 
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 AUTH_USER_MODEL = 'account_app.customUser'
 ROOT_URLCONF = 'capstone_project.urls'
@@ -143,3 +145,8 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 
 REST_USE_JWT = True
 ACCOUNT_LOGOUT_ON_GET = True
+
+# CORS 관련 추가 
+CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOW_CREDENTIALS = True
+
