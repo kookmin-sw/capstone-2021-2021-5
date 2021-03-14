@@ -16,3 +16,5 @@ class CustomRegisterSerializer(RegisterSerializer):
         data_dict['gender'] = self.validated_data.get('gender', '')
         data_dict['birthDate'] = self.validated_data.get('birthDate', '')
         return data_dict
+
+
