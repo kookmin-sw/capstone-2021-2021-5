@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'corsheaders',
+    'allauth.socialaccount',
+    'analysis',
 ]
 SITE_ID = 1
 
@@ -138,7 +140,9 @@ REST_FRAMEWORK = {
 }
 
 #ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_REQUIRED = False
+# ACCOUNT_EMAIL_REQUIRED = False
+# ACCOUNT_UNIQUE_EMAIL = True 
+ACCOUNT_USERNAME_REQUIRED = True
 
 #ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -150,3 +154,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 CORS_ORIGIN_ALLOW_ALL=True
 CORS_ALLOW_CREDENTIALS = True
 
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'account_app.serializers.CustomRegisterSerializer',
+}
+ACCOUNT_ADAPTER = 'account_app.adapter.DefaultAccountAdapterCustom'
