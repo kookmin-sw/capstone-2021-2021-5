@@ -17,6 +17,7 @@ class UserInfoView(APIView):
             'email': user.email,
             'gender': user.gender,
             'birthDate': user.birthDate,
+            'userType' : user.userType
             
         }
         return Response(ret, status=status.HTTP_200_OK)
