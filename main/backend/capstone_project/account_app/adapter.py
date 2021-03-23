@@ -8,6 +8,7 @@ class DefaultAccountAdapterCustom(DefaultAccountAdapter):
         data = form.cleaned_data
         user.gender = data.get('gender')
         user.birthDate = data.get('birthDate')
+        user.userType = data.get('userType')
         user.save()
 
         return user

@@ -14,3 +14,11 @@ class customUser(AbstractUser):
         ('F', '여성')
     )
    gender=models.CharField(max_length=1, choices=genderChoices,null=True)
+
+   userTypeChoices = (
+        
+        ('Adviser', '상담사'),
+        
+        ('Normal', '일반')
+    )
+   userType=models.CharField(max_length=7, choices=userTypeChoices,null=True)

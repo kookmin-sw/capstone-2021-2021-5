@@ -11,10 +11,12 @@ class CustomRegisterSerializer(RegisterSerializer):
     # 성별
     gender = serializers.ChoiceField(choices=User.genderChoices)
     birthDate = serializers.DateTimeField()
+    userType = serializers.ChoiceField(choices=User.userTypeChoices)
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
         data_dict['gender'] = self.validated_data.get('gender', '')
         data_dict['birthDate'] = self.validated_data.get('birthDate', '')
+        data_dict['userType'] = self.validated_data.get('userType', '')
         return data_dict
 
 
