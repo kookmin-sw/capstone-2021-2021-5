@@ -10,7 +10,7 @@ class CustomRegisterSerializer(RegisterSerializer):
     """
     # 성별
     gender = serializers.ChoiceField(choices=User.genderChoices)
-    birthDate = serializers.DateTimeField()
+    birthDate = serializers.DateField()
     userType = serializers.ChoiceField(choices=User.userTypeChoices)
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()

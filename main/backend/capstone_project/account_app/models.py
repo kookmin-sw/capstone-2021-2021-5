@@ -5,7 +5,7 @@ import datetime
 # Create your models here.
 class customUser(AbstractUser):
    
-   birthDate= models.DateTimeField(verbose_name='생년월일',null=True)
+   birthDate= models.DateField(verbose_name='생년월일',null=True)
    
    genderChoices = (
         
