@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'allauth.socialaccount',
     'analysis',
+     'chat',
 ]
 SITE_ID = 1
 
@@ -195,4 +197,15 @@ JWT_AUTH = {
 'JWT_AUTH_HEADER_PREFIX': 'JWT',
 'JWT_AUTH_COOKIE': None,
 
+}
+
+# Channels
+ASGI_APPLICATION = 'capstone_project.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }
