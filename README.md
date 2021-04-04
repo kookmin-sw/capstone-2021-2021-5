@@ -26,7 +26,7 @@
 ![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/logo.png?alt=media&token=92a29bfc-11aa-409b-b45c-2a3729338492)
 > 프로젝트의 가장 핵심이라고 할 수 있는 **감정** 을 공유하는것 따라서 이것을 나타낼 수 있는 단어로 프로젝트 명 선정.
 
-### 배경 및 개요
+### 배경및개요
 ![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/reason.png?alt=media&token=0c4957c6-5b2e-4af1-92e3-db3b2d54753d)
 > 최근 Covid-19 사태로 우울증이 많이 증가. 
 >> 사회적 관계 결핍을 해소 할 수 있는 방법과 공간 및 사람들의 감정을 관리해 주는 것이 필요하다 느낌.  
