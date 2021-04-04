@@ -14,9 +14,9 @@
 
 4.[팀원 소개](#팀원소개)
 
-5.사용법
+5.[사용법](#사용법)
 
-6.개발
+6.[개발](#개발)
 
 ## 프로젝트 소개
 
@@ -42,7 +42,7 @@
 
 
 ### DB구조
-
+![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/DB.png?alt=media&token=a0930d27-c4d0-4b63-a27b-1712b270c04f)
 
 ### FLOWCHART
 https://www.figma.com/file/O8MEjdSwNziQ55AquC1x5M/Untitled?node-id=0%3A1
@@ -54,7 +54,7 @@ https://www.figma.com/file/O8MEjdSwNziQ55AquC1x5M/Untitled?node-id=0%3A1
 
 ## 보고서
 
-[캡스톤 5조 보고서] () 
+[캡스톤 5조 보고서](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf?alt=media&token=90028701-2372-4af8-8f43-54c465472191) 
 
 ## 팀원소개
 ```
