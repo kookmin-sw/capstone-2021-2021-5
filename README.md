@@ -72,8 +72,8 @@ Github : [@chomins](https://github.com/chomins)
 
 이정우
 
-Student ID : 20171618
-E-Mail : dsawt98@kookmin.ac.kr
+Student ID : 20152851
+E-Mail : acdacd66@naver.com
 Role : 백엔드
 Github : [@acdadc56](https://github.com/acdacd56)
 
