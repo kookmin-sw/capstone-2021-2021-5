@@ -75,7 +75,7 @@ Github : [@chomins](https://github.com/chomins)
 Student ID : 20152851
 E-Mail : acdacd66@naver.com
 Role : 백엔드
-Github : [@acdadc56](https://github.com/acdacd56)
+Github : [@acdacd66](https://github.com/acdacd66)
 
 ```
 
