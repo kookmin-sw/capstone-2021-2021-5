@@ -131,12 +131,16 @@ Github : [@cys950331](https://github.com/cys950331)
 >>>		< yarn start >
 
 **Back End**
-> https://www.notion.so/68a26e095ea04f58978e954cc1d2e469
+> -> https://www.notion.so/68a26e095ea04f58978e954cc1d2e469
 
 ## 개발
 **협업 규칙**
-> https://www.notion.so/git-convention-206a562cda674ce99e326d875048c865
+> <img width="400" alt="스크린샷 2021-04-04 오후 7 41 38" src="https://user-images.githubusercontent.com/39540606/113506219-7669df80-957e-11eb-99ce-880ec40e580f.png">
+
+> -> https://www.notion.so/git-convention-206a562cda674ce99e326d875048c865
 
 **api spec**
-> https://www.notion.so/api-spec-63decf9ed6a447bc9c90e5d2a4a5a44c
+> <img width="400" alt="스크린샷 2021-04-04 오후 7 41 24" src="https://user-images.githubusercontent.com/39540606/113506460-ff354b00-957f-11eb-8bc8-a0e6e045ae19.png">
+
+> -> https://www.notion.so/api-spec-63decf9ed6a447bc9c90e5d2a4a5a44c
 
