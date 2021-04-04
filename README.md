@@ -1,80 +1,113 @@
 [![Work in Repl.it](https://classroom.github.com/assets/work-in-replit-14baed9a392b3a25080506f3b7b6d57f295ec2978f6f33ec97e36a161684cbe9.svg)](https://classroom.github.com/online_ide?assignment_repo_id=349932&assignment_repo_type=GroupAssignmentRepo)
-# Welcome to GitHub
+[![Work in Repl.it](https://classroom.github.com/assets/work-in-replit-14baed9a392b3a25080506f3b7b6d57f295ec2978f6f33ec97e36a161684cbe9.svg)](https://classroom.github.com/online_ide?assignment_repo_id=349932&assignment_repo_type=GroupAssignmentRepo)
+# 2021-캡스톤5조
 
-캡스톤 팀 생성을 축하합니다.
+1.프로젝트 소개
+  - [프로젝트명](#프로젝트명)
+  - [배경 및 개요](#배경및개요)
+  - [DB구조](#DB구조)
+  - [FLOWCHART](#FLOWCHART)
 
-## 팀소개 및 페이지를 꾸며주세요.
+2.소개
+  - [제공 기능](#제공해주는기능)
 
-- 프로젝트 소개
-  - 표정이나 음성을 통해 사용자의 감정을 분석하고, 그에 따른 컨텐츠를 챗봇으로 추천해주는 프로젝트
-  - user는 챗봇과의 대화를 통해 그날 그 감정에 따른 일기나 고민상담을 작성 할 수 있다.
-  - 챗봇과의 대화 내용은 원하는 경우 저장할 수 있고, 매달 감정에 대한 통계를 보며 본인이 어떤 감정을 가장 많이 느끼고 있는지 알 수 있다.
+3.[보고서](#보고서)
 
-- 팀페이지 꾸미기
-  - 프로젝트 소개 및 팀원 소개
-  - index.md 예시보고 수정.
+4.[팀원 소개](#팀원소개)
 
-- GitHub Pages 리파지토리 Settings > Options > GitHub Pages 
-  - Source를 marster branch
-  - Theme Chooser에서 태마선택
-  - 수정후 팀페이지 확인하여 점검.
+5.사용법
 
-**팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2021-5/
+6.개발
 
-**예시)** 2020년 0조  https://kookmin-sw.github.io/capstone-2020-0/
+## 프로젝트 소개
 
+### 프로젝트명  
 
-## 내용에 아래와 같은 내용들을 추가하세요.
+**SENTIO**
+![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/logo.png?alt=media&token=92a29bfc-11aa-409b-b45c-2a3729338492)
+> 프로젝트의 가장 핵심이라고 할 수 있는 **감정** 을 공유하는것 따라서 이것을 나타낼 수 있는 단어로 프로젝트 명 선정.
 
-### 1. 프로잭트 소개
+### 배경및개요
+![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/reason.png?alt=media&token=0c4957c6-5b2e-4af1-92e3-db3b2d54753d)
+> 최근 Covid-19 사태로 우울증이 많이 증가. 
+>> 사회적 관계 결핍을 해소 할 수 있는 방법과 공간 및 사람들의 감정을 관리해 주는 것이 필요하다 느낌.  
+>> 서비스를 통해 자신의 감정을 누군가가 알아주고, 같이 공유함으로써 사회적 관계 결핍을 해소
 
-프로젝트
-
-### 2. 소개 영상
-
-프로젝트 소개하는 영상을 추가하세요
-
-### 3. 팀 소개
-
-팀을 소개하세요.
-
-조민수(팀장) 소프트웨어학부
-https://chomins.github.io/
-
-
-### 4. 사용법
-
-소스코드제출시 설치법이나 사용법을 작성하세요.
-
-### 5. 기타
-
-추가적인 내용은 자유롭게 작성하세요.
+> 본 서비스는 표정으로 사용자의 감정을 분류 하여, 인공지능 라벨링을 통한 분류 데이터(문화 컨텐츠)를 제공  
+> 
+> 가공된 문화 컨텐츠에 사용자의 성향과 감정이라는 추상적 분석기법을 도입하여 사용자의 경험을 최상으로 이끌수 있는 서비스를 구축
+> 
+> 감정이라는 것을 날짜, 시간, 날씨에 따른 다양한 기준을 통한 통계를 제공  
+> 
+> 최종적으로는 일상에 지친 현대인들을 대상으로 위안을 주고, 본인의 감정을 기록할 수 있는 개인 기록 저장소 공간을 제공
 
 
-## Markdown을 사용하여 내용꾸미기
+### DB구조
 
-Markdown은 작문을 스타일링하기위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을위한 규칙이 포함됩니다.
 
-```markdown
-Syntax highlighted code block
+### FLOWCHART
+https://www.figma.com/file/O8MEjdSwNziQ55AquC1x5M/Untitled?node-id=0%3A1
 
-# Header 1
-## Header 2
-### Header 3
+## 소개
 
-- Bulleted
-- List
+### 제공해주는기능
+![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/%EA%B8%B0%EB%8A%A5.png?alt=media&token=9dfe4416-d2c4-43b4-806b-1c155ac99481)
 
-1. Numbered
-2. List
+## 보고서
 
-**Bold** and _Italic_ and `Code` text
+[캡스톤 5조 보고서] () 
 
-[Link](url) and ![Image](src)
+## 팀원소개
 ```
 
-자세한 내용은 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+조민수
 
-### Support or Contact
+Student ID : 20150465
+E-Mail : cms4317@kookmin.ac.kr
+Role : 팀장, 백엔드(보조), 프론트(보조)
+Github : [@chomins](https://github.com/chomins)
 
-readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://help.github.com/articles/about-readmes/) 이나 [contact support](https://github.com/contact) 을 이용하세요.
+```
+
+```
+
+이정우
+
+Student ID : 20152851
+E-Mail : acdacd66@naver.com
+Role : 백엔드
+Github : [@acdadc56](https://github.com/acdacd56)
+
+```
+
+```
+
+김인규
+
+Student ID : 
+E-Mail : 
+Role : AI (음악 감정분석)
+Github : [@gychoics](https://github.com/gychoics)
+
+```
+
+```
+
+한진교
+
+Student ID : 20152868
+E-Mail : hjk9891@naver.com
+Role : AI (표정인식 감정분류)
+Github : [@hjk9891](https://github.com/hjk9891)
+
+```
+
+```
+조영상
+
+Student ID: 20151809
+E-Mail: cys950331@kookmin.ac.kr
+Role : 프론트엔드
+Github : [@cys950331](https://github.com/cys950331)
+
+```
