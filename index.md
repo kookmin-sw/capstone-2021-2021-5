@@ -14,9 +14,9 @@
 
 4.[팀원 소개](#팀원소개)
 
-5.사용법
+5.[사용법](#사용법)
 
-6.개발
+6.[개발](#개발)
 
 ## 프로젝트 소개
 
@@ -42,10 +42,10 @@
 
 
 ### DB구조
-
+![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/DB.png?alt=media&token=a0930d27-c4d0-4b63-a27b-1712b270c04f)
 
 ### FLOWCHART
-[플로우차트](https://www.figma.com/file/O8MEjdSwNziQ55AquC1x5M/Untitled?node-id=0%3A1)
+https://www.figma.com/file/O8MEjdSwNziQ55AquC1x5M/Untitled?node-id=0%3A1
 
 ## 소개
 
@@ -54,7 +54,7 @@
 
 ## 보고서
 
-[캡스톤 5조 보고서] () 
+[캡스톤 5조 보고서](https://firebasestorage.googleapis.com/v0/b/my-project-1541150284852.appspot.com/o/%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf?alt=media&token=90028701-2372-4af8-8f43-54c465472191) 
 
 ## 팀원소개
 ```
@@ -75,7 +75,7 @@ Github : [@chomins](https://github.com/chomins)
 Student ID : 20152851
 E-Mail : acdacd66@naver.com
 Role : 백엔드
-Github : [@acdadc56](https://github.com/acdacd56)
+Github : [@acdacd66](https://github.com/acdacd66)
 
 ```
 
@@ -110,3 +110,33 @@ Role : 프론트엔드
 Github : [@cys950331](https://github.com/cys950331)
 
 ```
+
+## 사용법
+**Front End**
+
+>리액트  구동 방법
+> 1. ‘npm’ 을 이용하는 경우 
+>>	1) ‘node.js’를 설치한다. 자동으로 ‘npm’은 설치 완료된다.
+>>	2) 프로젝트가 위치한 폴더로 이동한다.
+>>>		< cd ‘프로젝트명’ >
+>>	3) 명령어를 실행하여 구동시킨다.
+>>>	< npm start >
+
+>2. ‘yarn’ 을 이용하는 경우 ( 페이스북에서 개발한 속도 및 안정성측면에서 좋은 패키지매니저)
+>>	1) ‘node.js’가 설치되어있는 환경에서 yarn을 설치한다.
+>>>		< npm Install —global yarn >
+>>	2) 프로젝트가 위한 폴더로 이동한다.
+>>>		< cd ‘프로젝트명’ >
+>>	3) 명령어를 실행하여 구동시킨다.
+>>>		< yarn start >
+
+**Back End**
+> https://www.notion.so/68a26e095ea04f58978e954cc1d2e469
+
+## 개발
+**협업 규칙**
+> https://www.notion.so/git-convention-206a562cda674ce99e326d875048c865
+
+**api spec**
+> https://www.notion.so/api-spec-63decf9ed6a447bc9c90e5d2a4a5a44c
+
