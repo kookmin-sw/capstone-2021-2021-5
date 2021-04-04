@@ -83,8 +83,8 @@ Github : [@acdadc56](https://github.com/acdacd56)
 
 김인규
 
-Student ID : 
-E-Mail : 
+Student Id : 20150752
+Email: inkyu0103@kookmin.ac.kr
 Role : AI (음악 감정분석)
 Github : [@gychoics](https://github.com/gychoics)
 
