@@ -110,3 +110,33 @@ Role : 프론트엔드
 Github : [@cys950331](https://github.com/cys950331)
 
 ```
+
+## 사용법
+**Front End**
+
+>리액트  구동 방법
+> 1. ‘npm’ 을 이용하는 경우 
+>>	1) ‘node.js’를 설치한다. 자동으로 ‘npm’은 설치 완료된다.
+>>	2) 프로젝트가 위치한 폴더로 이동한다.
+>>>		< cd ‘프로젝트명’ >
+>>	3) 명령어를 실행하여 구동시킨다.
+>>>	< npm start >
+
+>2. ‘yarn’ 을 이용하는 경우 ( 페이스북에서 개발한 속도 및 안정성측면에서 좋은 패키지매니저)
+>>	1) ‘node.js’가 설치되어있는 환경에서 yarn을 설치한다.
+>>>		< npm Install —global yarn >
+>>	2) 프로젝트가 위한 폴더로 이동한다.
+>>>		< cd ‘프로젝트명’ >
+>>	3) 명령어를 실행하여 구동시킨다.
+>>>		< yarn start >
+
+**Back End**
+> https://www.notion.so/68a26e095ea04f58978e954cc1d2e469
+
+## 개발
+**협업 규칙**
+> https://www.notion.so/git-convention-206a562cda674ce99e326d875048c865
+
+**api spec**
+> https://www.notion.so/api-spec-63decf9ed6a447bc9c90e5d2a4a5a44c
+
