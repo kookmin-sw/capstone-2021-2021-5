@@ -135,6 +135,7 @@ Github : [@cys950331](https://github.com/cys950331)
 
 ## 개발
 **협업 규칙**
+> <img width="300" alt="스크린샷 2021-04-04 오후 7 41 38" src="https://user-images.githubusercontent.com/39540606/113506219-7669df80-957e-11eb-99ce-880ec40e580f.png">
 > https://www.notion.so/git-convention-206a562cda674ce99e326d875048c865
 
 **api spec**
