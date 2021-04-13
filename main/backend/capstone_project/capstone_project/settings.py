@@ -132,8 +132,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-        #  'rest_framework.permissions.AllowAny',      # 누구나 접근 가능
+        # 'rest_framework.permissions.IsAuthenticated',
+         'rest_framework.permissions.AllowAny',      # 누구나 접근 가능
 
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (

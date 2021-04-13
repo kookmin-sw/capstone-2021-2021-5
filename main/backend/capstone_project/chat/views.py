@@ -20,7 +20,7 @@ def room(request, room_name):
 class ChatRoomViewSet(viewsets.ModelViewSet):
     queryset = chatRoom.objects.all()
     serializer_class = chatRoomSerializer
-    http_method_names = ['get']  # get 메소드만 허용
+    http_method_names = ['get','post']  # get 메소드만 허용
 
     # def post(self, request):
     #     room_name = request.data['room_name']
