@@ -10,3 +10,4 @@ class Tendancy(models.Model):
         User,
         on_delete=models.CASCADE,null=True
     )
+
