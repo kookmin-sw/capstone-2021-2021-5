@@ -1,4 +1,3 @@
-import { MailRounded } from '@material-ui/icons';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,9 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
-import {useCookies} from 'react-cookie';
-
+import { useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,43 +24,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main(){
+export default function ChatList(){
   const classes = useStyles();
-  let [roomname, setRoomName] = useState();
-  let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
   let history = useHistory();
+  const [clist, setList] = useState([]);
+
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
-  function OnSubmit(e) {
-    e.preventDefault();
-    if(roomname == null){
-      alert("Check RoomName");
-      return;
-    }
 
-    axios.post('http://127.0.0.1:8000/chat/crud/',{
-      name: roomname,
-
-    })
-    .then(function (response){
+  useEffect(()=>{
+    axios.get('http://127.0.0.1:8000/chat/crud/')
+    .then(function(response){
       console.log(response);
       console.log(response.data);
-      document.cookie = 'authorization=' + token + ';'
-      window.sessionStorage.setItem("MakeRoomName", roomname);
-      history.push("/chat");
-
+      console.log(response.data[0]);
+      setList(response.data);
+      // alert("Succ");
     })
-    .catch(function (error){
+    .catch(function(error){
       console.log(error);
-      alert(error);
-    });
-  }
+      alert("fail")
+    })
+  },[]);
 
-  function OnChat(e) {
-    e.preventDefault();
-    history.push("/chatlist");
-  }
 
   return(
     <div className={classes.root}>
@@ -73,20 +57,14 @@ export default function Main(){
       <MenuIcon />
     </IconButton>
     <Typography variant="h6" className={classes.title}>
-      Main Page
+      Chat List
     </Typography>
     <Button color="inherit">Logout</Button>
   </Toolbar>
 </AppBar>
-<form className={classes.form} onSubmit={OnSubmit}>
-  <TextField id="roomname" label="roomName" name="roomname" onChange={(e)=>{
-                  setRoomName(e.target.value);
-                }} />
-  <Button type="submit" className={classes.submit} onSubmit={OnSubmit}>채팅생성</Button>
-</form>
-<form className={classes.form} onSubmit={OnChat}>
-  <Button type="submit" className={classes.submit} onSubmit={OnChat}>채팅창리스트 보기</Button>
-</form>
+<textarea value={clist[0]}></textarea>
+
+
 </div>
   );
 }
