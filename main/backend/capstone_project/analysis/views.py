@@ -4,8 +4,17 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model
 
-from .models import Tendancy
+from .models import Tendancy,Emotion
 import ast
+
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import io
+import sys
+
+from django.conf import settings
+
+from util import face
+import base64
 
 User = get_user_model()
 # Create your views here.
@@ -34,3 +43,36 @@ class TendancyView(APIView):
     #     tendancy.save()
         
     #     return Response(status=status.HTTP_200_OK)
+
+class EmotionAnalyzeView(APIView):
+    def post(self, request):
+        #만약 해당유저가 이미 성향조사를 완료했으면
+        # if Tendancy.objects.filter(profile=request.user).exists():
+        #     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+       
+        instance = face.FaceClass()
+        emotion_dict,img = instance.face()
+        
+        img_io = io.BytesIO()
+        img.save(img_io, "JPEG")
+
+        emotion=Emotion()
+        emotion_list = list(emotion_dict.values())
+        emotion_str=str(emotion_list)
+        emotion.emotions=emotion_str
+        emotion.profile=request.user
+        emotion.image = InMemoryUploadedFile(img_io, 'ImageField', 'image.jpeg', 
+                    'image/jpeg',sys.getsizeof(img_io), None )
+        image_path = settings.MEDIA_ROOT + '/' + str(emotion.image)
+        emotion.save()
+
+        emotion_json = {}
+        # print(image_path)   
+        with open(image_path, "rb") as image_file:
+            emotion_json['image'] = base64.b64encode(image_file.read()).decode('utf-8')
+
+       
+        emotion_json['emotions'] = emotion_list
+      
+        return Response(emotion_json)

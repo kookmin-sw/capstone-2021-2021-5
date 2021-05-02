@@ -12,11 +12,14 @@ class CustomRegisterSerializer(RegisterSerializer):
     gender = serializers.ChoiceField(choices=User.genderChoices)
     birthDate = serializers.DateField()
     userType = serializers.ChoiceField(choices=User.userTypeChoices)
+    image = serializers.ImageField(use_url=True, allow_empty_file=True,required=False)
+
     def get_cleaned_data(self):
         data_dict = super().get_cleaned_data()
         data_dict['gender'] = self.validated_data.get('gender', '')
         data_dict['birthDate'] = self.validated_data.get('birthDate', '')
         data_dict['userType'] = self.validated_data.get('userType', '')
+        data_dict['image'] = self.validated_data.get('image', '')
         return data_dict
 
 

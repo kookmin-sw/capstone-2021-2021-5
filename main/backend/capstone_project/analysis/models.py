@@ -11,3 +11,13 @@ class Tendancy(models.Model):
         on_delete=models.CASCADE,null=True
     )
 
+# Create your models here.
+class Emotion(models.Model):
+    pubdate=models.DateTimeField(auto_now_add=True,verbose_name='아카이빙 날짜/시각',null=True)
+    emotions=models.CharField(max_length=100,null=True,verbose_name='감정 리스트')
+    profile= models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,null=True
+    )
+    image = models.ImageField(null=True)
+

@@ -4,4 +4,5 @@ import analysis.views as views
 
 urlpatterns = [
         path('tendancy/', views.TendancyView.as_view(),name='tendancy'),
+        path('emotion_analyze/', views.EmotionAnalyzeView.as_view(),name='emotion_analyze'),
 ]
