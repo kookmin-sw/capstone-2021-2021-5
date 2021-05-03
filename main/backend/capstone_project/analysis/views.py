@@ -33,16 +33,19 @@ class TendancyView(APIView):
         
         return Response(status=status.HTTP_200_OK)
 
-    # def put(self, request):
-      
-
-    #     answers=request.data['answer']
-    #     tendancy=Tendancy.objects.get(profile=request.user)
-    #     tendancy.answer=answers
-    #     tendancy.profile=request.user
-    #     tendancy.save()
+    def put(self, request):
+         #만약 해당유저가 이미 성향조사를 완료 안했으면
+        if not Tendancy.objects.filter(profile=request.user).exists():
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         
-    #     return Response(status=status.HTTP_200_OK)
+        answers=request.data['answer']
+        tendancy=Tendancy.objects.get(profile=request.user)
+        tendancy.answer=answers
+        tendancy.save()
+
+        return Response(status=status.HTTP_200_OK)
+     
+
 
 class EmotionAnalyzeView(APIView):
     def post(self, request):
@@ -64,13 +67,11 @@ class EmotionAnalyzeView(APIView):
         emotion.profile=request.user
         emotion.image = InMemoryUploadedFile(img_io, 'ImageField', 'image.jpeg', 
                     'image/jpeg',sys.getsizeof(img_io), None )
-        image_path = settings.MEDIA_ROOT + '/' + str(emotion.image)
+        image_path =  emotion.image.url
         emotion.save()
 
         emotion_json = {}
-        # print(image_path)   
-        with open(image_path, "rb") as image_file:
-            emotion_json['image'] = base64.b64encode(image_file.read()).decode('utf-8')
+        emotion_json['image'] = image_path
 
        
         emotion_json['emotions'] = emotion_list
