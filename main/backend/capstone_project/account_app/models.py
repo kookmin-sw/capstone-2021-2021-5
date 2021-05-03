@@ -23,4 +23,4 @@ class customUser(AbstractUser):
     )
    userType=models.CharField(max_length=7, choices=userTypeChoices,null=True)
 
-   image = models.ImageField(default='default.jpg')
+   image = models.ImageField(default='default/default.jpg',blank=False,null=True)
