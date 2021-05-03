@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+
+
 # Create your models here.
 class Tendancy(models.Model):
     pubdate=models.DateTimeField(auto_now_add=True,verbose_name='아카이빙 날짜/시각',null=True)
@@ -21,3 +23,4 @@ class Emotion(models.Model):
     )
     image = models.ImageField(null=True)
 
+   
