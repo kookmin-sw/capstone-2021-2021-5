@@ -15,6 +15,9 @@ from django.conf import settings
 
 from util import face
 import base64
+import uuid
+
+
 
 User = get_user_model()
 # Create your views here.
@@ -53,19 +56,29 @@ class EmotionAnalyzeView(APIView):
         # if Tendancy.objects.filter(profile=request.user).exists():
         #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-       
+        surveys = answers=request.data['answer']
+
+        try:
+            f=request.FILES['image'].read()
+        except :
+            return Response("invalid image file!",status=status.HTTP_400_BAD_REQUEST)
+        existing_filename=request.FILES['image'].name
+        input_image=io.BytesIO(f)
+        
         instance = face.FaceClass()
-        emotion_dict,img = instance.face()
+        emotion_dict,img = instance.face(input_image)
         
         img_io = io.BytesIO()
         img.save(img_io, "JPEG")
+
+        filename = '%s%s' % ( uuid.uuid4(),existing_filename)
 
         emotion=Emotion()
         emotion_list = list(emotion_dict.values())
         emotion_str=str(emotion_list)
         emotion.emotions=emotion_str
         emotion.profile=request.user
-        emotion.image = InMemoryUploadedFile(img_io, 'ImageField', 'image.jpeg', 
+        emotion.image = InMemoryUploadedFile(img_io, None, filename, 
                     'image/jpeg',sys.getsizeof(img_io), None )
         image_path =  emotion.image.url
         emotion.save()
