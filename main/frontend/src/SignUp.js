@@ -77,8 +77,7 @@ export default function SignUp() {
   let history = useHistory();
 
   
-  const hasNotSamePw = p =>
-    pw !== pwc ? true : false;
+  
 
   function OnSubmit(e) {
     e.preventDefault();

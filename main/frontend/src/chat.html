@@ -13,7 +13,10 @@
 </body>
 
 <script>
-    var roomName = {{ room_name_json }};
+    var roomName = "test";
+    let token = "1234";
+    
+    document.cookie = 'authorization=' + token + ';' 
 
     var chatSocket = new WebSocket(
         'ws://' + "127.0.0.1:8000" +

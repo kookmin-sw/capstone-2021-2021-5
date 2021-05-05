@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import './App.css';
+import { CookiesProvider } from 'react-cookie';
 import SignIn from './SignIn.js';
 import SignUp from './SignUp.js';
 import Main from './Main.js';
 import Tendency from './Tendency';
 import UserPage from './UserPage';
-import Chat from './Chat.js';
+import ChatList from "./ChatList";
+import Chat from "./Chat";
 
 function App() {
 
   return (
     <div className="App">
+      <CookiesProvider>
     <Route exact path="/"> 
       <SignIn />
     </Route>
@@ -27,9 +30,13 @@ function App() {
     <Route path="/userpage">
       <UserPage />
     </Route>
-    <Route path="/chat">
+    <Route path="/chatlist">
+      <ChatList />
+    </Route>
+    <Route exact path="/chat"> 
       <Chat />
     </Route>
+    </CookiesProvider>
     </div>
   );
 }
