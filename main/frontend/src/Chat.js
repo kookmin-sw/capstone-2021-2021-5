@@ -15,7 +15,7 @@ export default function Chat(){
   let [roomname, setRoomName] = useState();
   let [message, setMessage] = useState();
   let [chatlog, setChatLog] = useState();
-  // document.cookie = 'authorization=' + token;
+  document.cookie = 'authorization=' + token;
 
  
 
@@ -38,8 +38,8 @@ export default function Chat(){
 
 
   const chatSocket = new WebSocket(
-    'ws://' + "127.0.0.1:8000" +
-    '/ws/chat/' + roomname + '/' + "?token="+token);
+        'ws://' + "127.0.0.1:8000" +
+        '/ws/chat/' + roomname + '/');
         
 
     chatSocket.onmessage = function(e) {
