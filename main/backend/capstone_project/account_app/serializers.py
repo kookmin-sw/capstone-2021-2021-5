@@ -32,6 +32,7 @@ class UserInfoSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserInfoUpdateSerializer(serializers.HyperlinkedModelSerializer):
     image = serializers.ImageField(use_url=True,required=False)
+    email = serializers.EmailField(required=False)
     
     class Meta:
         model = User
