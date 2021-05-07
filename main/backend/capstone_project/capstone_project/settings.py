@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'analysis',
      'chat',
+     'diary_app',
 ]
 SITE_ID = 1
 
