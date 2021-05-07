@@ -20,7 +20,7 @@ import Container from '@material-ui/core/Container';
 import {Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
-
+import { Alert } from 'react-bootstrap';
 
 
 function Copyright() {
@@ -77,6 +77,7 @@ export default function SignUp() {
   let history = useHistory();
 
   
+
   
 
   function OnSubmit(e) {
@@ -100,12 +101,39 @@ export default function SignUp() {
       console.log(response.data.token);
       const accessToken = response.data.token;
       window.sessionStorage.setItem("Authorization",accessToken);
-      
       history.push("/tendency");
     })
+
     .catch(function (error){
-      console.log(error);
-      alert(error);
+      console.log(error.response);
+      if (error.response) {
+        const { data } = error.response;
+        if(data.email != null){
+          console.error("error : ", data.email);
+          alert(data.email);
+        }
+        if(data.username != null){
+          console.error("error : ", data.username);
+          alert(data.username);
+        }
+        if(data.password1 != null){
+          console.error("error : ", data.password1);
+          alert(data.password1);
+        }
+        if(data.gender != null){
+          console.error("error : ", data.gender);
+          alert(data.gender);
+        }
+        if(data.usertype != null){
+          console.error("error : ", data.usertype);
+          alert(data.usertype);
+        }
+        if(data.birthDate != null){
+          console.error("error : ", data.birthDate);
+          alert(data.birthDate);
+        }
+        
+      }
     });
   }
 
@@ -124,7 +152,7 @@ export default function SignUp() {
                 autoComplete="name"
                 name="name"
                 variant="outlined"
-                required
+                required="required"
                 fullWidth
                 id="name"
                 label="이름"
@@ -138,7 +166,7 @@ export default function SignUp() {
             {/* <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                required
+                required="required"
                 fullWidth
                 id="lastName"
                 label="Last Name"
@@ -148,8 +176,9 @@ export default function SignUp() {
             </Grid> */}
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 required
+                variant="outlined"
+                required="required"
                 fullWidth
                 id="email"
                 label="이메일"
@@ -164,7 +193,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
+                required="required"
                 fullWidth
                 name="password"
                 label="비밀번호"
@@ -180,7 +209,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
+                required="required"
                 fullWidth
                 name="password2"
                 label="비밀번호 확인"
@@ -202,7 +231,7 @@ export default function SignUp() {
               </InputLabel>
              <TextField
                 variant="outlined"
-                required
+                required="required"
                 fullWidth
                 name="birthdate"
                 color="secondary"
@@ -221,7 +250,7 @@ export default function SignUp() {
                     id="demo-simple-select-outlined"
                     label="성별"
                     color="secondary"
-                    required
+                    required="required"
                     onChange={(e)=>{
                   setGender(e.target.value);
                 }}
@@ -238,7 +267,7 @@ export default function SignUp() {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     color="secondary"
-                    required
+                    required="required"
                     onChange={(e)=>{
                   setUserType(e.target.value);
                 }}

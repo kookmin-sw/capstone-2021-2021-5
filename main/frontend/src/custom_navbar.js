@@ -24,8 +24,7 @@ import {
   
     return (
       <>
-      <Container className="themed-container" fluid={true}>
-      <Navbar color="faded" light expand="md" >
+      <Navbar variant="light" bg="light" light expand="md" >
         <Row >
         <Col xs="6"><NavbarBrand href="/main"><img src="logo/1x/Sentio_horizontalmdpi.png" width="100%" ></img></NavbarBrand></Col>
         <Col xs="6" className=" menu">
@@ -46,8 +45,6 @@ import {
           </Col>
         </Row>
         </Navbar>
-      </Container>
-        
       </>
     );
   }

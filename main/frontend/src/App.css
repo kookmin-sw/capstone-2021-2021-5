@@ -89,6 +89,11 @@ input::placeholder{
   font-weight: 100;
 }
 
+#btn_nomal {
+  background-color: #e73330a2;
+  border:none;
+}
+
 .logo {
   text-align: center;
 }
@@ -108,4 +113,9 @@ input::placeholder{
   font-style: normal;
   font-weight: 100;
   font-size: 1.5em;
+}
+
+#bottom_fix {
+  text-align: center;
+  align-items: center;
 }

@@ -117,7 +117,7 @@ export default function SignIn()  {
             fullWidth
             id="email"
             color="secondary"
-            label="이메일"
+            label="아이디"
             name="email"
             autoComplete="email"
             autoFocus
