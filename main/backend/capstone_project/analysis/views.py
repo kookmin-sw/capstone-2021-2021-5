@@ -17,7 +17,7 @@ from util import face
 import base64
 import uuid
 
-
+import datetime
 
 User = get_user_model()
 # Create your views here.
@@ -57,7 +57,7 @@ class EmotionAnalyzeView(APIView):
         #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
         surveys = answers=request.data['answer']
-
+  
         try:
             f=request.FILES['image'].read()
         except :
@@ -72,21 +72,32 @@ class EmotionAnalyzeView(APIView):
         img.save(img_io, "JPEG")
 
         filename = '%s%s' % ( uuid.uuid4(),existing_filename)
-
-        emotion=Emotion()
-        emotion_list = list(emotion_dict.values())
-        emotion_str=str(emotion_list)
-        emotion.emotions=emotion_str
-        emotion.profile=request.user
-        emotion.image = InMemoryUploadedFile(img_io, None, filename, 
-                    'image/jpeg',sys.getsizeof(img_io), None )
-        image_path =  emotion.image.url
-        emotion.save()
-
+        today = datetime.date.today()
+        if not Emotion.objects.filter(profile=request.user,pubdate= today).exists():
+            emotion=Emotion()
+            emotion_list = list(emotion_dict.values())
+            emotion_str=str(emotion_list)
+            emotion.emotions=emotion_str
+            emotion.profile=request.user
+            emotion.image = InMemoryUploadedFile(img_io, None, filename, 
+                        'image/jpeg',sys.getsizeof(img_io), None )
+            image_path =  emotion.image.url
+            emotion.save()
+        else:
+            emotion = Emotion.objects.get(profile=request.user,pubdate= today)
+            emotion_list = list(emotion_dict.values())
+            emotion_str=str(emotion_list)
+            emotion.emotions=emotion_str
+            emotion.profile=request.user
+            emotion.image = InMemoryUploadedFile(img_io, None, filename, 
+                        'image/jpeg',sys.getsizeof(img_io), None )
+            image_path =  emotion.image.url
+            emotion.save()
+            
         emotion_json = {}
         emotion_json['image'] = image_path
 
        
         emotion_json['emotions'] = emotion_list
-      
+
         return Response(emotion_json)
