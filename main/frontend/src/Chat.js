@@ -15,7 +15,7 @@ export default function Chat(){
   let [roomname, setRoomName] = useState();
   let [message, setMessage] = useState();
   let [chatlog, setChatLog] = useState();
-  document.cookie = 'authorization=' + token;
+  // document.cookie = 'authorization=' + token;
 
  
 
@@ -38,8 +38,8 @@ export default function Chat(){
 
 
   const chatSocket = new WebSocket(
-        'ws://' + "127.0.0.1:8000" +
-        '/ws/chat/' + roomname + '/');
+    'ws://' + "127.0.0.1:8000" +
+    '/ws/chat/' + roomname + '/' + "?token="+token);
         
 
     chatSocket.onmessage = function(e) {
@@ -53,7 +53,7 @@ export default function Chat(){
     };
 
     
-    function OnSubmit(e){
+    function OnSubmit(){
         chatSocket.send(JSON.stringify({
             'message': message
         }));
@@ -65,7 +65,7 @@ export default function Chat(){
   return(
     <div>
       <textarea id="chat-log" cols="100" rows="20">{chatlog}</textarea><br/>
-      <input id="chat-message-input" type="text" size="100" onFocus onKeyUp={(e)=>{
+      <input id="chat-message-input" type="text" size="100" onKeyUp={(e)=>{
                   if(e.key === 13){
                     OnSubmit();
                   };
@@ -73,7 +73,7 @@ export default function Chat(){
                 onChange={(e)=>{
                   setMessage(e.target.value);
                 }}/><br/>
-      <input id="chat-message-submit" type="button" value="Send" onClick={(e)=>{OnSubmit()}}/>
+      <input id="chat-message-submit" type="submit" value="Send" onClick={OnSubmit}/>
       <Form.Group controlId="exampleForm.ControlTextarea1">
       <Form.Label>{roomname}</Form.Label>
       <br></br>

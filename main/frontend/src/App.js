@@ -9,6 +9,8 @@ import Tendency from './Tendency';
 import UserPage from './UserPage';
 import ChatList from "./ChatList";
 import Chat from "./Chat";
+import Photo from "./Photo";
+import ChangeUserInfo from "./ChangeUserInfo";
 
 function App() {
 
@@ -35,6 +37,12 @@ function App() {
     </Route>
     <Route exact path="/chat"> 
       <Chat />
+    </Route>
+    <Route path="/photo">
+      <Photo />
+    </Route>
+    <Route path="/changeuserinfo">
+      <ChangeUserInfo />
     </Route>
     </CookiesProvider>
     </div>

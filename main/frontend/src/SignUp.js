@@ -75,25 +75,53 @@ export default function SignUp() {
   let [gender, setGender] = useState();
   let [usertype, setUserType] = useState();
   let history = useHistory();
+  let profile_preview = null;
+  let [file, setFile] = useState('');
+  let [previewURL, setPreviewURL] = useState();
+
+    if(file !== ''){
+      profile_preview = <img className='profile_preview' src={previewURL}></img>
+    }
+
+  function handleFileOnChange(event){
+    event.preventDefault();
+    let reader = new FileReader();
+    let files = event.target.files[0];
+    
+
+    reader.onloadend = () => {
+     setFile(files);
+     setPreviewURL(reader.result);
+     console.log(reader.result);
+    }
+    reader.readAsDataURL(files); 
+  }
+  
+
+   const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
 
   
   
 
   function OnSubmit(e) {
     e.preventDefault();
+    let fd = new FormData();
+    fd.append("username",name);
+    fd.append("password1",pw);
+    fd.append("password2",pwc);
+    fd.append("email",email);
+    fd.append("gender",gender);
+    fd.append("birthDate",birth);
+    fd.append("userType",usertype);
+    fd.append("image",file);
     if(pw !== pwc){
       alert('비밀번호가 일치 하지 않습니다.')
     }
-    axios.post('http://127.0.0.1:8000/account/rest-auth/registration/',{
-      username : name,
-      password1 : pw,
-      password2 : pwc,
-      email : email,
-      gender: gender,
-      birthDate: birth,
-      userType : usertype,
-
-    })
+    axios.post('http://127.0.0.1:8000/account/rest-auth/registration/',fd,config)
     .then(function (response){
       console.log(response);
       console.log(response.data);
@@ -104,7 +132,8 @@ export default function SignUp() {
       history.push("/tendency");
     })
     .catch(function (error){
-      console.log(error);
+      console.log(file);
+      console.log(error.response);
       alert(error);
     });
   }
@@ -120,8 +149,18 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate onSubmit={OnSubmit}>
+        <form className={classes.form} noValidate onSubmit={OnSubmit} encType="multipart/form-data">
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <div>
+            {profile_preview}
+              </div>
+              <input type='file' 
+              accept='image/jpg,image/png,image/jpeg,image/gif' 
+              name='profile_img' 
+              onChange={handleFileOnChange}>
+              </input>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 autoComplete="name"

@@ -1,4 +1,3 @@
-import { MailRounded } from '@material-ui/icons';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -65,6 +64,11 @@ export default function Main(){
     history.push("/chatlist");
   }
 
+  function ChaneInfo(e){
+    e.preventDefault();
+    history.push("/changeuserinfo");
+  }
+
   return(
     <div className={classes.root}>
     <AppBar position="static">
@@ -87,6 +91,7 @@ export default function Main(){
 <form className={classes.form} onSubmit={OnChat}>
   <Button type="submit" className={classes.submit} onSubmit={OnChat}>채팅창리스트 보기</Button>
 </form>
+<button onClick={ChaneInfo}>유저정보 변경</button>
 </div>
   );
 }

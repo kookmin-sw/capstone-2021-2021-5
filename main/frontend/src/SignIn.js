@@ -86,11 +86,14 @@ export default function SignIn()  {
         history.push("/main");
       }
       else{
-        throw new Error(response.error);
+        setEmail('');
+        setPw('');
+        alert(response.error);
+        console.log(response.error);
+        
       }
     }
     catch(err){
-      alert('Fail Login');
       setEmail('');
       setPw('');
       console.log(err);
