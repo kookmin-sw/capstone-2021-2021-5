@@ -19,7 +19,7 @@ class DiarySerializer(serializers.ModelSerializer):
         if Diary.objects.filter(profile=self.context['request'].user, title=data['title']).exists() == True: # 만약 같은 계정의 project title이 중복되면
             raise ValidationError('duplicated title')
         today = datetime.date.today()
-        if Diary.objects.filter(profile=self.context['request'].user, pubdate = today ).exists():
+        if self.context['request'].method != "PUT" and Diary.objects.filter(profile=self.context['request'].user, pubdate = today ).exists():
             raise ValidationError('already written')
         data['pubdate'] =  today
         data['profile'] = self.context['request'].user #project 생성시 항상 author을 해당 계정으로 설정
