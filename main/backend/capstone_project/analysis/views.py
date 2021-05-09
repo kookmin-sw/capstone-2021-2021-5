@@ -23,6 +23,14 @@ User = get_user_model()
 # Create your views here.
 
 class TendancyView(APIView):
+
+    def get(self, request):
+        res = {}
+        res["exist"]=False
+        if Tendancy.objects.filter(profile=request.user).exists():
+            res["exist"]=True
+        return Response(res)
+
     def post(self, request):
         #만약 해당유저가 이미 성향조사를 완료했으면
         if Tendancy.objects.filter(profile=request.user).exists():
@@ -101,3 +109,4 @@ class EmotionAnalyzeView(APIView):
         emotion_json['emotions'] = emotion_list
 
         return Response(emotion_json)
+
