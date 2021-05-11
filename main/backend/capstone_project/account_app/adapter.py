@@ -9,6 +9,7 @@ class DefaultAccountAdapterCustom(DefaultAccountAdapter):
         user.gender = data.get('gender')
         user.birthDate = data.get('birthDate')
         user.userType = data.get('userType')
+        user.image = data.get('image')
         user.save()
 
         return user

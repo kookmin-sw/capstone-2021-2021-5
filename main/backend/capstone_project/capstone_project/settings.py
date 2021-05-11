@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'analysis',
      'chat',
+     'diary_app',
 ]
 SITE_ID = 1
 
@@ -209,3 +210,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

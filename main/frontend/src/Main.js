@@ -1,4 +1,3 @@
-import { MailRounded } from '@material-ui/icons';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CNavbar from './custom_navbar';
@@ -71,6 +70,11 @@ export default function Main(){
   function OnChat(e) {
     e.preventDefault();
     history.push("/chatlist");
+  }
+
+  function ChaneInfo(e){
+    e.preventDefault();
+    history.push("/changeuserinfo");
   }
 
   return(
