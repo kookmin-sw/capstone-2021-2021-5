@@ -9,11 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
 import {
-  Carousel,
-  CarouselItem,
-  CarouselControl,
-  CarouselIndicators,
-  CarouselCaption,
+  
   Container, 
   Row, 
   Col,
@@ -79,8 +75,9 @@ export default function Main(){
 
   return(
     <React.Fragment>
-    <Container className="themed-container" fluid="md">
+    <Container className="themed-container" fluid>
     <CNavbar></CNavbar>
+    <br></br>
     <br></br>
     <Slide></Slide>
     <br></br>
@@ -90,18 +87,18 @@ export default function Main(){
     <span>최근 당신의 감정</span>
     </Col>  
     </Row>
-    <Row>
-    <Col></Col>   
-    <Col xs={12} md={8} >
+    <br></br>
+    <br></br>
+    <div id="Chart_Col">
+    <Row >
+    <Col id="Chart_Col">
     <Chart></Chart>
     </Col>
-    <Col></Col>
     </Row>
-    <br></br>
-    <br></br>
-    <Row id="bottom_fix" className="fixed-bottom">
+    </div>
+    <Row xs={7} id="bottom_fix" className="fixed-bottom">
     <Col>
-    <Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석하러 가기</span></Button>
+    <Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button>
     </Col>
     </Row>
     </Container>

@@ -13,11 +13,13 @@ import Photo from "./Photo";
 import ChangeUserInfo from "./ChangeUserInfo";
 import Diary from "./Diary";
 import Ctest from "./Ctest";
+import { Reset } from 'styled-reset'
 
 function App() {
 
   return (
     <div className="App">
+      <Reset/>
       <CookiesProvider>
     <Route exact path="/"> 
       <SignIn />

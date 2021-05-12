@@ -145,7 +145,31 @@ export default function SignUp() {
     .catch(function (error){
       console.log(file);
       console.log(error.response);
-      alert(error);
+      const { data } = error.response;
+        if(data.email != null){
+          console.error("error : ", data.email);
+          alert(data.email);
+        }
+        if(data.username != null){
+          console.error("error : ", data.username);
+          alert(data.username);
+        }
+        if(data.password1 != null){
+          console.error("error : ", data.password1);
+          alert(data.password1);
+        }
+        if(data.gender != null){
+          console.error("error : ", data.gender);
+          alert(data.gender);
+        }
+        if(data.usertype != null){
+          console.error("error : ", data.usertype);
+          alert(data.usertype);
+        }
+        if(data.birthDate != null){
+          console.error("error : ", data.birthDate);
+          alert(data.birthDate);
+        }
     });
   }
 

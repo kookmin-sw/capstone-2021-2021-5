@@ -3,6 +3,8 @@
   align-items: center;
 }
 
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -117,7 +119,7 @@ input::placeholder{
       width: 6px;
       background: white;
     }
-::-webkit-scrollbar-thumb :horizontal{
+::-webkit-scrollbar-thumb {
       background: #e73330a2;
       border-radius: 10px;
     }
@@ -151,11 +153,26 @@ input::placeholder{
   height: 150px;
   border-radius: 50%;
 }
+.profile_preview_small{
+  max-width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
 #icon{
   max-width: 30px;
   height: auto;
   
 }
+#Chart_Col{
+  align-items: center;
+  text-align: center;
+  margin-right: 75%;
+}
+#sub_color{
+  border: none;
+}
+
+
 
 }
 #btn_block {
@@ -165,6 +182,19 @@ input::placeholder{
   color: #282c34;
 }
 
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255) !important;
+}
 #btn_block :hover {
   color: #e73330a2;
+}
+
+#Chart_Col{
+  align-items: center;
+  text-align: center;
+  left: 43%;
 }
