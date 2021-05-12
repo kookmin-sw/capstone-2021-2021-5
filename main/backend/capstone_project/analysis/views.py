@@ -14,8 +14,10 @@ import sys
 from django.conf import settings
 
 from util import face
+from util.external_api import weather_report
 import base64
 import uuid
+import ast
 
 import datetime
 
@@ -57,6 +59,27 @@ class TendancyView(APIView):
         return Response(status=status.HTTP_200_OK)
      
 
+def emotion_stat_output_generator(emotion_lis):
+    emotion_dic = {'0':"분노" , '1':'경멸', '2':'불쾌', '3':'공포', '4':'행복', '5':'중립', '6':'슬픔', '7':'놀람' }
+    result = []
+    for i,emotion in enumerate(emotion_lis):
+        result_dic = {'name':emotion_dic[str(i)], 'emotion':emotion*100}
+        result.append(result_dic)
+    return result
+
+def weather_translator(weather):
+    weather_dict = {
+        'clear sky': '맑음',
+        'few clouds': '흐림',
+        'scattered clouds': '흐림',
+        'broken clouds': '흐림',
+        'shower rain': '비',
+        'rain': '비',
+        'thunderstorm': '번개',
+        'snow': '눈',
+        'mist': '안개'
+    }
+    return weather_dict[weather]
 
 class EmotionAnalyzeView(APIView):
     def post(self, request):
@@ -64,13 +87,17 @@ class EmotionAnalyzeView(APIView):
         # if Tendancy.objects.filter(profile=request.user).exists():
         #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        surveys = answers=request.data['answer']
+        surveys = request.data['answer']
+        surveys_list = ast.literal_eval(surveys)
+
+        axis = request.data['axis'] #lat,long
+        axis_list = ast.literal_eval(axis)
   
         try:
             f=request.FILES['image'].read()
         except :
             return Response("invalid image file!",status=status.HTTP_400_BAD_REQUEST)
-        existing_filename=request.FILES['image'].name
+        existing_filename=request.FILES['image'].name        
         input_image=io.BytesIO(f)
         
         instance = face.FaceClass()
@@ -81,22 +108,26 @@ class EmotionAnalyzeView(APIView):
 
         filename = '%s%s' % ( uuid.uuid4(),existing_filename)
         today = datetime.date.today()
+        emotion_list = list(emotion_dict.values())
+        weather_str = weather_report(axis_list[0],axis_list[1])
+        weathers = weather_translator(weather_str)
+
         if not Emotion.objects.filter(profile=request.user,pubdate= today).exists():
             emotion=Emotion()
-            emotion_list = list(emotion_dict.values())
             emotion_str=str(emotion_list)
             emotion.emotions=emotion_str
             emotion.profile=request.user
+            emotion.weather = weathers
             emotion.image = InMemoryUploadedFile(img_io, None, filename, 
                         'image/jpeg',sys.getsizeof(img_io), None )
             image_path =  emotion.image.url
             emotion.save()
         else:
             emotion = Emotion.objects.get(profile=request.user,pubdate= today)
-            emotion_list = list(emotion_dict.values())
             emotion_str=str(emotion_list)
             emotion.emotions=emotion_str
             emotion.profile=request.user
+            emotion.weather = weathers
             emotion.image = InMemoryUploadedFile(img_io, None, filename, 
                         'image/jpeg',sys.getsizeof(img_io), None )
             image_path =  emotion.image.url
@@ -106,7 +137,7 @@ class EmotionAnalyzeView(APIView):
         emotion_json['image'] = image_path
 
        
-        emotion_json['emotions'] = emotion_list
+        emotion_json['emotions'] = emotion_stat_output_generator(emotion_list)
 
         return Response(emotion_json)
 
