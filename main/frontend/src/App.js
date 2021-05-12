@@ -14,11 +14,13 @@ import ChangeUserInfo from "./ChangeUserInfo";
 import Diary from "./Diary";
 import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
+import { Reset } from 'styled-reset'
 
 function App() {
 
   return (
     <div className="App">
+      <Reset/>
       <CookiesProvider>
     <Route exact path="/"> 
       <SignIn />

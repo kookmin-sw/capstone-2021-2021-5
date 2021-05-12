@@ -1,16 +1,20 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import CNavbar from './custom_navbar';
+import 'bootstrap/dist/css/bootstrap.css';
+import Slide from './music_slide';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import {useCookies} from 'react-cookie';
-
+import Chart from './ChartPage';
+import {
+  
+  Container, 
+  Row, 
+  Col,
+  Button
+} from 'reactstrap';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,33 +74,34 @@ export default function Main(){
   }
 
   return(
-    <div className={classes.root}>
-    <AppBar position="static">
-  <Toolbar>
-    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon />
-    </IconButton>
-    <Typography variant="h6" className={classes.title}>
-      Main Page
-    </Typography>
-    <Button color="inherit">Logout</Button>
-  </Toolbar>
-</AppBar>
-<form className={classes.form} onSubmit={OnSubmit}>
-  <TextField id="roomname" label="roomName" name="roomname" onChange={(e)=>{
-                  setRoomName(e.target.value);
-                }} />
-  <Button type="submit" className={classes.submit} onSubmit={OnSubmit}>채팅생성</Button>
-</form>
-<form className={classes.form} onSubmit={OnChat}>
-  <Button type="submit" className={classes.submit} onSubmit={OnChat}>채팅창리스트 보기</Button>
-</form>
-<button onClick={ChaneInfo}>유저정보 변경</button>
-<button onClick={()=>{history.push("/diary")}}>일기</button>
-<button onClick={()=>{history.push("/ctest")}}>사진 테스트</button>
-<button onClick={()=>{history.push("/diarylist")}}>일기 리스트</button>
-
-
-</div>
+    <React.Fragment>
+    <Container className="themed-container" fluid>
+    <CNavbar></CNavbar>
+    <br></br>
+    <br></br>
+    <Slide></Slide>
+    <br></br>
+    <br></br>
+    <Row>
+    <Col id="sub_title">
+    <span>최근 당신의 감정</span>
+    </Col>  
+    </Row>
+    <br></br>
+    <br></br>
+    <div id="Chart_Col">
+    <Row >
+    <Col id="Chart_Col">
+    <Chart></Chart>
+    </Col>
+    </Row>
+    </div>
+    <Row xs={7} id="bottom_fix" className="fixed-bottom">
+    <Col>
+    <Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button>
+    </Col>
+    </Row>
+    </Container>
+    </React.Fragment>
   );
 }
