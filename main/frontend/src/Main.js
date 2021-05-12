@@ -94,6 +94,8 @@ export default function Main(){
 <button onClick={ChaneInfo}>유저정보 변경</button>
 <button onClick={()=>{history.push("/diary")}}>일기</button>
 <button onClick={()=>{history.push("/ctest")}}>사진 테스트</button>
+<button onClick={()=>{history.push("/diarylist")}}>일기 리스트</button>
+
 
 </div>
   );

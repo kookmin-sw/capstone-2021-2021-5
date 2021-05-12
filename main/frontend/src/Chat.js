@@ -13,8 +13,8 @@ export default function Chat(){
   const token = window.sessionStorage.getItem("Authorization");
   // axios.defaults.headers.common["Authorization"] = "jwt " + token;
   let [roomname, setRoomName] = useState();
-  let [message, setMessage] = useState();
-  let [chatlog, setChatLog] = useState();
+  let [message, setMessage] = useState('');
+  let [chatlog, setChatLog] = useState('');
   // document.cookie = 'authorization=' + token;
 
  

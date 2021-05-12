@@ -13,6 +13,7 @@ import Photo from "./Photo";
 import ChangeUserInfo from "./ChangeUserInfo";
 import Diary from "./Diary";
 import Ctest from "./Ctest";
+import DiaryList from "./DiaryList";
 
 function App() {
 
@@ -51,6 +52,9 @@ function App() {
     </Route>
     <Route path="/ctest">
       <Ctest />
+    </Route>
+    <Route path="/diarylist">
+      <DiaryList />
     </Route>
     </CookiesProvider>
     </div>

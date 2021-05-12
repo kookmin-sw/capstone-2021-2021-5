@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Ctest(){
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
+
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
@@ -38,7 +39,7 @@ export default function Ctest(){
 
    function OnSubmit(e) {
     e.preventDefault();
-    let file = dataURLtoFile(imgSrc, "photo");
+    let file = dataURLtoFile(imgSrc, "photo.jpeg");
     let fd = new FormData();
     fd.append("image", file);
     fd.append("answer",[1,1,2]);
