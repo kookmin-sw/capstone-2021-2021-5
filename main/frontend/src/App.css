@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  align-items: center;
 }
 
 .App-logo {
@@ -89,6 +90,13 @@ input::placeholder{
   font-weight: 100;
 }
 
+#light_txt{
+  font-family: 'GmarketSansLight';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 0.8em;
+}
+
 #btn_nomal {
   background-color: #e73330a2;
   border:none;
@@ -102,11 +110,30 @@ input::placeholder{
   text-align: right;
 }
 
-.thumbnail{
-  max-width: 60%;
-  height: auto;
-  border-radius: 50%;
-}
+
+
+::-webkit-scrollbar{
+      height: 7px;
+      width: 6px;
+      background: white;
+    }
+::-webkit-scrollbar-thumb :horizontal{
+      background: #e73330a2;
+      border-radius: 10px;
+    }
+  
+#slide_container {
+      white-space: nowrap;
+      vertical-align: middle;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      padding: 10px 10px 5px;
+    }
+#slide_container .container {
+      display: inline-block;
+      
+      
+    }
 
 #sub_title {
   font-family: 'GmarketSansBold';
@@ -114,8 +141,30 @@ input::placeholder{
   font-weight: 100;
   font-size: 1.5em;
 }
+@media only screen and (max-width: 600px) {
+#bar {
+  padding-right: 70px;
+  overflow: hidden;
+}
+.profile_preview{
+  max-width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+#icon{
+  max-width: 30px;
+  height: auto;
+  
+}
 
-#bottom_fix {
-  text-align: center;
-  align-items: center;
+}
+#btn_block {
+  background-color: white;
+  border:1px solid #e73330a2 ;
+  border-radius: 10px;
+  color: #282c34;
+}
+
+#btn_block :hover {
+  color: #e73330a2;
 }

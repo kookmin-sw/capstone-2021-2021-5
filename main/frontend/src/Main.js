@@ -79,9 +79,7 @@ export default function Main(){
 
   return(
     <React.Fragment>
-    <Container className="themed-container" >
-
-    
+    <Container className="themed-container" fluid="md">
     <CNavbar></CNavbar>
     <br></br>
     <Slide></Slide>
@@ -94,18 +92,16 @@ export default function Main(){
     </Row>
     <Row>
     <Col></Col>   
-    <Col xs={12} md={8} className="overflow-auto">
+    <Col xs={12} md={8} >
     <Chart></Chart>
     </Col>
     <Col></Col>
     </Row>
     <br></br>
     <br></br>
-    
-    <br></br>
     <Row id="bottom_fix" className="fixed-bottom">
     <Col>
-    <Button size="lg" id="btn_nomal" ><span id="simple_txt">감정분석하러 가기</span></Button>
+    <Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석하러 가기</span></Button>
     </Col>
     </Row>
     </Container>

@@ -51,9 +51,7 @@ const Chart = (props) => {
     width = {300}
     height = {250}
 		data={data}
-		margin={{
-			top: 20, right: 20, bottom: 20, left: 20,
-		}}
+    id="bar"
 	>
 		<CartesianGrid strokeDasharray="5 5" />
 		<XAxis dataKey="name" />

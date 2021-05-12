@@ -1,4 +1,4 @@
-import React, { useState,useCallback  } from 'react';
+import React, { useState  } from 'react';
 import {
   Carousel,
   CarouselItem,
@@ -9,17 +9,11 @@ import {
   Row, 
   Col 
 } from 'reactstrap';
+
 import axios from 'axios';
 
 
-const [params, setParams] = useState({
-  key:'AIzaSyBFyhTo8AXnROaRd3xXA9uZWMVz7LZIetI',
-  part: 'snippet',
-  q: "아이유 좋은날",
-  maxResults: 1,
-  type: 'video',
-  videoDuration: 'long'
-});
+
 
 
 const Slide = (props) => {
@@ -34,11 +28,24 @@ const Slide = (props) => {
     </Row>
     <br></br>
     <Row xs="1" sm="2" md="3" className="overflow-auto">
-    <Col> <img className="thumbnail" src="music.jpeg"></img></Col>
-    <Col>
-    <img className="thumbnail" src="music.jpeg"></img>
+    <Col></Col>
+    <Col >
+    <div id="slide_container">
+    <div class=" container" >
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class=" container">
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class=" container">
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class=" container">
+    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    </div>
     </Col>
-    <Col> <img className="thumbnail" src="music.jpeg"></img></Col>
+    <Col></Col>
     </Row>
     </>
   );

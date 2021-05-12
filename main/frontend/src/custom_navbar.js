@@ -16,11 +16,17 @@ import {
     Col,
     Row
   } from 'reactstrap';
+  import {useHistory} from 'react-router-dom'
   
   const CNavbar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
   
     const toggle = () => setIsOpen(!isOpen);
+    let history = useHistory();
+    const onLogout = () =>{
+      window.sessionStorage.clear()
+      history.push("/");
+    }
   
     return (
       <>
@@ -32,13 +38,13 @@ import {
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-2" navbar>
             <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap"><span id="simple_txt">마이페이지</span></NavLink>
+                <NavLink href="/userpage"><span id="simple_txt">마이페이지</span></NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="https://github.com/reactstrap/reactstrap"><span id="simple_txt">채팅방</span></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/components/"><span id="simple_txt">로그아웃</span></NavLink>
+                <NavLink href="#" onClick={onLogout}><span id="simple_txt">로그아웃</span></NavLink>
               </NavItem>
             </Nav>
           </Collapse>

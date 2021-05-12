@@ -21,6 +21,8 @@ import {Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
+import Figure from 'react-bootstrap/Figure'
+import FigureImage from 'react-bootstrap/FigureImage'
 
 
 function Copyright() {
@@ -80,7 +82,15 @@ export default function SignUp() {
   let [previewURL, setPreviewURL] = useState();
 
     if(file !== ''){
-      profile_preview = <img className='profile_preview' src={previewURL}></img>
+      profile_preview = <Figure>
+      <Figure.Image
+        width={171}
+        height={180}
+        alt="171x180"
+        className='profile_preview' 
+        src={previewURL}
+      />
+      </Figure>
     }
 
   function handleFileOnChange(event){
@@ -167,7 +177,7 @@ export default function SignUp() {
                 required="required"
                 fullWidth
                 id="name"
-                label="이름"
+                label="아이디"
                 color="secondary"
                 autoFocus
                 onChange={(e)=>{

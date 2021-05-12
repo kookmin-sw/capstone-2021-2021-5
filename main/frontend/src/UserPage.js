@@ -1,34 +1,23 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import { Grid, Input } from '@material-ui/core';
 import { useEffect } from 'react';
 import axios from 'axios';
+import {
+  Container, 
+  Row, 
+  Col,
+  Button
+} from 'reactstrap';
+import CNavbar from './custom_navbar';
+import Image from 'react-bootstrap/Image';
+import { Link } from 'react-router-dom';
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    justifyContent: 'left'
-  },
-}));
 
 export default function UserPage(){
-  const classes = useStyles();
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
   let [username, setUserName] = useState('');
+  let [userImage, setUserImage] = useState('');
 
 
   useEffect(()=>{
@@ -37,6 +26,7 @@ export default function UserPage(){
       console.log(response);
       console.log(response.data);
       setUserName(response.data.username);
+      setUserImage('http://127.0.0.1:8000'+response.data.image);
       // alert("Succ");
     })
     .catch(function(error){
@@ -46,7 +36,7 @@ export default function UserPage(){
   },[]);
 
   console.log(username);
-
+  console.log(userImage);
 
 
 
@@ -54,23 +44,96 @@ export default function UserPage(){
 
 
   return(
-    <div className={classes.root}>
-    <AppBar position="static">
-  <Toolbar>
-    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon />
-    </IconButton>
-    <Typography variant="h6" className={classes.title}>
-      User Page
-    </Typography>
-    <Button color="inherit">Logout</Button>
-  </Toolbar>
-  </AppBar>
+    <React.Fragment>
+    <Container className="themed-container" fluid="md">
+    <CNavbar></CNavbar>
+    <br></br>
+    <Row>
+    <Col>
+      
+    </Col>
+    <Col>
+      <Image className="profile_preview" src={userImage}  />
+    </Col>
+    <Col >
+      
+    </Col>
+    </Row>
+    <br></br>
+    <Row>
+    <Col>
+      <span id="simple_txt">{username}님 안녕하세요.</span>
+    </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+      <Col>
+      <Link to="/changeuserinfo">
+      <Button id="btn_block" size="lg" block>
+     
+        <Row>
+          <Col><img id="icon" src="svg/fi-rr-settings.svg"/></Col>
+          <Col><span id="light_txt">회원 정보 수정</span></Col>
+        </Row>
+        </Button>
+        </Link>
+      </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+      <Col>
+      <Link to="/changeuserinfo">
+      <Button id="btn_block" size="lg" block>
+        <Row>
+          <Col><img id="icon" src="svg/fi-rr-cloud.svg"/></Col>
+          <Col><span id="light_txt">날씨에 따른 내 감정</span></Col>
+        </Row>
+        </Button>
+      </Link>
+      </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+    <Col>
+      <Link to="/changeuserinfo">
+      <Button id="btn_block" size="lg" block>
+        <Row>
+          <Col><img id="icon" src="svg/fi-rr-stats.svg"/></Col>
+          <Col><span id="light_txt">감정 통계 보기</span></Col>
+        </Row>
+        </Button>
+        </Link>
+      </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+    <Col>
+    <Link to="/diary">
+      <Button id="btn_block" size="lg" block>
+        <Row>
+          <Col><img id="icon" src="svg/fi-rr-book-alt.svg"/></Col>
+          <Col><span id="light_txt">다이어리</span></Col>
+        </Row>
+        </Button>
+        </Link>
+      </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+    <Col>
+    <Link to="/main">
+    <Button size="lg" id="btn_nomal"><span id="simple_txt">메인으로 돌아가기</span></Button>
+    </Link>
+    </Col>
+    </Row>
 
-  <Grid>
-    <Input type="text" value={username}></Input>
-  </Grid>
+    </Container>
+    </React.Fragment>
 
-</div>
   );
 }

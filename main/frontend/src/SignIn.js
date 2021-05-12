@@ -82,7 +82,6 @@ export default function SignIn()  {
         console.log(response.token);
         const accessToken = response.token;
         window.sessionStorage.setItem("Authorization",accessToken);
-        alert("login suc")
         history.push("/main");
       }
       else{
