@@ -18,6 +18,7 @@ from util.external_api import weather_report
 import base64
 import uuid
 import ast
+from operator import add
 
 import datetime
 
@@ -62,22 +63,28 @@ class TendancyView(APIView):
 def emotion_stat_output_generator(emotion_lis):
     emotion_dic = {'0':"분노" , '1':'경멸', '2':'불쾌', '3':'공포', '4':'행복', '5':'중립', '6':'슬픔', '7':'놀람' }
     result = []
+
+    max_emotion_idx = max(emotion_lis)
+    max_emotion_idx = emotion_lis.index(max_emotion_idx)
+    max_emotion = emotion_dic[str(max_emotion_idx)]
+
     for i,emotion in enumerate(emotion_lis):
         result_dic = {'name':emotion_dic[str(i)], 'emotion':emotion*100}
         result.append(result_dic)
-    return result
+    return result, max_emotion
 
 def weather_translator(weather):
     weather_dict = {
-        'clear sky': '맑음',
-        'few clouds': '흐림',
-        'scattered clouds': '흐림',
-        'broken clouds': '흐림',
-        'shower rain': '비',
-        'rain': '비',
-        'thunderstorm': '번개',
-        'snow': '눈',
-        'mist': '안개'
+        # 맑음:0, 흐림:1,비:2,번개:3,눈:4,안개:5
+        'clear sky': '0',
+        'few clouds': '1',
+        'scattered clouds': '1',
+        'broken clouds': '1',
+        'shower rain': '2',
+        'rain': '2',
+        'thunderstorm': '3',
+        'snow': '4',
+        'mist': '5'
     }
     return weather_dict[weather]
 
@@ -137,7 +144,49 @@ class EmotionAnalyzeView(APIView):
         emotion_json['image'] = image_path
 
        
-        emotion_json['emotions'] = emotion_stat_output_generator(emotion_list)
+        emotion_json['emotions'], emotion_json['max_emotion'] = emotion_stat_output_generator(emotion_list)
 
         return Response(emotion_json)
 
+def objects_list(obs):
+    result = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+    length = len(obs)
+
+    for ob in obs:
+        ob_list = ast.literal_eval(ob.emotions)
+        result = map(add, result, ob_list)
+    result = map(lambda x: x/length, result)
+    result = list(result)
+    return result
+
+class EmotionStatisticView(APIView):
+    
+    def post(self, request):
+        past = (datetime.datetime.now() - datetime.timedelta(days=7)).date()
+        today = datetime.date.today()
+       
+        emotions = Emotion.objects.filter(profile=request.user,pubdate__range=[past,today])
+        
+        if len(emotions) == 0:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        emotion_list = objects_list(emotions)
+
+        result = {}
+        result['emotions'],result['max_emotion'] = emotion_stat_output_generator(emotion_list)
+        
+        return Response(result)
+
+    def get(self, request):
+        weather_input = request.query_params.get('weather', '') 
+        
+        emotions = Emotion.objects.filter(profile=request.user,weather = weather_input)
+
+        if len(emotions) == 0:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        emotion_list = objects_list(emotions)
+
+        result = {}
+        result['emotions'],result['max_emotion'] = emotion_stat_output_generator(emotion_list)
+        
+        return Response(result)
