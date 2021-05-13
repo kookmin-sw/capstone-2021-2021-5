@@ -4,10 +4,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model
 
-from .models import Tendancy,Emotion
+from .models import Tendancy,Emotion,Music
 import ast
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from .serializers import EmotionSerializer
 import io
 import sys
 
@@ -15,12 +16,16 @@ from django.conf import settings
 
 from util import face
 from util.external_api import weather_report
+from django.http import HttpResponseForbidden
 import base64
 import uuid
 import ast
 from operator import add
+import csv
 
 import datetime
+from django.conf import settings
+from rest_framework import viewsets
 
 User = get_user_model()
 # Create your views here.
@@ -88,14 +93,28 @@ def weather_translator(weather):
     }
     return weather_dict[weather]
 
+def music_classifier(emotion,emotion_obj):
+    emotion_dic = {"분노" : 0 , '경멸':1, '불쾌':0, '공포':1, '행복':0, '중립':1, '슬픔':0, '놀람':1 }
+    emotion_index = emotion_dic[emotion]
+    musics = None
+    emotion_obj.connection.clear() 
+    if emotion_index != 2:
+        musics = Music.objects.filter(emotion=emotion_index).order_by('?')[:10]
+    else:
+        musics = Music.objects.all().order_by('?')[:10]
+    
+    result = []
+    for music in musics:
+        emotion_obj.connection.add(music)
+        result.append({"title": music.title,"url":music.iframe_url})
+    return result
+    
+        
 class EmotionAnalyzeView(APIView):
     def post(self, request):
-        #만약 해당유저가 이미 성향조사를 완료했으면
-        # if Tendancy.objects.filter(profile=request.user).exists():
-        #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        surveys = request.data['answer']
-        surveys_list = ast.literal_eval(surveys)
+        # surveys = request.data['answer']
+        # surveys_list = ast.literal_eval(surveys)
 
         axis = request.data['axis'] #lat,long
         axis_list = ast.literal_eval(axis)
@@ -118,11 +137,12 @@ class EmotionAnalyzeView(APIView):
         emotion_list = list(emotion_dict.values())
         weather_str = weather_report(axis_list[0],axis_list[1])
         weathers = weather_translator(weather_str)
+        emotion = None
 
         if not Emotion.objects.filter(profile=request.user,pubdate= today).exists():
             emotion=Emotion()
             emotion_str=str(emotion_list)
-            emotion.emotions=emotion_str
+            emotion.emotions = emotion_str
             emotion.profile=request.user
             emotion.weather = weathers
             emotion.image = InMemoryUploadedFile(img_io, None, filename, 
@@ -143,9 +163,13 @@ class EmotionAnalyzeView(APIView):
         emotion_json = {}
         emotion_json['image'] = image_path
 
-       
-        emotion_json['emotions'], emotion_json['max_emotion'] = emotion_stat_output_generator(emotion_list)
+        emotion_stat, emotion_max = emotion_stat_output_generator(emotion_list)
+        emotion_musics = music_classifier(emotion_max,emotion)
 
+        emotion_json['emotions'] = emotion_stat
+        emotion_json['max_emotion'] = emotion_max
+        emotion_json['musics'] = emotion_musics
+       
         return Response(emotion_json)
 
 def objects_list(obs):
@@ -190,3 +214,67 @@ class EmotionStatisticView(APIView):
         result['emotions'],result['max_emotion'] = emotion_stat_output_generator(emotion_list)
         
         return Response(result)
+
+class DataInjectionView(APIView):
+    def get(self, request):
+        if not request.user.is_superuser:
+            return HttpResponseForbidden()
+
+        base_url = settings.BASE_DIR
+
+        CSV_PATH = base_url + "/util/sample.csv"
+        with open(CSV_PATH, newline='') as csvfile:
+            data_reader = csv.DictReader(csvfile)
+            for row in data_reader:
+                # print(row)
+                Music.objects.create(
+                                title       = row['Name'],
+                                emotion      = int(row['emotion']),
+                                iframe_url = row['url'],
+                        )
+        
+        return Response("good!!")
+
+    def post(self, request):
+        result = {'result':False}
+        if  request.user.is_superuser:
+            result['result'] = True
+        return Response(result)
+
+class EmotionHistroyView(APIView):
+    
+    def get(self, request):
+
+        emotion_records = Emotion.objects.filter(profile=request.user)
+        serializer = EmotionSerializer(emotion_records,many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        
+        pk = int(request.data['pk'])
+        result = {}
+
+        emotion_record = Emotion.objects.get(pk=pk)
+        musics = emotion_record.connection.all()
+
+        emotion_list = ast.literal_eval(emotion_record.emotions)
+        
+        emotion_stat, emotion_max = emotion_stat_output_generator(emotion_list)
+
+        res_lis = []
+        for music in musics:
+            res_lis.append({"title": music.title,"url":music.iframe_url})
+    
+
+        result['pubDate'] = emotion_record.pubdate
+        result['image'] = emotion_record.image.url
+        result['emotions'] = emotion_stat
+        result['max_emotion'] = emotion_max
+        result['musics'] = res_lis
+
+        
+        return Response(result)
+
+        
+         
+        
