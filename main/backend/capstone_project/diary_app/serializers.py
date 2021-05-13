@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 import datetime
 from analysis.models import Emotion
 
+
 class DiarySerializer(serializers.ModelSerializer):
     """
     검색 기록(SearchRecord) Serializer

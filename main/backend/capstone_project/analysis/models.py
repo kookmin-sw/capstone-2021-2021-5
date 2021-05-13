@@ -15,7 +15,7 @@ class Tendancy(models.Model):
 
 # Create your models here.
 class Emotion(models.Model):
-    pubdate=models.DateField(auto_now_add=True,verbose_name='아카이빙 날짜/시각',null=False)
+    pubdate=models.DateField(verbose_name='아카이빙 날짜/시각',null=False)
     emotions=models.CharField(max_length=100,null=True,verbose_name='감정 리스트')
     profile= models.ForeignKey(
         User,
@@ -23,4 +23,4 @@ class Emotion(models.Model):
     )
     image = models.ImageField(null=True)
 
-    weather=models.CharField(max_length=20,null=True)
+    weather = models.IntegerField(null = True)
