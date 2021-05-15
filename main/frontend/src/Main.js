@@ -8,6 +8,7 @@ import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
+import { Link } from 'react-router-dom';
 import {
   
   Container, 
@@ -98,7 +99,7 @@ export default function Main(){
     </div>
     <Row xs={7} id="bottom_fix" className="fixed-bottom">
     <Col>
-    <Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button>
+    <Link to="/ctest"><Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button></Link>
     </Col>
     </Row>
     </Container>

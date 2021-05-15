@@ -32,12 +32,7 @@ export default function Diary() {
   const [status, setStatus] = useState(null);
   let history = useHistory();
 
-  //현재 위치 가져오기
  
-
-
-
-
 
   function OnSubmit(e) {
     e.preventDefault();
@@ -80,8 +75,6 @@ export default function Diary() {
       <br></br>
       <div className="App">
       </div>
-
-      
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="title" label="일기 제목" variant="outlined" onChange={(e)=>{
                   setTitle(e.target.value);

@@ -1,9 +1,15 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect} from "react";
 import Webcam from "react-webcam";
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
 import axios from "axios";
+import {
+  Container, 
+  Row, 
+  Col ,
+  Button
+} from 'reactstrap';
+import CNavbar from "./custom_navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +37,32 @@ export default function Ctest(){
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+  
+  //현재 위치 가져오기
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus('Geolocation is not supported by your browser');
+    } else {
+      setStatus('Locating...');
+      navigator.geolocation.getCurrentPosition((position) => {
+        setStatus(null);
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+
+      }, () => {
+        setStatus('Unable to retrieve your location');
+        alert('위치를 알 수 없습니다.')
+      });
+    }
+  }
+
+  useEffect(()=>
+  {
+    getLocation();
+  },[]);
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -42,7 +74,7 @@ export default function Ctest(){
     let file = dataURLtoFile(imgSrc, "photo.jpeg");
     let fd = new FormData();
     fd.append("image", file);
-    fd.append("answer",[1,1,2]);
+    fd.append("axis",[lat,lng]);
     for (let value of fd.values()) {
     console.log(value);
     }
@@ -76,26 +108,40 @@ export default function Ctest(){
 
   return (
     <div>
-      <Webcam
-      mirrored={true}
-      audio={false}
-      ref={webcamRef}
-      screenshotFormat="image/jpeg"
-      />
-      <button onClick={capture}>Capture photo</button>
-        {imgSrc && (<img src={imgSrc}/>)}
-        <div>
+      <CNavbar></CNavbar>
+      <Container>
+        <br></br>
+        <Row>
+          <Col> 
+          <Webcam
+                mirrored={true}
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                width="300"
+                />
+           </Col>
+        </Row>
+        <br></br>
+        <Row>
+        <Col><Button id="btn_block" onClick={capture}>사진 촬영</Button></Col>
+        </Row>
+        <br></br>
+        <Row>
+        <Col> {imgSrc && (<img id="picture" src={imgSrc}/>)}</Col>
+        </Row>
+        <br></br>
+        <Row xs={7} id="bottom_fix" className="fixed-bottom">
+          <Col>
           <Button
-          type="sunmit"
+          type="submit"
           onClick={OnSubmit}
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          endIcon={<Icon>send</Icon>}
-        >
-          send
-        </Button>
-        </div>
+          size="lg" block id="btn_nomal">
+            <span id="simple_txt">감정 분석 결과보기</span>
+          </Button>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
