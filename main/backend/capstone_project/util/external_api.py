@@ -7,7 +7,7 @@ def weather_report(lat,lan):
     mgr = owm.weather_manager()
     obs = mgr.weather_at_coords(lat, lan)  
     w = obs.weather
-    res = w.detailed_status
+    res = w.status
     return res
     # res1 = w.detailed_status #날씨 상세
 # print(weather_report(37.5665,126.9780))
