@@ -198,3 +198,8 @@ input::placeholder{
   text-align: center;
   left: 43%;
 }
+
+#picture{
+  max-width: 300px;
+  height: auto;
+}

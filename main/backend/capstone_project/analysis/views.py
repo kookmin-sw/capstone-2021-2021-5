@@ -81,15 +81,21 @@ def emotion_stat_output_generator(emotion_lis):
 def weather_translator(weather):
     weather_dict = {
         # 맑음:0, 흐림:1,비:2,번개:3,눈:4,안개:5
-        'clear sky': '0',
-        'few clouds': '1',
-        'scattered clouds': '1',
-        'broken clouds': '1',
-        'shower rain': '2',
-        'rain': '2',
-        'thunderstorm': '3',
-        'snow': '4',
-        'mist': '5'
+        'Clear': '0',
+        'Clouds': '1',
+        'Ash': '1',
+        'Dust': '1',
+        'Sand': '1',
+        'Rain': '2',
+        'Squall': '2',
+        'Drizzle': '2',
+        'Thunderstorm': '3',
+        'Snow': '4',
+        'Mist': '5',
+        'Smoke': '5',
+        'Haze': '5',
+        'Fog': '5',
+        'Tornado': '6'
     }
     return weather_dict[weather]
 
