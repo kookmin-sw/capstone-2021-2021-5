@@ -14,7 +14,9 @@ import ChangeUserInfo from "./ChangeUserInfo";
 import Diary from "./Diary";
 import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
+import Maint from "./Maint";
 import { Reset } from 'styled-reset'
+
 
 function App() {
 
@@ -57,6 +59,9 @@ function App() {
     </Route>
     <Route path="/diarylist">
       <DiaryList />
+    </Route>
+    <Route path="/maint">
+      <Maint />
     </Route>
     </CookiesProvider>
     </div>
