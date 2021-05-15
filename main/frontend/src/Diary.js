@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
@@ -33,34 +33,11 @@ export default function Diary() {
   let history = useHistory();
 
   //현재 위치 가져오기
-  const getLocation = () => {
-    if (!navigator.geolocation) {
-      setStatus('Geolocation is not supported by your browser');
-    } else {
-      setStatus('Locating...');
-      navigator.geolocation.getCurrentPosition((position) => {
-        setStatus(null);
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
-
-      }, () => {
-        setStatus('Unable to retrieve your location');
-      });
-    }
-  }
-
  
-  const getWheather = () => {
-    axios.post(`http://api.openweathermap.org/data/2.5/weather?lat=37.5594532&lon=126.8554393&appid=6accb9bfc78c7f11c54c7b6c51c9ca26`)
-    .then(function (response){
-        console.log(response)
-    })
-    .catch(function (error){
-      console.log(error.response);
-      alert(error);
-    });
-  } 
- 
+
+
+
+
 
   function OnSubmit(e) {
     e.preventDefault();
@@ -102,13 +79,9 @@ export default function Diary() {
       <br></br>
       <br></br>
       <div className="App">
-      <button onClick={getLocation}>Get Location</button>
-      <button onClick={getWheather}>getWheather</button>
-      <h1>Coordinates</h1>
-      <p>{status}</p>
-      {lat && <p>Latitude: {lat}</p>}
-      {lng && <p>Longitude: {lng}</p>}
       </div>
+
+      
       <form className={classes.root} noValidate autoComplete="off">
         <TextField id="title" label="일기 제목" variant="outlined" onChange={(e)=>{
                   setTitle(e.target.value);
