@@ -27,7 +27,11 @@ const useStyles = makeStyles((theme) => ({
 export default function ChatList(){
   const classes = useStyles();
   let history = useHistory();
-  const [clist, setList] = useState([]);
+  const [clist, setList] = useState([
+    // id: '',
+    // name: '',
+  ]);
+  const {id, name} = clist;
 
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -39,7 +43,10 @@ export default function ChatList(){
       console.log(response);
       console.log(response.data);
       console.log(response.data[0]);
-      setList(response.data);
+      for(let i in response.data){
+        setList({...clist, id: response.data[i].id, name: response.data[i].name});
+      }
+      // setList({...clist, id:response.data[0].id, name:response.data[0].name});
       // alert("Succ");
     })
     .catch(function(error){
@@ -47,6 +54,8 @@ export default function ChatList(){
       alert("fail")
     })
   },[]);
+
+  console.log(clist);
 
 
   return(
@@ -62,7 +71,22 @@ export default function ChatList(){
     <Button color="inherit">Logout</Button>
   </Toolbar>
 </AppBar>
-<textarea value={clist[0]}></textarea>
+ {/* {
+            //반복문을 쓸때는 key를 써주도록 강요한다.
+            clist.map(function(i){
+              return (
+                <div className="list" key={i}>
+                  <p>{clist[i].id}</p>
+                  <p>{clist[i].name}</p>
+                  <hr/>
+                </div>
+              )
+            })
+          } */}
+<div>
+<label>{clist}</label>
+<hr></hr>
+</div>
 
 
 </div>

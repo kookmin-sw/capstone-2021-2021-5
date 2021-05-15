@@ -1,21 +1,15 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import { useCookies } from 'react-cookie';
+
 
 export default function Chat(){
   const token = window.sessionStorage.getItem("Authorization");
   // axios.defaults.headers.common["Authorization"] = "jwt " + token;
   let [roomname, setRoomName] = useState();
   let [message, setMessage] = useState('');
-  let [chatlog, setChatLog] = useState('');
-  // document.cookie = 'authorization=' + token;
+  let [chatlog, setChatLog] = useState([]);
 
  
 
@@ -45,15 +39,19 @@ export default function Chat(){
     chatSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var messaged = data['message'];
-        setChatLog(messaged + '\n');
+        console.log(data)
+        var narr = [...chatlog];
+        narr.push(messaged + '\n');
+        setChatLog(narr);
     };
+    
 
     chatSocket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');
     };
 
     
-    function OnSubmit(){
+    function OnSubmit(e){
         chatSocket.send(JSON.stringify({
             'message': message
         }));
@@ -64,9 +62,10 @@ export default function Chat(){
 
   return(
     <div>
-      <textarea id="chat-log" cols="100" rows="20">{chatlog}</textarea><br/>
-      <input id="chat-message-input" type="text" size="100" onKeyUp={(e)=>{
-                  if(e.key === 13){
+      <textarea id="chat-log" cols="100" rows="20" value={chatlog} readOnly></textarea><br/>
+      <input id="chat-message-input" value={message} type="text" size="100" onKeyPress={(e)=>{
+                  if(e.key === 'Enter'){
+                    console.log('enter');
                     OnSubmit();
                   };
                 }}
@@ -74,12 +73,8 @@ export default function Chat(){
                   setMessage(e.target.value);
                 }}/><br/>
       <input id="chat-message-submit" type="submit" value="Send" onClick={OnSubmit}/>
-      <Form.Group controlId="exampleForm.ControlTextarea1">
+      <br/>
       <Form.Label>{roomname}</Form.Label>
-      <br></br>
-      <Form.Control as="textarea" cols="100" rows={20} />
-      </Form.Group>
-      <TextareaAutosize aria-label="minimum height" cols="100" rowsMin={20} />
     </div>
   );
 }
