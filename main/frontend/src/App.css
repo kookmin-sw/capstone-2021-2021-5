@@ -13,33 +13,6 @@
   }
 }
 
-@font-face {
-  font-family: 'GmarketSansBold';
-  font-style: normal;
-  font-weight: 300;
-  src: url("fonts/GmarketSansOTF/GmarketSansBold.otf") format('truetype')
-}
-
-@font-face {
-  font-family: 'GmarketSansLight';
-  font-style: normal;
-  font-weight: 100;
-  src: url("fonts/GmarketSansOTF/GmarketSansLight.otf") format('truetype')
-}
-
-@font-face {
-  font-family: 'GmarketSansMedium';
-  font-style: normal;
-  font-weight: 100;
-  src: url("fonts/GmarketSansOTF/GmarketSansMedium.otf") format('truetype')
-}
-
-h1{
-  font-family: 'GmarketSansBold';
-  font-style: normal;
-  font-weight: 300;
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -62,60 +35,4 @@ h1{
   to {
     transform: rotate(360deg);
   }
-}
-
-#btn_large {
-  background-color: #e73330a2;
-  font-family: 'GmarketSansBold';
-  font-style: normal;
-  font-weight: 300;
-}
-
-#link:link { color:#e73330ad ; 
-  font-family: 'GmarketSansLight';
-  font-style: normal;
-  font-weight: 100;
-}
-
-input::placeholder{
-  font-family: 'GmarketSansLight';
-  font-style: normal;
-  font-weight: 100;
-}
-
-#simple_txt{
-  font-family: 'GmarketSansMedium';
-  font-style: normal;
-  font-weight: 100;
-}
-
-#btn_nomal {
-  background-color: #e73330a2;
-  border:none;
-}
-
-.logo {
-  text-align: center;
-}
-
-.menu{
-  text-align: right;
-}
-
-.thumbnail{
-  max-width: 60%;
-  height: auto;
-  border-radius: 50%;
-}
-
-#sub_title {
-  font-family: 'GmarketSansBold';
-  font-style: normal;
-  font-weight: 100;
-  font-size: 1.5em;
-}
-
-#bottom_fix {
-  text-align: center;
-  align-items: center;
 }

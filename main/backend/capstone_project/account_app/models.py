@@ -22,3 +22,5 @@ class customUser(AbstractUser):
         ('Normal', '일반')
     )
    userType=models.CharField(max_length=7, choices=userTypeChoices,null=True)
+
+   image = models.ImageField(default='default/default.jpg',blank=False,null=True)

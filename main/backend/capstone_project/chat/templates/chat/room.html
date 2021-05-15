@@ -14,13 +14,14 @@
 
 <script>
     // var roomName = {{ room_name_json }};
-    var roomName = "hello";
-    let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InRlc3QzIiwiZXhwIjoxNjE5NDE5MTg0LCJlbWFpbCI6ImFjZGFjZDY2QG5hdmVlci5jb20ifQ.lVf1FSXhykoFjM7PPZ8fFi6Iz6xnUZ9grsB8YxHYVPc";
-    document.cookie = 'authorization=' + token + ';' 
+    var roomName = "hello1";
+    var tokens = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6InRlc3QxIiwiZXhwIjoxNjIwODAzNzUyLCJlbWFpbCI6ImFjZGFjZDY2QG5hdmVyLmNvbSJ9.iTdkKg36YgjHrRCN5LR7cGtZUwqj_ekOrd8lQbEvvS8";
+    
+    
 
     var chatSocket = new WebSocket(
         'ws://' + "127.0.0.1:8000" +
-        '/ws/chat/' + roomName + '/');
+        '/ws/chat/' + roomName + '/'+"?token="+tokens);
         
 
     chatSocket.onmessage = function(e) {

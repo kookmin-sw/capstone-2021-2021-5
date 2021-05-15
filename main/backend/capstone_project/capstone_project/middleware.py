@@ -6,14 +6,33 @@ from django.contrib.auth.models import AnonymousUser
 from rest_framework.authtoken.models import Token
 from django.db import close_old_connections
 
+from urllib.parse import parse_qs
+from django.contrib.auth import get_user_model
+import jwt
+from capstone_project.settings import SECRET_KEY
+User = get_user_model()
+
 
 @database_sync_to_async
-def get_user(token_key):
-    try:
-        return Token.objects.get(key=token_key).user
-    except Token.DoesNotExist:
-        return AnonymousUser()
+def get_user(scope):
+    query_string = parse_qs(scope['query_string'].decode())
+    token = query_string.get('token')[0]
+    # print(token)
 
+    if not token:
+        return AnonymousUser()
+    try:
+        user_jwt = jwt.decode(
+                   token,
+                    SECRET_KEY,
+                     algorithms=["HS256"]
+                )
+        user = User.objects.get(pk=user_jwt['user_id'])
+    except Exception as exception:
+        return AnonymousUser()
+    if not user.is_active:
+        return AnonymousUser()
+    return user
 
 class TokenAuthMiddleware:
     """
@@ -31,20 +50,16 @@ class TokenAuthMiddleware:
 
 class TokenAuthMiddlewareInstance:
     def __init__(self, scope, middleware):
+       
         self.middleware = middleware
         self.scope = dict(scope)
         self.inner = self.middleware.inner
 
     async def __call__(self, receive, send):
         close_old_connections()
-        headers = dict(self.scope["headers"])
-        print(headers[b"cookie"])
-        if b"authorization" in headers[b"cookie"]:
-            print('still good here')
-            cookies = headers[b"cookie"].decode()
-            token_key = re.search("authorization=(.*)(; )?", cookies).group(1)
-            if token_key:
-                self.scope["user"] = await get_user(token_key)
+        # print("hello")
+        self.scope["user"] = await get_user(self.scope)
+        # print(self.scope["user"])
 
         # inner = self.inner(self.scope)
         return await self.inner(self.scope,receive, send) 

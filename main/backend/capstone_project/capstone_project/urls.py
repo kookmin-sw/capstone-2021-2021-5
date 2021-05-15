@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls import url
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("account/", include("account_app.urls")),
     path("analysis/", include("analysis.urls")),
+    path("diary/", include("diary_app.urls")),
     url(r'^chat/', include('chat.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

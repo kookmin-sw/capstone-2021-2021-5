@@ -1,4 +1,3 @@
-import { MailRounded } from '@material-ui/icons';
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
