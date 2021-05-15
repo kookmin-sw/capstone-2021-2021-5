@@ -82,6 +82,7 @@ export default function SignIn()  {
         console.log(response.token);
         const accessToken = response.token;
         window.sessionStorage.setItem("Authorization",accessToken);
+        alert("login suc")
         history.push("/main");
       }
       else{
@@ -105,12 +106,12 @@ export default function SignIn()  {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
         <Typography component="h1" variant="h5">
-          <img src = "logo/3x/Sentio_horizontalxxhdpi.png" width="70%">
-          </img>
+          Sign in
         </Typography>
-        <br></br>
         <form className={classes.form} noValidate onSubmit={OnSubmit}>
           <TextField
             variant="outlined"
@@ -118,8 +119,7 @@ export default function SignIn()  {
             required
             fullWidth
             id="email"
-            color="secondary"
-            label="아이디"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -133,8 +133,7 @@ export default function SignIn()  {
             required
             fullWidth
             name="password"
-            label="비밀번호"
-            color="secondary"
+            label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -153,17 +152,18 @@ export default function SignIn()  {
             color="primary"
             className={classes.submit}
             onSubmit={OnSubmit}
-            id="btn_large"
           >
-            로그인
+            Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-             
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
             </Grid>
             <Grid item>
-              <Link id="link" href="/SignUp" variant="body2">
-                {"회원가입"}
+              <Link href="/SignUp" variant="body2">
+                {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
           </Grid>

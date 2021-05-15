@@ -20,9 +20,7 @@ import Container from '@material-ui/core/Container';
 import {Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
-import { Alert } from 'react-bootstrap';
-import Figure from 'react-bootstrap/Figure'
-import FigureImage from 'react-bootstrap/FigureImage'
+
 
 
 function Copyright() {
@@ -82,15 +80,7 @@ export default function SignUp() {
   let [previewURL, setPreviewURL] = useState();
 
     if(file !== ''){
-      profile_preview = <Figure>
-      <Figure.Image
-        width={171}
-        height={180}
-        alt="171x180"
-        className='profile_preview' 
-        src={previewURL}
-      />
-      </Figure>
+      profile_preview = <img className='profile_preview' src={previewURL}></img>
     }
 
   function handleFileOnChange(event){
@@ -115,7 +105,6 @@ export default function SignUp() {
     };
 
   
-
   
 
   function OnSubmit(e) {
@@ -139,37 +128,13 @@ export default function SignUp() {
       console.log(response.data.token);
       const accessToken = response.data.token;
       window.sessionStorage.setItem("Authorization",accessToken);
+      
       history.push("/tendency");
     })
-
     .catch(function (error){
       console.log(file);
       console.log(error.response);
-      const { data } = error.response;
-        if(data.email != null){
-          console.error("error : ", data.email);
-          alert(data.email);
-        }
-        if(data.username != null){
-          console.error("error : ", data.username);
-          alert(data.username);
-        }
-        if(data.password1 != null){
-          console.error("error : ", data.password1);
-          alert(data.password1);
-        }
-        if(data.gender != null){
-          console.error("error : ", data.gender);
-          alert(data.gender);
-        }
-        if(data.usertype != null){
-          console.error("error : ", data.usertype);
-          alert(data.usertype);
-        }
-        if(data.birthDate != null){
-          console.error("error : ", data.birthDate);
-          alert(data.birthDate);
-        }
+      alert(error);
     });
   }
 
@@ -178,9 +143,12 @@ export default function SignUp() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-      <img src = "logo/3x/Sentio_horizontalxxhdpi.png" width="70%">
-          </img>
-          <br></br>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
         <form className={classes.form} noValidate onSubmit={OnSubmit} encType="multipart/form-data">
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -198,11 +166,10 @@ export default function SignUp() {
                 autoComplete="name"
                 name="name"
                 variant="outlined"
-                required="required"
+                required
                 fullWidth
                 id="name"
-                label="아이디"
-                color="secondary"
+                label="Name"
                 autoFocus
                 onChange={(e)=>{
                   setName(e.target.value);
@@ -212,7 +179,7 @@ export default function SignUp() {
             {/* <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                required="required"
+                required
                 fullWidth
                 id="lastName"
                 label="Last Name"
@@ -222,13 +189,11 @@ export default function SignUp() {
             </Grid> */}
             <Grid item xs={12}>
               <TextField
-                required
                 variant="outlined"
-                required="required"
+                required
                 fullWidth
                 id="email"
-                label="이메일"
-                color="secondary"
+                label="Email Address"
                 name="email"
                 autoComplete="email"
                 onChange={(e)=>{
@@ -239,11 +204,10 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required="required"
+                required
                 fullWidth
                 name="password"
-                label="비밀번호"
-                color="secondary"
+                label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -255,11 +219,10 @@ export default function SignUp() {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required="required"
+                required
                 fullWidth
                 name="password2"
-                label="비밀번호 확인"
-                color="secondary"
+                label="Password confirm"
                 type="password"
                 id="password2"
                 // error={hasNotSamePw('password2')}
@@ -273,14 +236,13 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={6}>
               <InputLabel>
-              생년월일
+              Birthdate
               </InputLabel>
              <TextField
                 variant="outlined"
-                required="required"
+                required
                 fullWidth
                 name="birthdate"
-                color="secondary"
                 type="date"
                 id="birthdate"
                 onChange={(e)=>{
@@ -294,9 +256,8 @@ export default function SignUp() {
                   <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
-                    label="성별"
-                    color="secondary"
-                    required="required"
+                    label="Gender"
+                    required
                     onChange={(e)=>{
                   setGender(e.target.value);
                 }}
@@ -308,12 +269,11 @@ export default function SignUp() {
             </Grid>
             <Grid xs={12}>
                  <FormControl className={classes.formControl1}>
-                  <InputLabel id="demo-simple-select-label">회원유형</InputLabel>
+                  <InputLabel id="demo-simple-select-label">UserType</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    color="secondary"
-                    required="required"
+                    required
                     onChange={(e)=>{
                   setUserType(e.target.value);
                 }}
@@ -332,11 +292,16 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
             onSubmit={OnSubmit}
-            id="btn_large"
           >
-            회원 가입
+            Sign Up
           </Button>
-          
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="/" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
       <Box mt={5}>

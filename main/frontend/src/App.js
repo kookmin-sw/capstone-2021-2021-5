@@ -4,7 +4,7 @@ import './App.css';
 import { CookiesProvider } from 'react-cookie';
 import SignIn from './SignIn.js';
 import SignUp from './SignUp.js';
-import Main from './Main.js';
+import Maint from './Maint';
 import Tendency from './Tendency';
 import UserPage from './UserPage';
 import ChatList from "./ChatList";
@@ -14,13 +14,12 @@ import ChangeUserInfo from "./ChangeUserInfo";
 import Diary from "./Diary";
 import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
-import { Reset } from 'styled-reset'
+import ChatModule from "./ChatModule";
 
 function App() {
 
   return (
     <div className="App">
-      <Reset/>
       <CookiesProvider>
     <Route exact path="/"> 
       <SignIn />
@@ -29,7 +28,7 @@ function App() {
       <SignUp />
     </Route>
     <Route path="/main" >
-        <Main  />
+        <Maint  />
     </Route>
     <Route path="/tendency">
       <Tendency />
@@ -57,6 +56,9 @@ function App() {
     </Route>
     <Route path="/diarylist">
       <DiaryList />
+    </Route>
+    <Route path="/cmodule">
+      <ChatModule />
     </Route>
     </CookiesProvider>
     </div>
