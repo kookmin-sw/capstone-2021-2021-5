@@ -25,7 +25,8 @@ class Emotion(models.Model):
     emotions=models.CharField(max_length=100,null=True,verbose_name='감정 리스트')
     profile= models.ForeignKey(
         User,
-        on_delete=models.CASCADE,null=True
+        on_delete=models.CASCADE,null=True,
+        related_name='profile_emotion'
     )
     image = models.ImageField(null=True)
 
