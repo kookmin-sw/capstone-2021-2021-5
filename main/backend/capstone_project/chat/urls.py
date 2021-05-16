@@ -10,4 +10,5 @@ urlpatterns = [
     path('', include(router.urls)),
     # url(r'^$', views.index, name='index'),
     # url(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
+    path('chat_statistic/', views.ChatStatisticView.as_view(),name='chat_statistic'),
 ]

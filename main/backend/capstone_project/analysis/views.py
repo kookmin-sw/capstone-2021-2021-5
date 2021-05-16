@@ -117,6 +117,16 @@ def music_classifier(emotion,emotion_obj):
     
         
 class EmotionAnalyzeView(APIView):
+    
+    def get(self, request):
+        today = datetime.date.today()
+        
+        result = {'result':False}
+        if Emotion.objects.filter(pubdate = today, profile = request.user).exists():
+            result['result'] = True
+        return Response(result)
+
+
     def post(self, request):
 
         # surveys = request.data['answer']
