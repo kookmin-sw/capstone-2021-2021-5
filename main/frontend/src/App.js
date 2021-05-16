@@ -17,7 +17,6 @@ import DiaryList from "./DiaryList";
 import { Reset } from 'styled-reset';
 import EmotionResult from './emotionResult';
 import Maint from "./Maint";
-import { Reset } from 'styled-reset'
 
 
 function App() {

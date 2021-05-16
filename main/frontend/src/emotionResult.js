@@ -20,6 +20,8 @@ export default function EmotionResult(){
     const picture = window.sessionStorage.getItem("picture");
     const resultImg = 'http://127.0.0.1:8000'+picture
     console.log(picture);
+    console.log(emotions);
+    console.log(musics)
  
   return (
     <>

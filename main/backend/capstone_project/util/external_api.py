@@ -2,7 +2,7 @@ from pyowm import OWM
 import requests
 
 def weather_report(lat,lan):
-    API_key = 'ddab7bbcc6c91eafb57fba486cd830bd'
+    API_key = '6accb9bfc78c7f11c54c7b6c51c9ca26'
     owm = OWM(API_key)
     mgr = owm.weather_manager()
     obs = mgr.weather_at_coords(lat, lan)  

@@ -10,7 +10,7 @@ class FaceClass:
     def __init__(self):
         # self.exciting_song = 'dd'
         # self.sad_song = 'sad'
-        KEY = '62a13cd4bdd94056b6fd4a9643a96644'  # Cognitive Services API KEY 키값이 있어야 api 호출이 가능
+        KEY = 'fdcf5f7e84904694a6fa3a029ca390d0'  # Cognitive Services API KEY 키값이 있어야 api 호출이 가능
         CF.Key.set(KEY)
         BASE_URL = 'https://koreacentral.api.cognitive.microsoft.com/face/v1.0/'  # 자신의 지역에 해당하는 URL //
         CF.BaseUrl.set(BASE_URL)

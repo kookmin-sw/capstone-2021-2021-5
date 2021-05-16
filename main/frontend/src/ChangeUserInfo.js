@@ -140,7 +140,8 @@ export default function ChangeUserInfo(){
       <Form.Label column sm="2">
         <span id="simple_txt">Email</span>
       </Form.Label>
-      <Col sm="10">
+      <Col xs={2}></Col>
+      <Col >
         <Form.Control  placeholder={uE}
           aria-label="이메일"
           aria-describedby="inputGroup-sizing-sm"
@@ -151,7 +152,9 @@ export default function ChangeUserInfo(){
           onChange={(e)=>{
             setEmail(e.target.value);}}/>
       </Col>
+      <Col xs={2}></Col>
     </Form.Group>
+
       {/* <TextField
                 variant="outlined"
                 fullWidth
