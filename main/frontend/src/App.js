@@ -16,13 +16,15 @@ import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
 import { Reset } from 'styled-reset';
 import EmotionResult from './emotionResult';
+import Maint from "./Maint";
+import { Reset } from 'styled-reset'
+
 
 function App() {
-
   return (
     <div className="App">
-      <Reset/>
-      <CookiesProvider>
+    <Reset/>
+    <CookiesProvider>
     <Route exact path="/"> 
       <SignIn />
     </Route>
@@ -61,6 +63,9 @@ function App() {
     </Route>
     <Route path="/emotionResult">
         <EmotionResult/>
+    </Route>
+    <Route path="/maint">
+      <Maint />
     </Route>
     </CookiesProvider>
     </div>
