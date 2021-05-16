@@ -1,13 +1,19 @@
 from pyowm import OWM
 import requests
+from socket import timeout
 
 def weather_report(lat,lan):
     API_key = '6accb9bfc78c7f11c54c7b6c51c9ca26'
+    global owm
     owm = OWM(API_key)
     mgr = owm.weather_manager()
-    obs = mgr.weather_at_coords(lat, lan)  
-    w = obs.weather
-    res = w.status
+    try:
+        obs = mgr.weather_at_coords(lat, lan)  
+        w = obs.weather
+        res = w.status
+    except timeout as e:
+        print("socket timeout.")
+        weather_report(lat,lan)
     return res
     # res1 = w.detailed_status #날씨 상세
 # print(weather_report(37.5665,126.9780))
