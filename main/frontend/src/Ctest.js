@@ -10,6 +10,8 @@ import {
   Button
 } from 'reactstrap';
 import CNavbar from "./custom_navbar";
+import emotionResult from "./emotionResult";
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,13 +35,14 @@ const useStyles = makeStyles((theme) => ({
 export default function Ctest(){
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
-
+  let history = useHistory();
   const classes = useStyles();
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [status, setStatus] = useState(null);
+
   
   //현재 위치 가져오기
   const getLocation = () => {
@@ -80,14 +83,22 @@ export default function Ctest(){
     }
     axios.post('http://127.0.0.1:8000/analysis/emotion_analyze/',fd)
     .then(function (response){
-      console.log(response);
-      console.log(response.data);
       console.log(response.data.token);
+      const emotions =response.data.emotions;
+      const musics = response.data.musics;
+      const picture = response.data.image;
+      console.log(emotions);
+      console.log(musics);
+      console.log(picture);
+      window.sessionStorage.setItem("emotions",emotions);
+      window.sessionStorage.setItem("musics",musics);
+      window.sessionStorage.setItem("picture",picture);
+      history.push("/emotionResult");
     })
     .catch(function (error){
       // console.log(file);
       console.log(error.response);
-      alert(error);
+      alert("사진이 올바르지 않습니다.");
     });
   }
   function dataURLtoFile(dataurl, filename) {

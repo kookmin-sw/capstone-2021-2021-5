@@ -14,7 +14,8 @@ import ChangeUserInfo from "./ChangeUserInfo";
 import Diary from "./Diary";
 import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
-import { Reset } from 'styled-reset'
+import { Reset } from 'styled-reset';
+import EmotionResult from './emotionResult';
 
 function App() {
 
@@ -57,6 +58,9 @@ function App() {
     </Route>
     <Route path="/diarylist">
       <DiaryList />
+    </Route>
+    <Route path="/emotionResult">
+        <EmotionResult/>
     </Route>
     </CookiesProvider>
     </div>

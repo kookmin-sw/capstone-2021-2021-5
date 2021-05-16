@@ -41,7 +41,7 @@ import {
                 <NavLink href="/userpage"><span id="simple_txt">마이페이지</span></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap"><span id="simple_txt">채팅방</span></NavLink>
+                <NavLink href="/chatlist"><span id="simple_txt">채팅방</span></NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="#" onClick={onLogout}><span id="simple_txt">로그아웃</span></NavLink>
