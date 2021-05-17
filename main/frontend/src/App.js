@@ -17,6 +17,7 @@ import DiaryList from "./DiaryList";
 import { Reset } from 'styled-reset';
 import EmotionResult from './emotionResult';
 import Maint from "./Maint";
+import WeatherChart from "./weather_chart";
 
 
 function App() {
@@ -62,6 +63,9 @@ function App() {
     </Route>
     <Route path="/emotionResult">
         <EmotionResult/>
+    </Route>
+    <Route path="/wheatherChart">
+        <WeatherChart/>
     </Route>
     <Route path="/maint">
       <Maint />

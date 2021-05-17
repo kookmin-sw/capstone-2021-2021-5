@@ -48,8 +48,12 @@ export default function Diary() {
       history.push("/main");
     })
     .catch(function (error){
-      console.log(error.response);
-      alert(error);
+      console.log(error.response.data.non_field_errors[0]);
+      if(error.response.data.non_field_errors[0]==='already written'){
+          alert("오늘 일기를 이미 작성했습니다.")
+          history.push("/main")
+      }
+
     });
   }
 

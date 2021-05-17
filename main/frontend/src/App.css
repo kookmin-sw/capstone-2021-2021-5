@@ -175,6 +175,12 @@ input::placeholder{
 
 
 }
+
+#icon{
+  max-width: 30px;
+  height: auto;
+  
+}
 #btn_block {
   background-color: white;
   border:1px solid #e73330a2 ;
@@ -202,4 +208,8 @@ input::placeholder{
 #picture{
   max-width: 300px;
   height: auto;
+}
+
+#warning{
+  color: red;
 }

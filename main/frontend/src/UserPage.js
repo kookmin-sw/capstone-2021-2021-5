@@ -84,7 +84,7 @@ export default function UserPage(){
     </br>
     <Row>
       <Col>
-      <Link to="/changeuserinfo">
+      <Link to="/wheatherChart">
       <Button id="btn_block" size="lg" block>
         <Row>
           <Col><img id="icon" src="svg/fi-rr-cloud.svg"/></Col>

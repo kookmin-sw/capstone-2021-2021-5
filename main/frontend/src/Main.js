@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CNavbar from './custom_navbar';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -10,7 +10,6 @@ import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
 import { Link } from 'react-router-dom';
 import {
-  
   Container, 
   Row, 
   Col,
@@ -38,9 +37,22 @@ export default function Main(){
   let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
   let history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
-  const emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
+  let emotions = '';
   const musics = JSON.parse(window.sessionStorage.getItem("musics"));
+  let musicslide ='';
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
+
+  function getEmotions(){
+    axios.post('http://127.0.0.1:8000/analysis/emotion_statistic/')
+    .then(function(response){
+      emotions = response.data.emotions;
+      window.sessionStorage.setItem("emotions",JSON.stringify(emotions));
+    })
+    .catch(function (error){
+      console.log(error);
+    });
+  }
+  
 
   function OnSubmit(e) {
     e.preventDefault();
@@ -66,15 +78,14 @@ export default function Main(){
       alert(error);
     });
   }
-
-  function OnChat(e) {
-    e.preventDefault();
-    history.push("/chatlist");
+  getEmotions();
+  emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
+ 
+  if(musics==null){
+      musicslide = <Row><Col id="sub_title">감정분석 <span id="warning">미완료.</span></Col></Row>;
   }
-
-  function ChaneInfo(e){
-    e.preventDefault();
-    history.push("/changeuserinfo");
+  else{
+      musicslide = <Slide data={musics}></Slide>;
   }
 
   return(
@@ -89,7 +100,7 @@ export default function Main(){
     </Col>    
     </Row>
     <br></br>
-    <Slide data={musics}></Slide>
+    {musicslide}
     <br></br>
     <br></br>
     <Row>
