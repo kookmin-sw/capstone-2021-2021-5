@@ -14,32 +14,7 @@ import {
 } from 'recharts';
 import axios from "axios";
 
-const data = [
-    {
-      name :"분노", emotion:30
-    },
-    {
-      name :"경멸", emotion:0
-      },
-    {
-      name :"불쾌", emotion:0
-    },
-    {
-      name :"공포", emotion:0
-    },
-    {
-      name :"행복", emotion:0
-    },
-    {
-      name :"슬픔", emotion:50
-    },
-    {
-      name :"중립", emotion:10
-    },
-    {
-      name :"놀람", emotion:10
-    },
-];
+
 const Chart = (props) => {
 
   return (
@@ -50,7 +25,7 @@ const Chart = (props) => {
     <BarChart
     width = {300}
     height = {250}
-		data={data}
+		data={props.data}
     id="bar"
 	>
 		<CartesianGrid strokeDasharray="5 5" vertical={false} />
