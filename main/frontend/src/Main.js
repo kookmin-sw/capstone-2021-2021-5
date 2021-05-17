@@ -40,6 +40,7 @@ export default function Main(){
   let emotions = '';
   const musics = JSON.parse(window.sessionStorage.getItem("musics"));
   let musicslide ='';
+  let randomMusic = '';
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
   function getEmotions(){
@@ -53,36 +54,24 @@ export default function Main(){
     });
   }
   
+  getEmotions();
+  emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
 
-  function OnSubmit(e) {
-    e.preventDefault();
-    if(roomname == null){
-      alert("Check RoomName");
-      return;
-    }
-
-    axios.post('http://127.0.0.1:8000/chat/crud/',{
-      name: roomname,
-
-    })
-    .then(function (response){
-      console.log(response);
-      console.log(response.data);
-      document.cookie = 'authorization=' + token + ';'
-      window.sessionStorage.setItem("MakeRoomName", roomname);
-      history.push("/chat");
-
+  function getRandomMusics(){
+    axios.get('http://127.0.0.1:8000/analysis/random_music/')
+    .then(function(response){
+      randomMusic = response.data.musics;
+      window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
     })
     .catch(function (error){
       console.log(error);
-      alert(error);
     });
   }
-  getEmotions();
-  emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
  
   if(musics==null){
-      musicslide = <Row><Col id="sub_title">감정분석 <span id="warning">미완료.</span></Col></Row>;
+      getRandomMusics()
+      randomMusic = JSON.parse(window.sessionStorage.getItem("randomMusic"));
+      musicslide = <Slide data={randomMusic}></Slide>;;
   }
   else{
       musicslide = <Slide data={musics}></Slide>;
