@@ -8,5 +8,6 @@ urlpatterns = [
         path('emotion_statistic/', views.EmotionStatisticView.as_view(),name='emotion_statistic'),
         path('data_injection/', views.DataInjectionView.as_view(),name='data_injection'),
         path('emotion_histroy/', views.EmotionHistroyView.as_view(),name='emotion_histroy'),
+        path('random_music/', views.RandomMusicView.as_view(),name='random_music'),
 ]
 

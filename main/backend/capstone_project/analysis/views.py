@@ -293,4 +293,15 @@ class EmotionHistroyView(APIView):
 
         
          
-        
+class RandomMusicView(APIView):
+    
+    def get(self, request):
+        result = {}
+        musics = Music.objects.all().order_by('?')[:10]
+        music_lis = []
+        for music in musics:
+            music_lis.append({"title": music.title,"url":music.iframe_url})
+        result["musics"] = music_lis
+   
+        return Response(result)
+    
