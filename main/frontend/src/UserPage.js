@@ -112,7 +112,7 @@ export default function UserPage(){
     </br>
     <Row>
     <Col>
-    <Link to="/diary">
+    <Link to="/diarylist">
       <Button id="btn_block" size="lg" block>
         <Row>
           <Col><img id="icon" src="svg/fi-rr-book-alt.svg"/></Col>

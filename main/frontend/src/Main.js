@@ -18,6 +18,7 @@ import {
 } from 'reactstrap';
 
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -37,6 +38,8 @@ export default function Main(){
   let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
   let history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
+  const emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
+  const musics = JSON.parse(window.sessionStorage.getItem("musics"));
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
   function OnSubmit(e) {
@@ -80,7 +83,13 @@ export default function Main(){
     <CNavbar></CNavbar>
     <br></br>
     <br></br>
-    <Slide></Slide>
+    <Row>
+    <Col id="sub_title">
+    <span>오늘 당신을 위한 음악</span>
+    </Col>    
+    </Row>
+    <br></br>
+    <Slide data={musics}></Slide>
     <br></br>
     <br></br>
     <Row>
@@ -93,10 +102,12 @@ export default function Main(){
     <div id="Chart_Col">
     <Row >
     <Col id="Chart_Col">
-    <Chart></Chart>
+    <Chart data={emotions}></Chart>
     </Col>
     </Row>
     </div>
+    <br></br>
+    <br></br>
     <Row xs={7} id="bottom_fix" className="fixed-bottom">
     <Col>
     <Link to="/ctest"><Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button></Link>

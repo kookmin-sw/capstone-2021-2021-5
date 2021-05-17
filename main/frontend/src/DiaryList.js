@@ -18,10 +18,6 @@ export default function DiaryList() {
     axios.get('http://127.0.0.1:8000/diary/crud/')
     .then(function(response){
       console.log(response);
-      console.log(response.data[0]);
-      console.log(response.data[0].pubdate);
-      console.log(response.data[0].title);
-      console.log(response.data[0].body);
       for (var idx in response.data){
         date.push(response.data[idx].pubdate);
         title.push(response.data[idx].title);
@@ -102,19 +98,7 @@ export default function DiaryList() {
         })
       }
 
-      {/* <form>
-        <div>
-        <label>{title}</label>
-        </div>
-        <div>
-        <label>{date}</label>
-        </div>
-        <div>
-        <textarea readOnly value={content}></textarea>
-        </div>
-        <button onClick={OnRead}>열람</button>
-        <button>수정</button>
-      </form> */}
+    
       
     </div>
   );

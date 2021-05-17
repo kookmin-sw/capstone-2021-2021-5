@@ -1,35 +1,25 @@
 import React, {useState,useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+
 import axios from "axios";
 import { useHistory } from 'react-router';
 import CNavbar from './custom_navbar';
 import { RenderAfterNavermapsLoaded, NaverMap } from 'react-naver-maps'
+import {
+  Container, 
+  Row, 
+  Col,
+  Button
+} from 'reactstrap';
+import Form from 'react-bootstrap/Form'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-    button: {
-    margin: theme.spacing(1),
-  },
-  },
-}));
+
 
 export default function Diary() {
-  const classes = useStyles();
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
   let[title, setTitle] = useState('');
   let[content, setContent] = useState('');
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
   let history = useHistory();
 
  
@@ -68,34 +58,41 @@ export default function Diary() {
 
   return (
     <div>
-      <CNavbar>
-
-      </CNavbar>
-      <br></br>
-      <br></br>
-      <div className="App">
-      </div>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="title" label="일기 제목" variant="outlined" onChange={(e)=>{
+      <CNavbar></CNavbar>
+      <Container>
+        <br></br>
+        <br></br>
+        <Form>
+          <Form.Group as={Row} controlId="formHorizontalEmail">
+          <Form.Label column xs={2}>
+            제목:
+          </Form.Label>
+          <Col xs={10}>
+            <Form.Control type="text" onChange={(e)=>{
                   setTitle(e.target.value);
                 }} />
+          </Col>
+        </Form.Group>
         <br></br>
-        <textarea id="content" rows="5" cols="33" onChange={(e)=>{
+        <Form.Group as={Row} controlId="formHorizontalPassword">
+          <Form.Label column xs={2}>
+            내용:
+          </Form.Label>
+          <Col xs={10}>
+            <Form.Control as="textarea" rows={20} onChange={(e)=>{
                   setContent(e.target.value);
-                }}>
-        </textarea>
-        <br></br>
-         <Button
-          type="sunmit"
-          onClick={OnSubmit}
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          endIcon={<Icon>send</Icon>}
-        >
-          send
-        </Button>
-      </form>
+                }}/>
+          </Col>
+        </Form.Group>
+        <Row xs={7} id="bottom_fix" className="fixed-bottom">
+        <Col>
+        <Button size="lg" block id="btn_nomal"  type="sunmit"
+          onClick={OnSubmit}><span id="simple_txt">작성완료</span></Button>
+        </Col>
+        </Row>
+        </Form>
+      </Container>
     </div>
+   
   );
 }

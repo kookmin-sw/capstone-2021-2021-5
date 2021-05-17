@@ -18,31 +18,17 @@ import axios from 'axios';
 
 const Slide = (props) => {
 
- 
+  const musics = props.data;
+  const urls = musics.map((music)=>  <div class=" container" >
+  <iframe width="300" height="200" src={music.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>);
   return (
     <>
-    <Row>
-    <Col id="sub_title">
-    <span>오늘 당신을 위한 음악</span>
-    </Col>    
-    </Row>
-    <br></br>
     <Row xs="1" sm="2" md="3" className="overflow-auto">
     <Col></Col>
     <Col >
     <div id="slide_container">
-    <div class=" container" >
-    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class=" container">
-    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class=" container">
-    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class=" container">
-    <iframe width="300" height="200" src="https://www.youtube.com/embed/COz9lDCFHjw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
+    {urls}
     </div>
     </Col>
     <Col></Col>

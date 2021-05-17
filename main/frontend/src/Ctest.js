@@ -90,8 +90,8 @@ export default function Ctest(){
       console.log(emotions);
       console.log(musics);
       console.log(picture);
-      window.sessionStorage.setItem("emotions",emotions);
-      window.sessionStorage.setItem("musics",musics);
+      window.sessionStorage.setItem("emotions",JSON.stringify(emotions));
+      window.sessionStorage.setItem("musics",JSON.stringify(musics));
       window.sessionStorage.setItem("picture",picture);
       history.push("/emotionResult");
     })
