@@ -21,7 +21,7 @@
 
     var chatSocket = new WebSocket(
         'ws://' + "127.0.0.1:8000" +
-        '/ws/chat/' + roomName + '/'+"?token="+tokens);
+        '/ws/adviser/' + roomName + '/'+"?token="+tokens);
         
 
     chatSocket.onmessage = function(e) {

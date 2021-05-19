@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
-from .models import chatRoom
-from .serializers import chatRoomSerializer
+from .models import chatRoom,AdviserRoom
+from .serializers import chatRoomSerializer,adviseRoomSerializer
 import ast
 from operator import add
 import datetime
@@ -78,7 +78,7 @@ class ChatStatisticView(APIView):
         return Response(result)
 
         
-# class AdviserRoomViewSet(viewsets.ModelViewSet):
-#     queryset = chatRoom.objects.all()
-#     serializer_class = chatRoomSerializer
-#     http_method_names = ['get','post']  # get 메소드만 허용
+class AdviserRoomViewSet(viewsets.ModelViewSet):
+    queryset = AdviserRoom.objects.all()
+    serializer_class = adviseRoomSerializer
+    http_method_names = ['get','post']  # get 메소드만 허용

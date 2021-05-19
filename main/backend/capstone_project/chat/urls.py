@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register('crud', views.ChatRoomViewSet)
+router.register('adviser', views.AdviserRoomViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
