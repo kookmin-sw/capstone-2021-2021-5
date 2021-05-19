@@ -11,27 +11,11 @@ import axios from 'axios';
 import { useEffect } from 'react';
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    justifyContent: 'left'
-  },
-}));
+
 
 export default function ChatList(){
-  const classes = useStyles();
   let history = useHistory();
-  const [clist, setList] = useState([
-    // id: '',
-    // name: '',
-  ]);
-  const {id, name} = clist;
+  const [clist, setList] = useState([]);
 
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -42,11 +26,7 @@ export default function ChatList(){
     .then(function(response){
       console.log(response);
       console.log(response.data);
-      console.log(response.data[0]);
-      for(let i in response.data){
-        setList({...clist, id: response.data[i].id, name: response.data[i].name});
-      }
-      // setList({...clist, id:response.data[0].id, name:response.data[0].name});
+      setList(response.data);
       // alert("Succ");
     })
     .catch(function(error){
@@ -55,40 +35,31 @@ export default function ChatList(){
     })
   },[]);
 
-  console.log(clist);
+  function OnGoChat(roomname) {
+    console.log(roomname);
+    window.sessionStorage.setItem("MakeRoomName", roomname);
+    history.push("/sockettest");
+  }
 
 
   return(
-    <div className={classes.root}>
-    <AppBar position="static">
-  <Toolbar>
-    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-      <MenuIcon />
-    </IconButton>
-    <Typography variant="h6" className={classes.title}>
-      Chat List
-    </Typography>
-    <Button color="inherit">Logout</Button>
-  </Toolbar>
-</AppBar>
- {/* {
-            //반복문을 쓸때는 key를 써주도록 강요한다.
-            clist.map(function(i){
-              return (
-                <div className="list" key={i}>
-                  <p>{clist[i].id}</p>
-                  <p>{clist[i].name}</p>
-                  <hr/>
-                </div>
-              )
-            })
-          } */}
-<div>
-<label>{clist}</label>
-<hr></hr>
-</div>
+  <div>
+    <table>
+      <th>Room_Id</th>
+      <th>Room_Name</th>
+        {
+      clist.map((post, idx) => (
+        <tr key={idx}>   
+          <td>{post.id}</td>
+          <td onClick={(e)=>{
+                  var roomname = e.target.innerText;
+                  OnGoChat(roomname);
+                }}>{post.name}</td>
+        </tr>
+      ))
+    }
+    </table>
 
-
-</div>
+  </div>
   );
 }

@@ -18,6 +18,7 @@ import { Reset } from 'styled-reset';
 import EmotionResult from './emotionResult';
 import Maint from "./Maint";
 import WeatherChart from "./weather_chart";
+import DiaryDetail from "./DiaryDetail";
 
 
 function App() {
@@ -69,6 +70,9 @@ function App() {
     </Route>
     <Route path="/maint">
       <Maint />
+    </Route>
+    <Route path="/diarydetail">
+      <DiaryDetail />
     </Route>
     </CookiesProvider>
     </div>

@@ -1,18 +1,16 @@
-import React, {useState} from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import Form from 'react-bootstrap/Form';
 
-
-export default function Chat(){
+const Chat = () => {
   const token = window.sessionStorage.getItem("Authorization");
-  // axios.defaults.headers.common["Authorization"] = "jwt " + token;
-  let [roomname, setRoomName] = useState();
+  const [socketConnected, setSocketConnected] = useState(false);
+  const [sendMsg, setSendMsg] = useState(false);
   let [message, setMessage] = useState('');
+  const [items, setItems] = useState([]);
+  const [roomname, setRoomName] = useState();
   let [chatlog, setChatLog] = useState([]);
-
- 
-
+  let ws = useRef(null);
 
   useEffect(()=>{
     axios.get('http://127.0.0.1:8000/chat/crud/')
@@ -21,48 +19,83 @@ export default function Chat(){
       console.log(response.data);
       setRoomName(window.sessionStorage.getItem("MakeRoomName"));
       console.log(roomname);
-      // alert("Succ");
     })
     .catch(function(error){
-      console.log(roomname);
       console.log(error);
       alert("fail")
     })
   },[]);
 
+  const webSocketUrl = 'ws://' + "127.0.0.1:8000" +
+    '/ws/chat/' + roomname + '/' + "?token="+ token;
 
-  const chatSocket = new WebSocket(
-    'ws://' + "127.0.0.1:8000" +
-    '/ws/chat/' + roomname + '/' + "?token="+token);
-        
 
-    chatSocket.onmessage = function(e) {
-        var data = JSON.parse(e.data);
+  // 소켓 객체 생성
+  useEffect(() => {
+    if (!ws.current) {
+      ws.current = new WebSocket(webSocketUrl);
+      ws.current.onopen = () => {
+        console.log("connected to " + webSocketUrl);
+        setSocketConnected(true);
+      };
+      ws.current.onclose = (error) => {
+        console.log("disconnect from " + webSocketUrl);
+        console.log(error);
+      };
+      ws.current.onerror = (error) => {
+        console.log("connection error " + webSocketUrl);
+        console.log(error);
+      };
+      ws.current.onmessage = (evt) => {
+        const data = JSON.parse(evt.data);
         var messaged = data['message'];
-        console.log(data)
-        var narr = [...chatlog];
-        narr.push(messaged + '\n');
-        setChatLog(narr);
-    };
-    
+        console.log(data);
+        console.log(typeof(messaged));
+        console.log(Array.isArray(chatlog));
+        setChatLog((prevItems) => [...prevItems, messaged + '\n']);
+      };
+    }
 
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
+    return () => {
+      console.log("clean up");
+      ws.current.close();
     };
+  }, []);
 
-    
-    function OnSubmit(e){
-        chatSocket.send(JSON.stringify({
+  // //소켓이 연결되었을 시에 send 메소드
+  // useEffect(() => {
+  //   if (socketConnected) {
+  //     ws.current.send(
+  //       JSON.stringify({
+  //         'message': '',
+  //       })
+  //     );
+
+  //     setSendMsg(true);
+  //   }
+  // }, [socketConnected]);
+
+  function OnSubmit(e){
+        ws.current.send(JSON.stringify({
             'message': message
         }));
 
         setMessage('');
       }
-  
 
-  return(
+      console.log(chatlog);
+
+  return (
     <div>
-      <textarea id="chat-log" cols="100" rows="20" value={chatlog} readOnly></textarea><br/>
+      <Form.Label>{roomname}</Form.Label>
+      <div>socket connected : {`${socketConnected}`}</div>
+      {
+        chatlog.map((idx,clog)=>{
+          return <div key={clog}>{idx}</div>
+        })
+      }
+       <textarea id="chat-log" cols="100" rows="20"readOnly value={chatlog}></textarea>
+       <br/>
       <input id="chat-message-input" value={message} type="text" size="100" onKeyPress={(e)=>{
                   if(e.key === 'Enter'){
                     console.log('enter');
@@ -74,7 +107,8 @@ export default function Chat(){
                 }}/><br/>
       <input id="chat-message-submit" type="submit" value="Send" onClick={OnSubmit}/>
       <br/>
-      <Form.Label>{roomname}</Form.Label>
     </div>
   );
-}
+};
+
+export default Chat;
