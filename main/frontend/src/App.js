@@ -19,14 +19,11 @@ import EmotionResult from './emotionResult';
 import Maint from "./Maint";
 import WeatherChart from "./weather_chart";
 import DiaryDetail from "./DiaryDetail";
-<<<<<<< HEAD
 import AdChat from "./AdChat";
 import AdChatList from "./AdChatList";
-=======
 import EmotionList from './EmotionList';
 import EmotionDetail from './EmotionDetail';
 import DiaryEdit from './DiaryEdit';
->>>>>>> 395a67288a87a6542e1031a9dfbf61325d8fb4aa
 
 
 function App() {
@@ -87,6 +84,7 @@ function App() {
     </Route>
     <Route exact path="/adchatlist">
       <AdChatList />
+      </Route>
     <Route path="/emotionList">
         <EmotionList></EmotionList>
     </Route>
