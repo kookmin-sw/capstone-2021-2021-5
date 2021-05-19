@@ -260,7 +260,7 @@ class DataInjectionView(APIView):
 
     def post(self, request):
         result = {'result':False}
-        if  request.user.is_superuser:
+        if  request.user.userType == "Adviser":
             result['result'] = True
         return Response(result)
 
