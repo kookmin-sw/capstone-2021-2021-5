@@ -1,25 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
 import axios from "axios";
 import { useHistory } from 'react-router';
+import CNavbar from './custom_navbar';
+import {
+  Container, 
+  Row, 
+  Col,
+  Button
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-    button: {
-    margin: theme.spacing(1),
-  },
-  },
-}));
 
 export default function DiaryDetail() {
-  const classes = useStyles();
+  
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
@@ -37,54 +30,39 @@ export default function DiaryDetail() {
     setId(diary_id);
   },[]);
 
-  function OnModify(e) {
-    e.preventDefault();
-    console.log(id);
-
-     axios.put('http://127.0.0.1:8000/diary/crud/' + id + '/',{
-      title: title,
-      body: content,
-
-    })
-    .then(function (response){
-      console.log(response);
-      console.log(response.data);
-      alert("수정완료");
-      history.push("/main");
-    })
-    .catch(function (error){
-      console.log(error.response);
-      alert(error);
-    });
-
-  }
-
-
-
-
+ 
   return (
     <div>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField id="title" defaultValue={title} placeholder={title} label="일기 제목" variant="outlined" onChange={(e)=>{
-                  setTitle(e.target.value);
-                }} />
-        <br></br>
-        <textarea id="content" placeholder={content} rows="5" cols="33" onChange={(e)=>{
-                  setContent(e.target.value);
-                }}>
-        </textarea>
-        <br></br>
-         <Button
-          type="submit"
-          onClick={OnModify}
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          endIcon={<Icon>send</Icon>}
-        >
-          send
-        </Button>
-      </form>
+      <CNavbar></CNavbar>
+      <br></br>
+      <Container>
+      <Row>
+        <Col style={{textAlign:"left"}}>
+        <Link to="/diarylist">
+     <img id="icon" src="svg/fi-rr-arrow-left.svg"/>
+     </Link>
+     </Col>
+     </Row>
+      <br></br>
+      <br></br>
+        <Row>
+          <Col id="simple_txt" xs={4}>TITLE : </Col>
+          <Col id="light_txt">{title}</Col>
+        </Row>
+        <hr></hr>
+        <Row>
+          <Col id="simple_txt" xs={5}>CONTENT : </Col>
+          <Col id="light_txt" >{content}</Col>
+        </Row>
+        <Row xs={7} id="bottom_fix" className="fixed-bottom">
+        <Col>
+        <Link to="/diaryEdit">
+        <Button size="lg" block id="btn_nomal"  
+        ><span id="simple_txt">수정하기</span></Button>
+        </Link>
+        </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

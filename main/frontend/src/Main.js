@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CNavbar from './custom_navbar';
 import 'bootstrap/dist/css/bootstrap.css';
 import Slide from './music_slide';
 import axios from 'axios';
+import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
 import { Link } from 'react-router-dom';
 import {
@@ -12,9 +12,17 @@ import {
   Col,
   Button
 } from 'reactstrap';
+import { useHistory } from 'react-router';
+
+
+
 
 
 export default function Main(){
+  
+  let [roomname, setRoomName] = useState();
+  let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
+  let history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
   const [emo,setEmo] = useState('');
   const [rm,setRm] = useState('');
@@ -37,9 +45,15 @@ export default function Main(){
       </Row>
       </div>;
       setEmo(chart);
-    
     })
     .catch(function (error){
+      let chart = 
+      <Row>
+      <Col id="simple_txt">
+      <span id="warning">감정 데이터가 충분하지 않습니다.</span>
+      </Col>    
+      </Row>
+       setEmo(chart);
       console.log(error);
     });
   }

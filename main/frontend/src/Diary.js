@@ -3,7 +3,6 @@ import React, {useState,useEffect} from 'react';
 import axios from "axios";
 import { useHistory } from 'react-router';
 import CNavbar from './custom_navbar';
-import { RenderAfterNavermapsLoaded, NaverMap } from 'react-naver-maps'
 import {
   Container, 
   Row, 

@@ -14,14 +14,14 @@
 
 <script>
     // var roomName = {{ room_name_json }};
-    var roomName = "hello3";
+    var roomName = "안";
     var tokens = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InRlc3Q3NyIsImV4cCI6MTYyMjA0ODA5MiwiZW1haWwiOiJhY2RhY2Q2NkBmYWNlYm9vay5jb20ifQ.Elk3dP_iwEqMjl1BH2C6-MKsc57mz5ot4hV8KJXPdWA";
     
     
 
     var chatSocket = new WebSocket(
         'ws://' + "127.0.0.1:8000" +
-        '/ws/adviser/' + roomName + '/'+"?token="+tokens);
+        '/ws/chat/' + roomName + '/'+"?token="+tokens);
         
 
     chatSocket.onmessage = function(e) {

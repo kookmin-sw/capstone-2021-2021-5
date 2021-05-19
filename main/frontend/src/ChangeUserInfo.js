@@ -27,7 +27,12 @@ export default function ChangeUserInfo(){
     .then(function(response){
       console.log(response);
       console.log(response.data);
-      setUserImage('http://127.0.0.1:8000'+response.data.image);
+      if(response.data.image == null){
+        setUserImage('svg/fi-rr-user.svg')
+      }
+      else{
+        setUserImage('http://127.0.0.1:8000'+response.data.image);
+      }
       setUserE(response.data.email);
       // alert("Succ");
     })
@@ -106,7 +111,7 @@ export default function ChangeUserInfo(){
       <br></br>
       <br></br>
       <Row>
-      <Col style={{textAlign:"right",justifyContent:"right"}} xs={5}><Image className="profile_preview_small" src={userImage}  /></Col>
+      <Col style={{textAlign:"right",justifyContent:"right"}} xs={5}><Image className="profile_preview_small" src={userImage}   /></Col>
       <Col>
       <br></br>
       <br></br>
