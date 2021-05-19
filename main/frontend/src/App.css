@@ -98,6 +98,13 @@ input::placeholder{
   font-weight: 100;
   font-size: 0.8em;
 }
+.light_txt{
+  font-family: 'GmarketSansLight';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 0.8em;
+  color: #d82e2be3;
+}
 
 #btn_nomal {
   background-color: #e73330a2;

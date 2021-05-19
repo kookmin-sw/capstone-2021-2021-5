@@ -1,7 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import { useHistory } from 'react-router';
-
+import CNavbar from './custom_navbar';
+import {
+    Container, 
+    Row, 
+    Col,
+    Button
+  } from 'reactstrap';
+  import Table from 'react-bootstrap/Table'
 
 
 export default function DiaryList() {
@@ -46,30 +53,73 @@ export default function DiaryList() {
     })
   }
 
-
+  function weather(num){
+    if(num == 0){
+      return "맑음";
+    }
+    else if(num == 1){
+      return "흐림";
+    }
+    else if(num == 2){
+      return "비";
+    }
+    else if(num == 3){
+      return "번개";
+    }
+    else if(num == 4){
+      return "눈";
+    }
+    else if(num == 5){
+      return "안개";
+    }
+    else {
+      return "광풍"
+    }
+  }
 
 
   return (
     <div>
-    <table>
-      <th>Diary_idx</th>
-      <th>Diary_title</th>
-      <th>Diary_weather</th>
-      <th>Diary_date</th>
-        {
-      diaryList.map((post, idx) => (
-        <tr key={idx}>   
-          <td id="id" onClick={(e)=>{
-                  var id = e.target.innerText;
-                  OnDetail(id);}}
-                  >{post.id}</td>
-          <td id="title">{post.title}</td>
-          <td id="weather">{post.weather}</td>
-          <td id="pubdate">{post.pubdate}</td>
-        </tr>
-      ))
-    }
-    </table>
+    <CNavbar>
+
+    </CNavbar>
+    <Container fluid>
+    <br></br>
+    <br></br>
+    <Row>
+        <Col id="sub_title" style={{textAlign:'left'}}>
+            나의 일기들
+        </Col>
+    </Row>
+    <br></br>
+    <Row>
+        <Table bordered responsive hover>
+            <thead>
+                <th><span id="simple_txt">NO.</span></th>
+                <th><span id="simple_txt">TITLE.</span></th>
+                <th><span id="simple_txt">WEATHER.</span></th>
+                <th><span id="simple_txt">DATE.</span></th>
+            </thead>
+            <tbody>
+            {
+                diaryList.map((post, idx) => (
+                  <tr key={idx}>   
+                    <td id="id" 
+                            ><span id="light_txt">{idx+1}</span></td>
+                    <td id={post.id} onClick={(e)=>{
+                            var id = e.target.id;
+                            OnDetail(id);}}><span id={post.id} className="light_txt">{post.title}</span></td>
+                    <td id="weather">
+                    <span id="light_txt">{weather(post.weather)}</span>
+                      </td>
+                    <td id="pubdate"><span id="light_txt">{post.pubdate}</span></td>
+                  </tr>
+                ))
+              }
+            </tbody>
+        </Table>
+    </Row>
+    </Container>
 
   </div>
   );

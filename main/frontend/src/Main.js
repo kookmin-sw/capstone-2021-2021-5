@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CNavbar from './custom_navbar';
 import 'bootstrap/dist/css/bootstrap.css';
 import Slide from './music_slide';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
 import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
 import { Link } from 'react-router-dom';
@@ -18,21 +16,10 @@ import {
 
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    justifyContent: 'left'
-  },
-}));
+
 
 export default function Main(){
-  const classes = useStyles();
+  
   let [roomname, setRoomName] = useState();
   let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
   let history = useHistory();
@@ -57,9 +44,15 @@ export default function Main(){
       </Row>
       </div>;
       setEmo(chart);
-      console.log(emotions);
     })
     .catch(function (error){
+      let chart = 
+      <Row>
+      <Col id="simple_txt">
+      <span id="warning">감정 데이터가 충분하지 않습니다.</span>
+      </Col>    
+      </Row>
+       setEmo(chart);
       console.log(error);
     });
   }
@@ -70,6 +63,7 @@ export default function Main(){
       let random = response.data.musics;
       window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
       musicslide = <Slide data={random}></Slide>;
+      setRm(musicslide);
     })
     .catch(function (error){
       console.log(error);
@@ -77,13 +71,14 @@ export default function Main(){
   }
   else{
       musicslide = <Slide data={musics}></Slide>;
+      setRm(musicslide);
   }
   }
 
   useEffect(() => {
     getEmotions();
     getRandomMusics();
-  },randomMusic)
+  },[])
 
   
 
@@ -99,7 +94,7 @@ export default function Main(){
     </Col>    
     </Row>
     <br></br>
-    {musicslide}
+    {rm}
     <br></br>
     <br></br>
     <Row>

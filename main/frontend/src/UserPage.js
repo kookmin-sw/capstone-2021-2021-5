@@ -26,7 +26,12 @@ export default function UserPage(){
       console.log(response);
       console.log(response.data);
       setUserName(response.data.username);
-      setUserImage('http://127.0.0.1:8000'+response.data.image);
+      if(response.data.image == null){
+        setUserImage('svg/fi-rr-user.svg')
+      }
+      else{
+        setUserImage('http://127.0.0.1:8000'+response.data.image);
+      }
       // alert("Succ");
     })
     .catch(function(error){
@@ -73,8 +78,8 @@ export default function UserPage(){
       <Button id="btn_block" size="lg" block>
      
         <Row>
-          <Col><img id="icon" src="svg/fi-rr-settings.svg"/></Col>
-          <Col><span id="light_txt">회원 정보 수정</span></Col>
+          <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-settings.svg"/></Col>
+          <Col style={{marginTop:"5px"}}><span id="light_txt">회원 정보 수정</span></Col>
         </Row>
         </Button>
         </Link>
@@ -87,8 +92,8 @@ export default function UserPage(){
       <Link to="/wheatherChart">
       <Button id="btn_block" size="lg" block>
         <Row>
-          <Col><img id="icon" src="svg/fi-rr-cloud.svg"/></Col>
-          <Col><span id="light_txt">날씨에 따른 내 감정</span></Col>
+          <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-cloud.svg"/></Col>
+          <Col style={{marginTop:"5px"}}><span id="light_txt">날씨에 따른 내 감정</span></Col>
         </Row>
         </Button>
       </Link>
@@ -98,11 +103,11 @@ export default function UserPage(){
     </br>
     <Row>
     <Col>
-      <Link to="/changeuserinfo">
+      <Link to="/emotionList">
       <Button id="btn_block" size="lg" block>
         <Row>
-          <Col><img id="icon" src="svg/fi-rr-stats.svg"/></Col>
-          <Col><span id="light_txt">감정 통계 보기</span></Col>
+          <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-stats.svg"/></Col>
+          <Col style={{marginTop:"5px"}}><span id="light_txt">감정 통계 보기</span></Col>
         </Row>
         </Button>
         </Link>
@@ -115,8 +120,8 @@ export default function UserPage(){
     <Link to="/diarylist">
       <Button id="btn_block" size="lg" block>
         <Row>
-          <Col><img id="icon" src="svg/fi-rr-book-alt.svg"/></Col>
-          <Col><span id="light_txt">다이어리</span></Col>
+          <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-book-alt.svg"/></Col>
+          <Col style={{marginTop:"5px"}}><span id="light_txt">다이어리</span></Col>
         </Row>
         </Button>
         </Link>

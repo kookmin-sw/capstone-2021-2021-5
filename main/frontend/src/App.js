@@ -19,6 +19,9 @@ import EmotionResult from './emotionResult';
 import Maint from "./Maint";
 import WeatherChart from "./weather_chart";
 import DiaryDetail from "./DiaryDetail";
+import EmotionList from './EmotionList';
+import EmotionDetail from './EmotionDetail';
+import DiaryEdit from './DiaryEdit';
 
 
 function App() {
@@ -71,8 +74,17 @@ function App() {
     <Route path="/maint">
       <Maint />
     </Route>
-    <Route path="/diarydetail">
+    <Route path="/diaryDetail">
       <DiaryDetail />
+    </Route>
+    <Route path="/emotionList">
+        <EmotionList></EmotionList>
+    </Route>
+    <Route path="/emotionDetail">
+        <EmotionDetail></EmotionDetail>
+    </Route>
+    <Route path="/diaryEdit">
+        <DiaryEdit></DiaryEdit>
     </Route>
     </CookiesProvider>
     </div>
