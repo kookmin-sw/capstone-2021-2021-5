@@ -213,3 +213,7 @@ input::placeholder{
 #warning{
   color: red;
 }
+
+#tab{
+  overflow-x: scroll;
+}

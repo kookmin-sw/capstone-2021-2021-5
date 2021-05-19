@@ -37,7 +37,8 @@ export default function Main(){
   let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
   let history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
-  let emotions = '';
+  const [emo,setEmo] = useState('');
+  const [rm,setRm] = useState('');
   const musics = JSON.parse(window.sessionStorage.getItem("musics"));
   let musicslide ='';
   let randomMusic = '';
@@ -46,36 +47,45 @@ export default function Main(){
   function getEmotions(){
     axios.post('http://127.0.0.1:8000/analysis/emotion_statistic/')
     .then(function(response){
-      emotions = response.data.emotions;
+      let emotions = response.data.emotions;
       window.sessionStorage.setItem("emotions",JSON.stringify(emotions));
+      let chart =<div id="Chart_Col">
+      <Row>
+          <Col id="Chart_Col">
+             <Chart data={emotions}></Chart>
+          </Col>
+      </Row>
+      </div>;
+      setEmo(chart);
+      console.log(emotions);
     })
     .catch(function (error){
       console.log(error);
     });
   }
-  
-  getEmotions();
-  emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
-
   function getRandomMusics(){
-    axios.get('http://127.0.0.1:8000/analysis/random_music/')
+    if(musics==null){
+      axios.get('http://127.0.0.1:8000/analysis/random_music/')
     .then(function(response){
-      randomMusic = response.data.musics;
+      let random = response.data.musics;
       window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
+      musicslide = <Slide data={random}></Slide>;
     })
     .catch(function (error){
       console.log(error);
     });
-  }
- 
-  if(musics==null){
-      getRandomMusics()
-      randomMusic = JSON.parse(window.sessionStorage.getItem("randomMusic"));
-      musicslide = <Slide data={randomMusic}></Slide>;;
   }
   else{
       musicslide = <Slide data={musics}></Slide>;
   }
+  }
+
+  useEffect(() => {
+    getEmotions();
+    getRandomMusics();
+  },randomMusic)
+
+  
 
   return(
     <React.Fragment>
@@ -99,13 +109,7 @@ export default function Main(){
     </Row>
     <br></br>
     <br></br>
-    <div id="Chart_Col">
-    <Row >
-    <Col id="Chart_Col">
-    <Chart data={emotions}></Chart>
-    </Col>
-    </Row>
-    </div>
+    {emo}
     <br></br>
     <br></br>
     <Row xs={7} id="bottom_fix" className="fixed-bottom">

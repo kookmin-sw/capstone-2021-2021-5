@@ -23,19 +23,20 @@ export default function WeatherChart() {
     axios.defaults.headers.common["Authorization"] = "jwt " + token;
     function selk(k){
         setKey(k);
-        console.log(k);
         axios.get('http://127.0.0.1:8000/analysis/emotion_statistic/?weather='+k)
         .then(function (response){
             setEmotions(response.data.emotions);
-            console.log(emotions);
+            let emos =response.data.emotions;
             let chart =<div id="Chart_Col">
             <Row>
                 <Col id="Chart_Col">
-                   <Chart data={emotions}></Chart>
+                   <Chart data={emos}></Chart>
                 </Col>
             </Row>
-        </div>;
+            </div>;
+            console.log(emos)
             setEmo(chart);
+
         })
         .catch(function(error){
             console.log(error);
@@ -44,7 +45,13 @@ export default function WeatherChart() {
         })
         
     }
+
+    useEffect(() => {
+        selk(key);
+        console.log(emotions);
+    },key)
   
+    console.log(emotions);
     return (
     <>
     
@@ -53,11 +60,10 @@ export default function WeatherChart() {
         <Row >
             <Col>
                 <Tabs
-                    id="controlled-tab-example"
+                    id="tab"
                     activeKey={key}
                     onSelect={(k) => selk(k)}
                     defaultActiveKey={0}
-                    className="overflow-auto"
                 >
                     <Tab eventKey="0" title="맑음">
                     {emo}
