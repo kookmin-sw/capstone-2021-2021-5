@@ -9,14 +9,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def add_participant(self,participant):
-        room = chatRoom.objects.get(name = self.room_name)
+        room = chatRoom.objects.get(pk = int(self.room_name))
         room.participants.add(participant)
         room.numbers += 1
         room.save()
 
     @database_sync_to_async
     def del_participant(self,participant):
-        room = chatRoom.objects.get(name = self.room_name)
+        room = chatRoom.objects.get(pk = int(self.room_name))
         room.participants.remove(participant)
         room.numbers -= 1
         room.save()

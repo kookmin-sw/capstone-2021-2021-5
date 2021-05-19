@@ -9,7 +9,7 @@ class adviserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def add_participant(self,participant):
-        room = AdviserRoom.objects.get(name = self.room_name)
+        room = AdviserRoom.objects.get(pk =int(self.room_name))
        
         room.numbers += 1
         if room.numbers > 2:
@@ -19,7 +19,7 @@ class adviserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def del_participant(self,participant):
-        room = AdviserRoom.objects.get(name = self.room_name)
+        room = AdviserRoom.objects.get(pk = int(self.room_name))
        
         room.numbers -= 1
         room.save()
