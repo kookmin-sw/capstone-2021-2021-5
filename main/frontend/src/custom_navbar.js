@@ -44,6 +44,9 @@ import {
                 <NavLink href="/chatlist"><span id="simple_txt">채팅방</span></NavLink>
               </NavItem>
               <NavItem>
+                <NavLink href="/adchatlist"><span id="simple_txt">상담채팅방</span></NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="#" onClick={onLogout}><span id="simple_txt">로그아웃</span></NavLink>
               </NavItem>
             </Nav>

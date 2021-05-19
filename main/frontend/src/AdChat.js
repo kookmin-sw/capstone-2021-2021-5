@@ -1,22 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Form from 'react-bootstrap/Form';
+import { useHistory } from "react-router";
 
-const Chat = () => {
+const AdChat = () => {
   const token = window.sessionStorage.getItem("Authorization");
-  const ri = window.sessionStorage.getItem("RoomId");
+  const ri = window.sessionStorage.getItem("AdRoomId");
   const [socketConnected, setSocketConnected] = useState(false);
   let [message, setMessage] = useState('');
   let [roomname, setRoomName] = useState('');
   let [chatlog, setChatLog] = useState([]);
   let ws = useRef(null);
+  let history = useHistory();
 
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/chat/crud/')
+    axios.get('http://127.0.0.1:8000/chat/adviser/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
-      setRoomName(window.sessionStorage.getItem("MakeRoomName"));
+      setRoomName(window.sessionStorage.getItem("AdRoomName"));
       console.log(roomname);
     })
     .catch(function(error){
@@ -26,7 +28,7 @@ const Chat = () => {
   },[]);
 
   const webSocketUrl = 'ws://' + "127.0.0.1:8000" +
-    '/ws/chat/' + ri + '/' + "?token="+ token;
+    '/ws/adviser/' + ri + '/' + "?token="+ token;
 
 
   // 소켓 객체 생성
@@ -40,10 +42,13 @@ const Chat = () => {
       ws.current.onclose = (error) => {
         console.log("disconnect from " + webSocketUrl);
         console.log(error);
+        history.push('./main')
       };
       ws.current.onerror = (error) => {
         console.log("connection error " + webSocketUrl);
         console.log(error);
+        alert("해당 채팅방은 입장할 수 없습니다.");
+        history.push('./main')
       };
       ws.current.onmessage = (evt) => {
         const data = JSON.parse(evt.data);
@@ -108,4 +113,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default AdChat;

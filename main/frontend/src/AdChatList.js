@@ -9,10 +9,11 @@ import TextField from '@material-ui/core/TextField';
 
 
 
-export default function ChatList(){
+export default function AdChatList(){
   let history = useHistory();
   const [clist, setList] = useState([]);
   let [roomname, setRoomName] = useState('');
+  const [userType, setUserType] = useState(true);
   const [modalShow, setModalShow] = React.useState(false);
 
 
@@ -21,12 +22,11 @@ export default function ChatList(){
 
 
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/chat/crud/')
+    axios.get('http://127.0.0.1:8000/chat/adviser/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
       setList(response.data);
-      // alert("Succ");
     })
     .catch(function(error){
       console.log(error);
@@ -34,12 +34,36 @@ export default function ChatList(){
     })
   },[]);
 
+  useEffect(()=>{
+    axios.post('http://127.0.0.1:8000/analysis/data_injection/')
+    .then(function(response){
+      console.log(response.data.result);
+      
+      const type = response.data.result;
+      console.log(type);
+      if(type == true){
+        let t =  <Button  variant="primary" onClick={() => setModalShow(true)} >
+        채팅창 생성
+      </Button>;
+        setUserType(t);
+      }
+      else{
+        let t =  ""
+        setUserType(t);
+      }
+      }
+    )
+    .catch(function(error){
+      console.log(error);
+    })
+  },[]);
+
   function OnGoChat(roomid,roomname) {
     console.log(roomid);
     console.log(roomname);
-    window.sessionStorage.setItem("RoomId", roomid);
-    window.sessionStorage.setItem("MakeRoomName", roomname);
-    history.push("/chat");
+    window.sessionStorage.setItem("AdRoomId", roomid);
+    window.sessionStorage.setItem("AdRoomName", roomname);
+    history.push("/adchat");
   }
 
   function OnMakeChat(e) {
@@ -49,7 +73,7 @@ export default function ChatList(){
       return;
     }
 
-    axios.post('http://127.0.0.1:8000/chat/crud/',{
+    axios.post('http://127.0.0.1:8000/chat/adviser/',{
       name: roomname,
 
     })
@@ -57,9 +81,9 @@ export default function ChatList(){
       console.log(response);
       console.log(response.data);
       var roomid = response.data.id;
-      window.sessionStorage.setItem("MakeRoomName", roomname);
-      window.sessionStorage.setItem("RoomId",roomid);
-      history.push("/chat");
+      window.sessionStorage.setItem("AdRoomName", roomname);
+      window.sessionStorage.setItem("AdRoomId",roomid);
+      history.push("/adchat");
 
     })
     .catch(function (error){
@@ -87,9 +111,7 @@ export default function ChatList(){
       ))
     }
     </table>
-    <Button variant="primary" onClick={() => setModalShow(true)}>
-        채팅창 생성
-      </Button>
+    {userType}
 
       <MyVerticallyCenteredModal
         show={modalShow}
