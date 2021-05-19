@@ -21,3 +21,10 @@ class adviseRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdviserRoom
         fields = "__all__"
+
+    def validate(self, data):
+       
+        if self.context['request'].method == "POST" and self.context['request'].user.userType != "Adviser":
+            raise ValidationError('only Adviser can create room')
+      
+        return data
