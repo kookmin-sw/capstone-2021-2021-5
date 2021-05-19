@@ -35,8 +35,16 @@ export default function DiaryDetail() {
     <div>
       <CNavbar></CNavbar>
       <br></br>
-      <br></br>
       <Container>
+      <Row>
+        <Col style={{textAlign:"left"}}>
+        <Link to="/diarylist">
+     <img id="icon" src="svg/fi-rr-arrow-left.svg"/>
+     </Link>
+     </Col>
+     </Row>
+      <br></br>
+      <br></br>
         <Row>
           <Col id="simple_txt" xs={4}>TITLE : </Col>
           <Col id="light_txt">{title}</Col>
