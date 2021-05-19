@@ -5,10 +5,8 @@ import Form from 'react-bootstrap/Form';
 const Chat = () => {
   const token = window.sessionStorage.getItem("Authorization");
   const [socketConnected, setSocketConnected] = useState(false);
-  const [sendMsg, setSendMsg] = useState(false);
   let [message, setMessage] = useState('');
-  const [items, setItems] = useState([]);
-  const [roomname, setRoomName] = useState();
+  let [roomname, setRoomName] = useState();
   let [chatlog, setChatLog] = useState([]);
   let ws = useRef(null);
 

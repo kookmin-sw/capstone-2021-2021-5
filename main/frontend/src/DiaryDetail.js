@@ -38,20 +38,10 @@ export default function DiaryDetail() {
   },[]);
 
   function OnModify(e) {
-    console.log(id);
     e.preventDefault();
+    console.log(id);
 
-    if(title == ''){
-      alert("제목을 입력하세요");
-      return
-    }
-    if(content == ''){
-      alert("내용을 입력하세요");
-      return
-    }
-
-
-    axios.put('http://127.0.0.1:8000/diary/crud/' + id + '/',{
+     axios.put('http://127.0.0.1:8000/diary/crud/' + id + '/',{
       title: title,
       body: content,
 
@@ -66,6 +56,7 @@ export default function DiaryDetail() {
       console.log(error.response);
       alert(error);
     });
+
   }
 
 

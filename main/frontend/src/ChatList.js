@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import { useEffect } from 'react';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
+import TextField from '@material-ui/core/TextField';
 
 
 
@@ -16,6 +12,9 @@ import { useEffect } from 'react';
 export default function ChatList(){
   let history = useHistory();
   const [clist, setList] = useState([]);
+  let [roomname, setRoomName] = useState();
+  const [modalShow, setModalShow] = React.useState(false);
+
 
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -38,7 +37,32 @@ export default function ChatList(){
   function OnGoChat(roomname) {
     console.log(roomname);
     window.sessionStorage.setItem("MakeRoomName", roomname);
-    history.push("/sockettest");
+    history.push("/chat");
+  }
+
+  function OnMakeChat(e) {
+    e.preventDefault();
+    if(roomname == null){
+      alert("Check RoomName");
+      return;
+    }
+
+    axios.post('http://127.0.0.1:8000/chat/crud/',{
+      name: roomname,
+
+    })
+    .then(function (response){
+      console.log(response);
+      console.log(response.data);
+      document.cookie = 'authorization=' + token + ';'
+      window.sessionStorage.setItem("MakeRoomName", roomname);
+      history.push("/chat");
+
+    })
+    .catch(function (error){
+      console.log(error);
+      alert(error);
+    });
   }
 
 
@@ -59,7 +83,43 @@ export default function ChatList(){
       ))
     }
     </table>
+    <Button variant="primary" onClick={() => setModalShow(true)}>
+        채팅창 생성
+      </Button>
+
+      <MyVerticallyCenteredModal
+        show={modalShow}
+        setRoomName={setRoomName}
+        OnMakeChat={OnMakeChat}
+        onHide={() => setModalShow(false)}
+      />
 
   </div>
+  );
+}
+function MyVerticallyCenteredModal(props) {
+  return (
+    <Modal
+      
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          채팅창 만들기
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <TextField id="roomname" label="roomName" name="roomname" onChange={(e)=>{
+                  props.setRoomName(e.target.value);
+                }} />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.OnMakeChat}>Make</Button>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   );
 }

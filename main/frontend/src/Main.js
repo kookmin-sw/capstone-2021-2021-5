@@ -3,10 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CNavbar from './custom_navbar';
 import 'bootstrap/dist/css/bootstrap.css';
 import Slide from './music_slide';
-import {useHistory} from 'react-router-dom';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
-import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
 import { Link } from 'react-router-dom';
 import {
@@ -17,29 +14,12 @@ import {
 } from 'reactstrap';
 
 
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    justifyContent: 'left'
-  },
-}));
-
 export default function Main(){
-  const classes = useStyles();
-  let [roomname, setRoomName] = useState();
-  let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
-  let history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
   const [emo,setEmo] = useState('');
   const [rm,setRm] = useState('');
   const musics = JSON.parse(window.sessionStorage.getItem("musics"));
+  console.log(musics)
   let musicslide ='';
   let randomMusic = '';
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -57,7 +37,7 @@ export default function Main(){
       </Row>
       </div>;
       setEmo(chart);
-      console.log(emotions);
+    
     })
     .catch(function (error){
       console.log(error);
@@ -69,7 +49,9 @@ export default function Main(){
     .then(function(response){
       let random = response.data.musics;
       window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
+    
       musicslide = <Slide data={random}></Slide>;
+      setRm(musicslide);
     })
     .catch(function (error){
       console.log(error);
@@ -77,13 +59,14 @@ export default function Main(){
   }
   else{
       musicslide = <Slide data={musics}></Slide>;
+      setRm(musicslide);
   }
   }
 
   useEffect(() => {
     getEmotions();
     getRandomMusics();
-  },randomMusic)
+  },[])
 
   
 
@@ -99,7 +82,7 @@ export default function Main(){
     </Col>    
     </Row>
     <br></br>
-    {musicslide}
+    {rm}
     <br></br>
     <br></br>
     <Row>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import { useHistory } from 'react-router';
+import $ from "jquery"
 
 
 
@@ -17,7 +18,6 @@ export default function DiaryList() {
       console.log(response.data);
       setDiaryList(response.data);
       
-      // alert("Succ");
     })
     .catch(function(error){
       console.log(error);
