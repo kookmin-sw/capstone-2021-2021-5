@@ -24,7 +24,6 @@ export default function DiaryList() {
       console.log(response.data);
       setDiaryList(response.data);
       
-      // alert("Succ");
     })
     .catch(function(error){
       console.log(error);

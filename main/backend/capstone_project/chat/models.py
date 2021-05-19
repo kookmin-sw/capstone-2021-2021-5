@@ -16,10 +16,10 @@ class chatRoom(models.Model):
     numbers = models.IntegerField(null = True, default=0)
 
 
-# class AdviserRoom(models.Model):
-#     name=models.CharField(max_length=100,null=True,unique=True,verbose_name='방 이름')
+class AdviserRoom(models.Model):
+    name=models.CharField(max_length=100,null=True,unique=True,verbose_name='방 이름')
 
-#     numbers = models.IntegerField(null = True, default=0)
+    numbers = models.IntegerField(null = True, default=0)
 
     
 

@@ -43,8 +43,9 @@ class TendancyView(APIView):
         #만약 해당유저가 이미 성향조사를 완료했으면
         if Tendancy.objects.filter(profile=request.user).exists():
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
+        #분노, 경멸/불쾌 , 행복, 슬픔   # 0:차분함, 1:신남
         answers=request.data['answer']
+      
         tendancy=Tendancy()
         tendancy.answer=answers
         tendancy.profile=request.user
@@ -99,8 +100,10 @@ def weather_translator(weather):
     }
     return weather_dict[weather]
 
-def music_classifier(emotion,emotion_obj):
-    emotion_dic = {"분노" : 0 , '경멸':1, '불쾌':0, '공포':1, '행복':0, '중립':1, '슬픔':0, '놀람':1 }
+def music_classifier(emotion,emotion_obj,tendancy):
+  
+  
+    emotion_dic = {"분노" : tendancy[0] , '경멸': tendancy[1], '불쾌': tendancy[1], '공포':0, '행복':tendancy[2], '중립':2, '슬픔':tendancy[3], '놀람':0 }  # 0:차분함, 1:신남
     emotion_index = emotion_dic[emotion]
     musics = None
     emotion_obj.connection.clear() 
@@ -180,7 +183,11 @@ class EmotionAnalyzeView(APIView):
         emotion_json['image'] = image_path
 
         emotion_stat, emotion_max = emotion_stat_output_generator(emotion_list)
-        emotion_musics = music_classifier(emotion_max,emotion)
+
+        tendancy = Tendancy.objects.get(profile = request.user).answer
+        tendancy = ast.literal_eval(tendancy)
+
+        emotion_musics = music_classifier(emotion_max,emotion,tendancy)
 
         emotion_json['emotions'] = emotion_stat
         emotion_json['max_emotion'] = emotion_max

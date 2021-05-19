@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import CNavbar from './custom_navbar';
 import 'bootstrap/dist/css/bootstrap.css';
 import Slide from './music_slide';
-import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
 import Chart from './ChartPage';
@@ -27,6 +26,7 @@ export default function Main(){
   const [emo,setEmo] = useState('');
   const [rm,setRm] = useState('');
   const musics = JSON.parse(window.sessionStorage.getItem("musics"));
+  console.log(musics)
   let musicslide ='';
   let randomMusic = '';
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -62,6 +62,7 @@ export default function Main(){
     .then(function(response){
       let random = response.data.musics;
       window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
+    
       musicslide = <Slide data={random}></Slide>;
       setRm(musicslide);
     })

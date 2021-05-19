@@ -3,21 +3,24 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 
 import json
-from .models import chatRoom
+from .models import AdviserRoom
 
-class ChatConsumer(AsyncWebsocketConsumer):
+class adviserConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def add_participant(self,participant):
-        room = chatRoom.objects.get(pk = int(self.room_name))
-        room.participants.add(participant)
+        room = AdviserRoom.objects.get(pk =int(self.room_name))
+       
         room.numbers += 1
+        if room.numbers > 2:
+            return False
         room.save()
+        return True
 
     @database_sync_to_async
     def del_participant(self,participant):
-        room = chatRoom.objects.get(pk = int(self.room_name))
-        room.participants.remove(participant)
+        room = AdviserRoom.objects.get(pk = int(self.room_name))
+       
         room.numbers -= 1
         room.save()
         if room.numbers == 0:
@@ -27,7 +30,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         print( self.room_name)
         self.room_group_name = 'chat_%s' % self.room_name
-        await self.add_participant(self.scope["user"])
+        if await self.add_participant(self.scope["user"]) == False:
+            await self.close()
         
         # Join room group
         await self.channel_layer.group_add(
