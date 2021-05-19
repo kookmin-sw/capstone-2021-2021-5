@@ -16,10 +16,11 @@ class DiarySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def validate(self, data):
-
-        if Diary.objects.filter(profile=self.context['request'].user, title=data['title']).exists() == True: # 만약 같은 계정의 project title이 중복되면
+       
+        if self.context['request'].method != "PUT" and Diary.objects.filter(profile=self.context['request'].user, title=data['title']).exists() == True: # 만약 같은 계정의 project title이 중복되면
             raise ValidationError('duplicated title')
         today = datetime.date.today()
+        
         if self.context['request'].method != "PUT" and Diary.objects.filter(profile=self.context['request'].user, pubdate = today ).exists():
             raise ValidationError('already written')
         if self.context['request'].method == "POST" and not Emotion.objects.filter(profile=self.context['request'].user,pubdate = today).exists():
