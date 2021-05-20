@@ -111,7 +111,7 @@ export default function Main(){
     <br></br>
     <Row xs={7} id="bottom_fix" className="fixed-bottom">
     <Col>
-    <Link to="/ctest"><Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button></Link>
+    <Link to="/photoChoice"><Button size="lg" block id="btn_nomal"><span id="simple_txt">감정분석</span></Button></Link>
     </Col>
     </Row>
     </Container>

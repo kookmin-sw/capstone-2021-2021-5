@@ -24,6 +24,7 @@ import AdChatList from "./AdChatList";
 import EmotionList from './EmotionList';
 import EmotionDetail from './EmotionDetail';
 import DiaryEdit from './DiaryEdit';
+import PhotoChoice from './PhotoChoice';
 
 
 function App() {
@@ -93,6 +94,9 @@ function App() {
     </Route>
     <Route path="/diaryEdit">
         <DiaryEdit></DiaryEdit>
+    </Route>
+    <Route path="/photoChoice">
+        <PhotoChoice></PhotoChoice>
     </Route>
     </CookiesProvider>
     </div>
