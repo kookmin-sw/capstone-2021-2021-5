@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
+
 import CNavbar from './custom_navbar';
 import {
   Container, 
@@ -160,17 +160,7 @@ export default function ChangeUserInfo(){
       <Col xs={2}></Col>
     </Form.Group>
 
-      {/* <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={(e)=>{
-                  setEmail(e.target.value);
-                }}
-              /> */}
+   
       <br></br>
       <br></br>
       <Row>
