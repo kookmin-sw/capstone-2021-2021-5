@@ -102,7 +102,7 @@ export default function AdChatList(){
       clist.map((post, idx) => (
         <tr key={idx}>   
           <td>{post.id}</td>
-          <td id={post.id} onClick={(e)=>{
+          <td  id={post.id} onClick={(e)=>{
                   var roomid = e.target.id;
                   var roomname = e.target.innerText;
                   OnGoChat(roomid,roomname);

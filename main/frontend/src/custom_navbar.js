@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Collapse,
     Navbar,
@@ -20,9 +20,36 @@ import {
   
   const CNavbar = (props) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [emotions, setEmotions] = useState();
   
     const toggle = () => setIsOpen(!isOpen);
     let history = useHistory();
+
+    useEffect(()=>{
+      console.log(props.userType);
+      console.log(props.maxEmo);
+      if(props.userType){
+            let t =  <NavItem>
+                <NavLink href="/adchatlist"><span id="simple_txt">상담채팅방</span></NavLink>
+              </NavItem>;
+              setEmotions(t);
+      }
+      else{
+        if(props.maxEmo === '슬픔'){
+              let t =  <NavItem>
+                <NavLink href="/adchatlist"><span id="simple_txt">상담채팅방</span></NavLink>
+              </NavItem>;
+              setEmotions(t);
+        }
+        else{
+          let t =  ""
+          setEmotions(t);
+      }
+        }
+    },[props.maxEmo]);
+    
+
+
     const onLogout = () =>{
       window.sessionStorage.clear()
       history.push("/");
@@ -43,9 +70,7 @@ import {
               <NavItem>
                 <NavLink href="/chatlist"><span id="simple_txt">채팅방</span></NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/adchatlist"><span id="simple_txt">상담채팅방</span></NavLink>
-              </NavItem>
+              {emotions}
               <NavItem>
                 <NavLink href="#" onClick={onLogout}><span id="simple_txt">로그아웃</span></NavLink>
               </NavItem>
