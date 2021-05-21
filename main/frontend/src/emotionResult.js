@@ -22,7 +22,7 @@ export default function EmotionResult(){
     const emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
     const musics = JSON.parse(window.sessionStorage.getItem("musics"));
     const picture = window.sessionStorage.getItem("picture");
-    const resultImg = 'http://127.0.0.1:8000'+picture
+    const resultImg = 'http://15.165.85.247:8000'+picture
     console.log(picture);
     console.log(emotions);
     console.log(musics);

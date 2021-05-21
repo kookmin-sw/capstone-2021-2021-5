@@ -13,19 +13,19 @@ import {
   Button
 } from 'reactstrap';
 import { useHistory } from 'react-router';
+import { LaptopWindowsOutlined } from '@material-ui/icons';
 
 
 
 
 
 export default function Main(){
-  
-  let [roomname, setRoomName] = useState();
-  let [cookie, setCookie, removeCookie] = useCookies(['authorization=']);
-  let history = useHistory();
+  const history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
   const [emo,setEmo] = useState('');
   const [rm,setRm] = useState('');
+  const [userType, setUserType] = useState(false);
+  const [maxEmo, setMaxEmo] = useState();
   const musics = JSON.parse(window.sessionStorage.getItem("musics"));
   console.log(musics)
   let musicslide ='';
@@ -33,10 +33,14 @@ export default function Main(){
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
   function getEmotions(){
-    axios.post('http://127.0.0.1:8000/analysis/emotion_statistic/')
+    axios.post('http://15.165.85.247:8000/analysis/emotion_statistic/')
     .then(function(response){
       let emotions = response.data.emotions;
+      let max_emotions = response.data.max_emotion;
+      console.log(max_emotions);
+      setMaxEmo(max_emotions);
       window.sessionStorage.setItem("emotions",JSON.stringify(emotions));
+      // window.sessionStorage.setItem("max_emotins",JSON.stringify(max_emotions));
       let chart =<div id="Chart_Col">
       <Row>
           <Col id="Chart_Col">
@@ -54,12 +58,13 @@ export default function Main(){
       </Col>    
       </Row>
        setEmo(chart);
+       setMaxEmo('중립');
       console.log(error);
     });
   }
   function getRandomMusics(){
     if(musics==null){
-      axios.get('http://127.0.0.1:8000/analysis/random_music/')
+      axios.get('http://15.165.85.247:8000/analysis/random_music/')
     .then(function(response){
       let random = response.data.musics;
       window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
@@ -77,9 +82,41 @@ export default function Main(){
   }
   }
 
+  function getUserType(){
+    axios.post('http://15.165.85.247:8000/analysis/data_injection/')
+    .then(function(response){
+      console.log(response.data.result);
+      const type = response.data.result;
+      setUserType(type);
+      }
+    )
+    .catch(function(error){
+      console.log(error);
+    })
+  }
+
   useEffect(() => {
+    getUserType();
     getEmotions();
     getRandomMusics();
+    console.log(maxEmo);
+    console.log(userType);
+  },[])
+
+   useEffect(() => {
+    axios.get('http://15.165.85.247:8000/analysis/tendancy/')
+    .then(function(response){
+      let bool = response.data.exist;
+      if(!bool){
+        alert('성향분석을 먼저해주세요');
+        history.push('./tendency')
+      }
+      console.log(response);
+      }
+    )
+    .catch(function(error){
+      console.log(error);
+    })
   },[])
 
   
@@ -87,7 +124,7 @@ export default function Main(){
   return(
     <React.Fragment>
     <Container className="themed-container" fluid>
-    <CNavbar></CNavbar>
+    <CNavbar maxEmo={maxEmo} userType={userType}></CNavbar>
     <br></br>
     <br></br>
     <Row>

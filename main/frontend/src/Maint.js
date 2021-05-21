@@ -41,7 +41,7 @@ export default function Maint(){
       return;
     }
 
-    axios.post('http://127.0.0.1:8000/chat/crud/',{
+    axios.post('http://15.165.85.247:8000/chat/crud/',{
       name: roomname,
 
     })

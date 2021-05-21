@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
-
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
-import {Row, Col, Form, FormGroup, Label, Input, FormText,Container,Button } from 'reactstrap';
+import { Row,Col, Form, FormGroup, Label, Input, FormText,Container,Button } from 'reactstrap';
 import CNavbar from './custom_navbar';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Tendency() {
+function TendencyChange() {
   const classes = useStyles();
   const [value, setValue] = React.useState([]);
   const [q1, setQ1] = useState(0);
@@ -57,13 +54,13 @@ function Tendency() {
     value.push(q4);
     console.log(value.map(i=>Number(i)));
     event.preventDefault();
-    axios.post('http://15.165.85.247:8000/analysis/tendancy/',{
+    axios.put('http://15.165.85.247:8000/analysis/tendancy/',{
       answer: value.map(i=>Number(i))
 
     })
     .then(function (response){
       console.log(response);
-      history.push("/main");
+      history.push("/userpage");
     })
     .catch(function (error){
       console.log(error);
@@ -74,10 +71,8 @@ function Tendency() {
 
   return (
     <div>
-      <br></br>
-        <img src = "logo/3x/Sentio_horizontalxxhdpi.png" width="30%">
-          </img>
-        <br></br>
+        <CNavbar>
+        </CNavbar>
         <br></br>
         <Container>
         <FormGroup tag="fieldset" row onChange={handleRadioChange}>
@@ -166,4 +161,4 @@ function Tendency() {
   );
 }
 
-export default Tendency;
+export default TendencyChange;

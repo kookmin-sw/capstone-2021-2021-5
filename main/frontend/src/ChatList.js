@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 import Table from 'react-bootstrap/Table'
 import Image from 'react-bootstrap/Image'
+import PIgraph from './PIgraph';
 
 
 
@@ -22,13 +23,15 @@ export default function ChatList(){
   let [roomname, setRoomName] = useState('');
   const [modalShow, setModalShow] = React.useState(false);
   const [PImodalShow, setPIModalShow] = React.useState(false);
+  const [maxEmotion, setMaxEmotion] = useState('');
+  const [emotions, setEmotions] = useState([]);
 
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
 
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/chat/crud/')
+    axios.get('http://15.165.85.247:8000/chat/crud/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -40,6 +43,37 @@ export default function ChatList(){
       alert("fail")
     })
   },[]);
+
+  useEffect(() => {
+    axios.get('http://15.165.85.247:8000/analysis/emotion_analyze/')
+    .then(function(response){
+      let bool = response.data.result;
+      if(!bool){
+        alert('감정분석을 먼저해주세요');
+        history.push('./main')
+      }
+      console.log(response);
+      }
+    )
+    .catch(function(error){
+      console.log(error);
+    })
+  },[])
+
+  function ShowPI(idx) {
+    console.log(idx)
+    axios.get('http://15.165.85.247:8000/chat/chat_statistic/?room_id='+idx)
+    .then(function(response){
+      console.log(response.data);
+      setMaxEmotion(response.data.max_emotion);
+      setEmotions(response.data.emotions);
+      setPIModalShow(true);
+    })
+    .catch(function (error){
+      console.log(error);
+      alert(error);
+    });
+  }
 
   function OnGoChat(roomid,roomname) {
     console.log(roomid);
@@ -56,7 +90,7 @@ export default function ChatList(){
       return;
     }
 
-    axios.post('http://127.0.0.1:8000/chat/crud/',{
+    axios.post('http://15.165.85.247:8000/chat/crud/',{
       name: roomname,
 
     })
@@ -99,7 +133,7 @@ export default function ChatList(){
                 clist.map((post, idx) => (
                   <tr key={idx}>   
                     <td id="id" 
-                            ><span id="light_txt" onClick={() => setPIModalShow(true)}>{idx+1}</span></td>
+                            ><span id="light_txt"  onClick={() => ShowPI(post.id)}>{idx+1}</span></td>
                    <td id={post.id} className="light_txt" onClick={(e)=>{
                   var roomid = e.target.id;
                   var roomname = e.target.innerText;
@@ -117,18 +151,15 @@ export default function ChatList(){
         </Col>
       </Row>
     </Container>
-    
-     <MyPIVerticallyCenteredModal
-        show={PImodalShow}
-        onHide={() => setPIModalShow(false)}
-      />
-
+  
       <MyVerticallyCenteredModal
         show={modalShow}
         setRoomName={setRoomName}
         OnMakeChat={OnMakeChat}
         onHide={() => setModalShow(false)}
       />
+      <MyPIVerticallyCenteredModal  show={PImodalShow}
+      onHide={() => setPIModalShow(false)} data={maxEmotion} emotions={emotions}></MyPIVerticallyCenteredModal>
 
   </div>
   );
@@ -170,12 +201,12 @@ function MyPIVerticallyCenteredModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          파이그래프 보여줄거임
+        <Modal.Title id="contained-modal-title-vcenter simple_txt">
+          MAIN EMOTION: <span style={{color:"#f1a9a0"}}>{props.data}</span>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        
+        <PIgraph data={props.emotions}></PIgraph>
       </Modal.Body>
       <Modal.Footer>
         <Button id="btn_nomal" onClick={props.onHide}>확인</Button>

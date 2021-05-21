@@ -21,7 +21,7 @@ export default function UserPage(){
 
 
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/account/userinfo/')
+    axios.get('http://15.165.85.247:8000/account/userinfo/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -30,7 +30,7 @@ export default function UserPage(){
         setUserImage('svg/fi-rr-user.svg')
       }
       else{
-        setUserImage('http://127.0.0.1:8000'+response.data.image);
+        setUserImage('http://15.165.85.247:8000'+response.data.image);
       }
       // alert("Succ");
     })
@@ -80,6 +80,21 @@ export default function UserPage(){
         <Row>
           <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-settings.svg"/></Col>
           <Col style={{marginTop:"5px"}}><span id="light_txt">회원 정보 수정</span></Col>
+        </Row>
+        </Button>
+        </Link>
+      </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+      <Col>
+      <Link to="/tendency_change">
+      <Button id="btn_block" size="lg" block>
+     
+        <Row>
+          <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-following.svg"/></Col>
+          <Col style={{marginTop:"5px"}}><span id="light_txt">성향 분석 수정</span></Col>
         </Row>
         </Button>
         </Link>

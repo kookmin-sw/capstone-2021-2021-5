@@ -81,7 +81,7 @@ export default function Ctest(){
     for (let value of fd.values()) {
     console.log(value);
     }
-    axios.post('http://127.0.0.1:8000/analysis/emotion_analyze/',fd)
+    axios.post('http://15.165.85.247:8000/analysis/emotion_analyze/',fd)
     .then(function (response){
       console.log(response.data.token);
       const emotions =response.data.emotions;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
+
 import CNavbar from './custom_navbar';
 import {
   Container, 
@@ -23,7 +23,7 @@ export default function ChangeUserInfo(){
   let history = useHistory();
   
   useEffect(()=>{
-    axios.get('http://127.0.0.1:8000/account/userinfo/')
+    axios.get('http://15.165.85.247:8000/account/userinfo/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -31,7 +31,7 @@ export default function ChangeUserInfo(){
         setUserImage('svg/fi-rr-user.svg')
       }
       else{
-        setUserImage('http://127.0.0.1:8000'+response.data.image);
+        setUserImage('http://15.165.85.247:8000'+response.data.image);
       }
       setUserE(response.data.email);
       // alert("Succ");
@@ -64,7 +64,7 @@ export default function ChangeUserInfo(){
     for (let value of fd.values()) {
     console.log(value);
     }
-    axios.put('http://127.0.0.1:8000/account/userinfo/',fd,config)
+    axios.put('http://15.165.85.247:8000/account/userinfo/',fd,config)
     .then(function (response){
       console.log(response);
       console.log(response.data);
@@ -160,17 +160,7 @@ export default function ChangeUserInfo(){
       <Col xs={2}></Col>
     </Form.Group>
 
-      {/* <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                onChange={(e)=>{
-                  setEmail(e.target.value);
-                }}
-              /> */}
+   
       <br></br>
       <br></br>
       <Row>

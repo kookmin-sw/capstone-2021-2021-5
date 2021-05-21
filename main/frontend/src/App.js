@@ -16,7 +16,6 @@ import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
 import { Reset } from 'styled-reset';
 import EmotionResult from './emotionResult';
-import Maint from "./Maint";
 import WeatherChart from "./weather_chart";
 import DiaryDetail from "./DiaryDetail";
 import AdChat from "./AdChat";
@@ -25,6 +24,8 @@ import EmotionList from './EmotionList';
 import EmotionDetail from './EmotionDetail';
 import DiaryEdit from './DiaryEdit';
 import PhotoChoice from './PhotoChoice';
+import TendencyChange from "./TendencyChange";
+import Cnav from "./custom_navbar";
 
 
 function App() {
@@ -39,7 +40,9 @@ function App() {
       <SignUp />
     </Route>
     <Route path="/main" >
-        <Main  />
+        <Main>
+          <Cnav />
+        </Main>
     </Route>
     <Route path="/tendency">
       <Tendency />
@@ -74,9 +77,6 @@ function App() {
     <Route path="/wheatherChart">
         <WeatherChart/>
     </Route>
-    <Route path="/maint">
-      <Maint />
-    </Route>
     <Route path="/diaryDetail">
       <DiaryDetail />
     </Route>
@@ -85,6 +85,9 @@ function App() {
     </Route>
     <Route exact path="/adchatlist">
       <AdChatList />
+      </Route>
+    <Route exact path="/tendency_change">
+      <TendencyChange />
       </Route>
     <Route path="/emotionList">
         <EmotionList></EmotionList>
