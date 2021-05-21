@@ -153,12 +153,6 @@ function Tendency() {
           </FormGroup>
           </Col>
           </FormGroup>
-<<<<<<< HEAD
-          <Button type="submit" onClick={handleSubmit} variant="outlined" color="primary" className={classes.button}>
-          분석하기
-        </Button>
-
-=======
           <Row xs={7} id="bottom_fix" className="fixed-bottom">
           <Col>
           <Button type="submit" onClick={handleSubmit}  size="lg" block id="btn_nomal"><span id="simple_txt">완료</span></Button>
@@ -166,7 +160,6 @@ function Tendency() {
           </Row>
          
         </Container>
->>>>>>> a3a7f56515d5b90b5e8e3fbb7d1563bc87f084fe
     </div>
   );
 }
