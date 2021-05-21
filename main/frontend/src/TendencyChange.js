@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
-import { Col, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import { Row,Col, Form, FormGroup, Label, Input, FormText,Container,Button } from 'reactstrap';
+import CNavbar from './custom_navbar';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -72,82 +71,92 @@ function TendencyChange() {
 
   return (
     <div>
-         <FormGroup tag="fieldset" row onChange={handleRadioChange}>
-        <legend className="col-form-label col-sm-2">나는 화가 날때 </legend>
+        <CNavbar>
+        </CNavbar>
+        <br></br>
+        <Container>
+        <FormGroup tag="fieldset" row onChange={handleRadioChange}>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 화가 날때?</span> </legend>
         <Col sm={10}>
           <FormGroup check>
             <Label check>
               <Input  value='0' type="radio" name="radio1" />{' '}
-              차분한 음악
+              <span id="simple_txt">차분한 음악이 좋아요!</span>
             </Label>
           </FormGroup>
+          <br></br>
           <FormGroup check>
             <Label check>
               <Input value='1' type="radio" name="radio1" />{' '}
-              신나는 음악
+              <span id="simple_txt">스트레스 풀리는 신나는 음악이 좋아요!</span>
             </Label>
           </FormGroup>
           </Col>
           </FormGroup>
           <hr/>
           <FormGroup tag="fieldset" row onChange={handleRadioChange2}>
-        <legend className="col-form-label col-sm-2">나는 짜증 날때</legend>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 짜증 날때?</span> </legend>
         <Col sm={10}>
           <FormGroup check>
             <Label check>
               <Input value='0' type="radio" name="radio2" />{' '}
-              차분한 음악
+              <span id="simple_txt">차분한 음악이 좋아요!</span>
             </Label>
           </FormGroup>
+          <br></br>
           <FormGroup check>
             <Label check>
               <Input value='1' type="radio" name="radio2" />{' '}
-              신나는 음악
+              <span id="simple_txt">짜증 풀리는 신나는 음악이 좋아요!</span>
             </Label>
           </FormGroup>
           </Col>
           </FormGroup>
           <hr/>
           <FormGroup tag="fieldset" row onChange={handleRadioChange3}>
-        <legend className="col-form-label col-sm-2">나는 행복 할때</legend>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 행복 할때?</span> </legend>
         <Col sm={10}>
           <FormGroup check>
             <Label check>
               <Input value='0' type="radio" name="radio3" />{' '}
-              차분한 음악
+              <span id="simple_txt">차분해질수 있는 조용한 음악이 좋아요!</span>
             </Label>
           </FormGroup>
+          <br></br>
           <FormGroup check>
             <Label check>
               <Input value='1' type="radio" name="radio3" />{' '}
-              행복한 음악
+              <span id="simple_txt">행복할땐 신나는 음악이 좋아요!</span>
             </Label>
           </FormGroup>
           </Col>
           </FormGroup>
           <hr/>
           <FormGroup tag="fieldset" row onChange={handleRadioChange4}>
-        <legend className="col-form-label col-sm-2">나는 슬플때</legend>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 슬플때?</span> </legend>
         <Col sm={10}>
           <FormGroup check>
             <Label check>
               <Input value='0' type="radio" name="radio4" />{' '}
-              차분한 음악
+              <span id="simple_txt">나를 위로해주는 슬픈 음악이 좋아요!</span>
             </Label>
           </FormGroup>
+          <br></br>
           <FormGroup check>
             <Label check>
               <Input value='1' type="radio" name="radio4" />{' '}
-              행복한 음악
+              <span id="simple_txt">슬픔을 날리는 신나는 음악이 좋아요!</span>
             </Label>
           </FormGroup>
           </Col>
           </FormGroup>
-          <Button type="submit" onClick={handleSubmit} variant="outlined" color="primary" className={classes.button}>
-          분석하기
-        </Button>
-
-      
+          <Row xs={7} id="bottom_fix" className="fixed-bottom">
+          <Col>
+          <Button type="submit" onClick={handleSubmit}  size="lg" block id="btn_nomal"><span id="simple_txt">완료</span></Button>
+          </Col>
+          </Row>
+         
+        </Container>
     </div>
   );
 }
