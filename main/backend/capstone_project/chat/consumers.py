@@ -1,6 +1,8 @@
 # chat/consumers.py
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
+from channels.exceptions import StopConsumer
+
 
 import json
 from .models import chatRoom
@@ -44,6 +46,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
         await self.del_participant(self.scope["user"])
+        raise StopConsumer()
         
 
     # Receive message from WebSocket
