@@ -22,7 +22,6 @@ const Chat = () => {
   let [roomname, setRoomName] = useState('');
   let [chatlog, setChatLog] = useState([]);
   let ws = useRef(null);
-  const scrollRef = useRef();
   
 
   useEffect(()=>{
@@ -76,18 +75,6 @@ const Chat = () => {
     };
   },[] );
 
-  // //소켓이 연결되었을 시에 send 메소드
-  // useEffect(() => {
-  //   if (socketConnected) {
-  //     ws.current.send(
-  //       JSON.stringify({
-  //         'message': '',
-  //       })
-  //     );
-
-  //     setSendMsg(true);
-  //   }
-  // }, [socketConnected]);
 
   function OnSubmit(e){
         ws.current.send(JSON.stringify({
@@ -118,7 +105,7 @@ const Chat = () => {
      </Row>
       <br></br>
       <Row>
-      <div ref={scrollRef} id="chatroom">
+      <div  id="chatroom">
         {
           chatlog.map((idx,clog)=>{
             return <><br></br><Row ><Col key={clog}><span id="simple_txt">{idx}</span></Col></Row></>

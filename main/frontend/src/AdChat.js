@@ -1,7 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import axios from "axios";
-import Form from 'react-bootstrap/Form';
-import { useHistory } from "react-router";
+import Form from 'react-bootstrap/Form'
+import CNavbar from './custom_navbar';
+import {
+  Container, 
+  Row, 
+  Col,
+  Button
+} from 'reactstrap';
+import {
+  Link, useHistory
+} from 'react-router-dom';
+import InputGroup from 'react-bootstrap/InputGroup'
+import $ from "jquery";
 
 const AdChat = () => {
   const token = window.sessionStorage.getItem("Authorization");
@@ -67,49 +78,69 @@ const AdChat = () => {
     };
   },[] );
 
-  // //소켓이 연결되었을 시에 send 메소드
-  // useEffect(() => {
-  //   if (socketConnected) {
-  //     ws.current.send(
-  //       JSON.stringify({
-  //         'message': '',
-  //       })
-  //     );
-
-  //     setSendMsg(true);
-  //   }
-  // }, [socketConnected]);
 
   function OnSubmit(e){
         ws.current.send(JSON.stringify({
             'message': message
         }));
-
+        var mydiv = $("#chatroom");
+        mydiv.scrollTop(mydiv.prop("scrollHeight"));  
         setMessage('');
       }
 
   return (
     <div>
-      <Form.Label>{roomname}</Form.Label>
-      <div>socket connected : {`${socketConnected}`}</div>
-      {
-        chatlog.map((idx,clog)=>{
-          return <div key={clog}>{idx}</div>
-        })
-      }
-       <textarea id="chat-log" cols="100" rows="20"readOnly value={chatlog}></textarea>
-       <br/>
-      <input id="chat-message-input" value={message} type="text" size="100" onKeyPress={(e)=>{
-                  if(e.key === 'Enter'){
-                    console.log('enter');
-                    OnSubmit();
-                  };
-                }}
-                onChange={(e)=>{
-                  setMessage(e.target.value);
-                }}/><br/>
-      <input id="chat-message-submit" type="submit" value="Send" onClick={OnSubmit}/>
-      <br/>
+      <CNavbar></CNavbar>
+      <br></br>
+      <Container>
+      <Row>
+        <Col style={{textAlign:"left"}}>
+        <Link to="/chatlist">
+     <img id="icon" src="svg/fi-rr-arrow-left.svg"/>
+     </Link>
+     </Col>
+     </Row>
+     <br></br>
+     <Row>
+       <Col id="sub_title">ROOMNAME. {roomname}</Col>
+     </Row>
+      <br></br>
+      <Row>
+      <div id="chatroom">
+        {
+          chatlog.map((idx,clog)=>{
+            return <><br></br><Row ><Col key={clog}><span id="simple_txt">{idx}</span></Col></Row></>
+          })
+        }
+      </div>
+      </Row>
+      <br></br>
+      <Row>
+        <Col>
+        <InputGroup className="mb-3">
+        <Form.Control
+          placeholder=""
+          aria-label=""
+          aria-describedby="basic-addon2"
+          value={message} type="text" onKeyPress={(e)=>{
+            if(e.key === 'Enter'){
+              console.log('enter');
+              OnSubmit();
+            };
+          }}
+          onChange={(e)=>{
+            setMessage(e.target.value);
+          }}
+        />
+        <InputGroup.Append>
+        <Button type="submit" id="btn_large" onClick={OnSubmit}><span id="light_txt">SEND</span></Button>
+        </InputGroup.Append>
+      </InputGroup>
+        </Col>
+      </Row>
+      </Container>
+
+      
     </div>
   );
 };

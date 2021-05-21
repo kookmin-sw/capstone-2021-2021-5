@@ -74,8 +74,10 @@ function Tendency() {
 
   return (
     <div>
-        <CNavbar>
-        </CNavbar>
+      <br></br>
+        <img src = "logo/3x/Sentio_horizontalxxhdpi.png" width="30%">
+          </img>
+        <br></br>
         <br></br>
         <Container>
         <FormGroup tag="fieldset" row onChange={handleRadioChange}>
