@@ -89,6 +89,21 @@ export default function UserPage(){
     </br>
     <Row>
       <Col>
+      <Link to="/tendency_change">
+      <Button id="btn_block" size="lg" block>
+     
+        <Row>
+          <Col style={{marginTop:"5px"}}><img id="icon" src="svg/fi-rr-following.svg"/></Col>
+          <Col style={{marginTop:"5px"}}><span id="light_txt">성향 분석 수정</span></Col>
+        </Row>
+        </Button>
+        </Link>
+      </Col>
+    </Row>
+    <br>
+    </br>
+    <Row>
+      <Col>
       <Link to="/wheatherChart">
       <Button id="btn_block" size="lg" block>
         <Row>
