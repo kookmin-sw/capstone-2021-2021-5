@@ -81,6 +81,8 @@ const Chat = () => {
 
         setMessage('');
       }
+  
+
 
   return (
     <div>

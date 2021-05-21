@@ -42,6 +42,7 @@ const AdChat = () => {
       ws.current.onclose = (error) => {
         console.log("disconnect from " + webSocketUrl);
         console.log(error);
+        alert("해당 채팅방은 입장할 수 없습니다.");
         history.push('./main')
       };
       ws.current.onerror = (error) => {

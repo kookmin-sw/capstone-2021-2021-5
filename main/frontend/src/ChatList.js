@@ -44,6 +44,22 @@ export default function ChatList(){
     })
   },[]);
 
+  useEffect(() => {
+    axios.get('http://127.0.0.1:8000/analysis/emotion_analyze/')
+    .then(function(response){
+      let bool = response.data.result;
+      if(!bool){
+        alert('감정분석을 먼저해주세요');
+        history.push('./main')
+      }
+      console.log(response);
+      }
+    )
+    .catch(function(error){
+      console.log(error);
+    })
+  },[])
+
   function ShowPI(idx) {
     console.log(idx)
     axios.get('http://127.0.0.1:8000/chat/chat_statistic/?room_id='+idx)

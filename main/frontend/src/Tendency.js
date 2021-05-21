@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
@@ -152,40 +146,6 @@ function Tendency() {
           <Button type="submit" onClick={handleSubmit} variant="outlined" color="primary" className={classes.button}>
           분석하기
         </Button>
-
-      {/* <form onSubmit={handleSubmit}>
-        <FormLabel component="legend">성향 분석 퀴즈</FormLabel>
-        <RadioGroup aria-label="quiz" name="quiz" value={value} onClick={()=>{console.log("click")}} onChange={handleRadioChange}>
-          <FormControlLabel value="0" control={<Radio name="q1"/>} label="화날때 차분한 음악" />
-          <FormControlLabel value="1" control={<Radio name="q1" />} label="화날때 신나는 음악" />
-        </RadioGroup>
-        <hr/>
-
-        <RadioGroup aria-label="quiz2" name="quiz2" value={value} onChange={handleRadioChange}>
-          <FormControlLabel value="2" control={<Radio name="q2" />} label="슬플때 차분한 음악" />
-          <FormControlLabel value="3" control={<Radio name="q2" />} label="짜증날때 신나는 음악" />          
-        </RadioGroup>
-
-        <hr/>
-
-        <RadioGroup aria-label="quiz3" name="quiz3" value={value} onChange={handleRadioChange}>
-          <FormControlLabel value="4" control={<Radio name="q3"/>} label="행복할때 차분한 음악" />
-          <FormControlLabel value="5" control={<Radio name="q3" />} label="행복할때 행복한 음악" />
-        </RadioGroup>
-
-        <hr/>
-
-        <RadioGroup aria-label="quiz4" name="quiz4" value={value} onChange={handleRadioChange}>
-          <FormControlLabel value="6" control={<Radio name="q4" />} label="슬플때 차분한 음악" />
-          <FormControlLabel value="7" control={<Radio name="q4" />} label="슬플때 행복한 음악" />
-        </RadioGroup>
-
-        <hr/>
-
-        <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-          분석하기
-        </Button>
-    </form> */}
 
     </div>
   );

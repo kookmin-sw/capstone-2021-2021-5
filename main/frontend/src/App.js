@@ -16,7 +16,6 @@ import Ctest from "./Ctest";
 import DiaryList from "./DiaryList";
 import { Reset } from 'styled-reset';
 import EmotionResult from './emotionResult';
-import Maint from "./Maint";
 import WeatherChart from "./weather_chart";
 import DiaryDetail from "./DiaryDetail";
 import AdChat from "./AdChat";
@@ -77,9 +76,6 @@ function App() {
     </Route>
     <Route path="/wheatherChart">
         <WeatherChart/>
-    </Route>
-    <Route path="/maint">
-      <Maint />
     </Route>
     <Route path="/diaryDetail">
       <DiaryDetail />

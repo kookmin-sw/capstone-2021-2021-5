@@ -20,6 +20,7 @@ import { LaptopWindowsOutlined } from '@material-ui/icons';
 
 
 export default function Main(){
+  const history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
   const [emo,setEmo] = useState('');
   const [rm,setRm] = useState('');
@@ -100,6 +101,22 @@ export default function Main(){
     getRandomMusics();
     console.log(maxEmo);
     console.log(userType);
+  },[])
+
+   useEffect(() => {
+    axios.get('http://127.0.0.1:8000/analysis/tendancy/')
+    .then(function(response){
+      let bool = response.data.exist;
+      if(!bool){
+        alert('성향분석을 먼저해주세요');
+        history.push('./tendency')
+      }
+      console.log(response);
+      }
+    )
+    .catch(function(error){
+      console.log(error);
+    })
   },[])
 
   
