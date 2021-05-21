@@ -5,12 +5,12 @@ from socket import timeout
 def weather_report(lat,lan):
     API_key = '6accb9bfc78c7f11c54c7b6c51c9ca26'
     global owm
-    owm = OWM(API_key)
-    mgr = owm.weather_manager()
+    mgr = pyowm.OWM(API_key)
+   # mgr = owm.weather_manager()
     try:
         obs = mgr.weather_at_coords(lat, lan)  
-        w = obs.weather
-        res = w.status
+        w = obs.get_weather()
+        res = w.get_status()
     except timeout as e:
         print("socket timeout.")
         weather_report(lat,lan)
