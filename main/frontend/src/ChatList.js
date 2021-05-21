@@ -13,6 +13,7 @@ import {
 } from 'reactstrap';
 import Table from 'react-bootstrap/Table'
 import Image from 'react-bootstrap/Image'
+import PIgraph from './PIgraph';
 
 
 
@@ -22,6 +23,8 @@ export default function ChatList(){
   let [roomname, setRoomName] = useState('');
   const [modalShow, setModalShow] = React.useState(false);
   const [PImodalShow, setPIModalShow] = React.useState(false);
+  const [maxEmotion, setMaxEmotion] = useState('');
+  const [emotions, setEmotions] = useState([]);
 
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -42,11 +45,13 @@ export default function ChatList(){
   },[]);
 
   function ShowPI(idx) {
-    setPIModalShow(true)
     console.log(idx)
-    axios.get('/chat/chat_statistic/?room_id='+idx)
+    axios.get('http://127.0.0.1:8000/chat/chat_statistic/?room_id='+idx)
     .then(function(response){
-      console.log(response);
+      console.log(response.data);
+      setMaxEmotion(response.data.max_emotion);
+      setEmotions(response.data.emotions);
+      setPIModalShow(true);
     })
     .catch(function (error){
       console.log(error);
@@ -130,18 +135,15 @@ export default function ChatList(){
         </Col>
       </Row>
     </Container>
-    
-     <MyPIVerticallyCenteredModal
-        show={PImodalShow}
-        onHide={() => setPIModalShow(false)}
-      />
-
+  
       <MyVerticallyCenteredModal
         show={modalShow}
         setRoomName={setRoomName}
         OnMakeChat={OnMakeChat}
         onHide={() => setModalShow(false)}
       />
+      <MyPIVerticallyCenteredModal  show={PImodalShow}
+      onHide={() => setPIModalShow(false)} data={maxEmotion} emotions={emotions}></MyPIVerticallyCenteredModal>
 
   </div>
   );
@@ -183,12 +185,12 @@ function MyPIVerticallyCenteredModal(props) {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          파이그래프 보여줄거임
+        <Modal.Title id="contained-modal-title-vcenter simple_txt">
+          MAIN EMOTION: <span style={{color:"#f1a9a0"}}>{props.data}</span>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        
+        <PIgraph data={props.emotions}></PIgraph>
       </Modal.Body>
       <Modal.Footer>
         <Button id="btn_nomal" onClick={props.onHide}>확인</Button>
