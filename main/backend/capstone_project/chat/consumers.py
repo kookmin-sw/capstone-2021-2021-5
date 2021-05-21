@@ -46,7 +46,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
         await self.del_participant(self.scope["user"])
-        raise StopConsumer()
+        # raise StopConsumer()
         
 
     # Receive message from WebSocket
