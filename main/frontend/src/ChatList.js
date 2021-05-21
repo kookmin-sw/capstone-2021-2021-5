@@ -41,6 +41,19 @@ export default function ChatList(){
     })
   },[]);
 
+  function ShowPI(idx) {
+    setPIModalShow(true)
+    console.log(idx)
+    axios.get('/chat/chat_statistic/?room_id='+idx)
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function (error){
+      console.log(error);
+      alert(error);
+    });
+  }
+
   function OnGoChat(roomid,roomname) {
     console.log(roomid);
     console.log(roomname);
@@ -99,7 +112,7 @@ export default function ChatList(){
                 clist.map((post, idx) => (
                   <tr key={idx}>   
                     <td id="id" 
-                            ><span id="light_txt" onClick={() => setPIModalShow(true)}>{idx+1}</span></td>
+                            ><span id="light_txt"  onClick={() => ShowPI(post.id)}>{idx+1}</span></td>
                    <td id={post.id} className="light_txt" onClick={(e)=>{
                   var roomid = e.target.id;
                   var roomname = e.target.innerText;
