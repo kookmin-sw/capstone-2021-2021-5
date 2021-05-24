@@ -29,6 +29,8 @@ function Copyright() {
   );
 }
 
+
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -54,9 +56,12 @@ export default function SignIn()  {
   let [username, setEmail] = useState();
   let [pw, setPw] = useState();
   let history = useHistory();
+  
+
+
 
   const Check = (user) =>{
-    return fetch('http://127.0.0.1:8000/account/rest-auth/login/',{
+    return fetch('http://15.165.85.247:8000/account/rest-auth/login/',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'
@@ -82,15 +87,17 @@ export default function SignIn()  {
         console.log(response.token);
         const accessToken = response.token;
         window.sessionStorage.setItem("Authorization",accessToken);
-        alert("login suc")
         history.push("/main");
       }
       else{
-        throw new Error(response.error);
+        setEmail('');
+        setPw('');
+        alert(response.error);
+        console.log(response.error);
+        
       }
     }
     catch(err){
-      alert('Fail Login');
       setEmail('');
       setPw('');
       console.log(err);

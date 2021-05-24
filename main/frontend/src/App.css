@@ -1,6 +1,9 @@
 .App {
   text-align: center;
+  align-items: center;
 }
+
+
 
 .App-logo {
   height: 40vmin;
@@ -71,7 +74,8 @@ h1{
   font-weight: 300;
 }
 
-#link:link { color:#e73330ad ; 
+#link:link { 
+  color:#e73330ad ; 
   font-family: 'GmarketSansLight';
   font-style: normal;
   font-weight: 100;
@@ -89,6 +93,20 @@ input::placeholder{
   font-weight: 100;
 }
 
+#light_txt{
+  font-family: 'GmarketSansLight';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 0.8em;
+}
+.light_txt{
+  font-family: 'GmarketSansLight';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 0.8em;
+  color: #d82e2be3;
+}
+
 #btn_nomal {
   background-color: #e73330a2;
   border:none;
@@ -102,11 +120,30 @@ input::placeholder{
   text-align: right;
 }
 
-.thumbnail{
-  max-width: 60%;
-  height: auto;
-  border-radius: 50%;
-}
+
+
+::-webkit-scrollbar{
+      height: 7px;
+      width: 6px;
+      background: white;
+    }
+::-webkit-scrollbar-thumb {
+      background: #e73330a2;
+      border-radius: 10px;
+    }
+  
+#slide_container {
+      white-space: nowrap;
+      vertical-align: middle;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      padding: 10px 10px 5px;
+    }
+#slide_container .container {
+      display: inline-block;
+      
+      
+    }
 
 #sub_title {
   font-family: 'GmarketSansBold';
@@ -114,8 +151,86 @@ input::placeholder{
   font-weight: 100;
   font-size: 1.5em;
 }
-
-#bottom_fix {
-  text-align: center;
+@media only screen and (max-width: 600px) {
+#bar {
+  padding-right: 70px;
+  overflow: hidden;
+}
+.profile_preview{
+  max-width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.profile_preview_small{
+  max-width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+#icon{
+  max-width: 30px;
+  height: auto;
+  
+}
+#Chart_Col{
   align-items: center;
+  text-align: center;
+  margin-right: 75%;
+}
+#sub_color{
+  border: none;
+}
+
+
+
+}
+
+#icon{
+  max-width: 30px;
+  height: auto;
+  
+}
+#btn_block {
+  background-color: white;
+  border:1px solid #e73330a2 ;
+  border-radius: 10px;
+  color: #282c34;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255) !important;
+}
+#btn_block :hover {
+  color: #e73330a2;
+}
+
+#Chart_Col{
+  align-items: center;
+  text-align: center;
+  left: 43%;
+}
+
+#picture{
+  max-width: 300px;
+  height: auto;
+}
+
+#warning{
+  color: red;
+}
+
+#tab{
+  overflow-x: scroll;
+}
+
+#chatroom{
+  width: 100%;
+  height: 550px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border:  5px solid #bdc3c7;
+  border-radius: 12px;
 }

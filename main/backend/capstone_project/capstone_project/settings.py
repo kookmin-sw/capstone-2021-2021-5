@@ -26,7 +26,7 @@ SECRET_KEY = '@#!tz#jj#(fr1*m=ow=d+_ujlhb8w3tg5$#zn0@aol)2f+ak6k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'analysis',
      'chat',
+     'diary_app',
 ]
 SITE_ID = 1
 
@@ -205,7 +206,10 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('15.165.85.247', 6379)],
         },
     },
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

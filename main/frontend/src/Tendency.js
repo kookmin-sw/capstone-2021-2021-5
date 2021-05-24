@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel from '@material-ui/core/FormLabel';
-import Button from '@material-ui/core/Button';
+
+
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import {Row, Col, Form, FormGroup, Label, Input, FormText,Container,Button } from 'reactstrap';
+import CNavbar from './custom_navbar';
 
 
 
@@ -23,8 +20,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Tendency() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const [error, setError] = React.useState(false);
+  const [value, setValue] = React.useState([]);
+  const [q1, setQ1] = useState(0);
+  const [q2, setQ2] = useState(0);
+  const [q3, setQ3] = useState(0);
+  const [q4, setQ4] = useState(0);
+
+  
   let history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
@@ -32,14 +34,31 @@ function Tendency() {
 
 
   const handleRadioChange = (event) => {
-    setValue(event.target.value);
-    setError(false);
+    console.log(event.target.value);
+    setQ1(event.target.value);
+  };
+  const handleRadioChange2 = (event) => {
+    console.log(event.target.value);
+    setQ2(event.target.value);
+  };
+  const handleRadioChange3 = (event) => {
+    console.log(event.target.value);
+    setQ3(event.target.value);
+  };
+  const handleRadioChange4 = (event) => {
+    console.log(event.target.value);
+    setQ4(event.target.value);
   };
 
   const handleSubmit = (event) => {
+    value.push(q1);
+    value.push(q2);
+    value.push(q3);
+    value.push(q4);
+    console.log(value.map(i=>Number(i)));
     event.preventDefault();
-    axios.post('http://127.0.0.1:8000/analysis/tendancy/',{
-      answer: [parseInt(value)],
+    axios.post('http://15.165.85.247:8000/analysis/tendancy/',{
+      answer: value.map(i=>Number(i))
 
     })
     .then(function (response){
@@ -55,19 +74,94 @@ function Tendency() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-      <FormControl component="fieldset" error={error} className={classes.formControl}>
-        <FormLabel component="legend">성향 분석 퀴즈</FormLabel>
-        <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-          <FormControlLabel value="1" control={<Radio />} label="슬플때 슬픈 음악" />
-          <FormControlLabel value="2" control={<Radio />} label="슬플땐 기쁜 음악" />
-        </RadioGroup>
-        <Button type="submit" variant="outlined" color="primary" className={classes.button}>
-          분석하기
-        </Button>
-      </FormControl>
-    </form>
-
+      <br></br>
+        <img src = "logo/3x/Sentio_horizontalxxhdpi.png" width="30%">
+          </img>
+        <br></br>
+        <br></br>
+        <Container>
+        <FormGroup tag="fieldset" row onChange={handleRadioChange}>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 화가 날때?</span> </legend>
+        <Col sm={10}>
+          <FormGroup check>
+            <Label check>
+              <Input  value='0' type="radio" name="radio1" />{' '}
+              <span id="simple_txt">차분한 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          <br></br>
+          <FormGroup check>
+            <Label check>
+              <Input value='1' type="radio" name="radio1" />{' '}
+              <span id="simple_txt">스트레스 풀리는 신나는 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          </Col>
+          </FormGroup>
+          <hr/>
+          <FormGroup tag="fieldset" row onChange={handleRadioChange2}>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 짜증 날때?</span> </legend>
+        <Col sm={10}>
+          <FormGroup check>
+            <Label check>
+              <Input value='0' type="radio" name="radio2" />{' '}
+              <span id="simple_txt">차분한 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          <br></br>
+          <FormGroup check>
+            <Label check>
+              <Input value='1' type="radio" name="radio2" />{' '}
+              <span id="simple_txt">짜증 풀리는 신나는 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          </Col>
+          </FormGroup>
+          <hr/>
+          <FormGroup tag="fieldset" row onChange={handleRadioChange3}>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 행복 할때?</span> </legend>
+        <Col sm={10}>
+          <FormGroup check>
+            <Label check>
+              <Input value='0' type="radio" name="radio3" />{' '}
+              <span id="simple_txt">차분해질수 있는 조용한 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          <br></br>
+          <FormGroup check>
+            <Label check>
+              <Input value='1' type="radio" name="radio3" />{' '}
+              <span id="simple_txt">행복할땐 신나는 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          </Col>
+          </FormGroup>
+          <hr/>
+          <FormGroup tag="fieldset" row onChange={handleRadioChange4}>
+        <legend className="col-form-label col-sm-2"><span id="sub_title">나는 슬플때?</span> </legend>
+        <Col sm={10}>
+          <FormGroup check>
+            <Label check>
+              <Input value='0' type="radio" name="radio4" />{' '}
+              <span id="simple_txt">나를 위로해주는 슬픈 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          <br></br>
+          <FormGroup check>
+            <Label check>
+              <Input value='1' type="radio" name="radio4" />{' '}
+              <span id="simple_txt">슬픔을 날리는 신나는 음악이 좋아요!</span>
+            </Label>
+          </FormGroup>
+          </Col>
+          </FormGroup>
+          <Row xs={7} id="bottom_fix" className="fixed-bottom">
+          <Col>
+          <Button type="submit" onClick={handleSubmit}  size="lg" block id="btn_nomal"><span id="simple_txt">완료</span></Button>
+          </Col>
+          </Row>
+         
+        </Container>
     </div>
   );
 }

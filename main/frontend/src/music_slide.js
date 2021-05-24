@@ -1,4 +1,4 @@
-import React, { useState,useCallback  } from 'react';
+import React, { useState  } from 'react';
 import {
   Carousel,
   CarouselItem,
@@ -9,36 +9,35 @@ import {
   Row, 
   Col 
 } from 'reactstrap';
+
 import axios from 'axios';
 
 
-const [params, setParams] = useState({
-  key:'AIzaSyBFyhTo8AXnROaRd3xXA9uZWMVz7LZIetI',
-  part: 'snippet',
-  q: "아이유 좋은날",
-  maxResults: 1,
-  type: 'video',
-  videoDuration: 'long'
-});
+
 
 
 const Slide = (props) => {
 
- 
+  const musics = props.data;
+  if(musics == null){
+    return false;
+  }
+  else{
+    
+  }
+  const urls = musics.map((music)=>  <div class=" container" >
+  <iframe width="300" height="200" src={music.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>);
   return (
     <>
-    <Row>
-    <Col id="sub_title">
-    <span>오늘 당신을 위한 음악</span>
-    </Col>    
-    </Row>
-    <br></br>
     <Row xs="1" sm="2" md="3" className="overflow-auto">
-    <Col> <img className="thumbnail" src="music.jpeg"></img></Col>
-    <Col>
-    <img className="thumbnail" src="music.jpeg"></img>
+    <Col></Col>
+    <Col >
+    <div id="slide_container">
+    {urls}
+    </div>
     </Col>
-    <Col> <img className="thumbnail" src="music.jpeg"></img></Col>
+    <Col></Col>
     </Row>
     </>
   );

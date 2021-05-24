@@ -21,6 +21,8 @@ import {Route, Switch} from 'react-router-dom';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
+import Figure from 'react-bootstrap/Figure'
+import FigureImage from 'react-bootstrap/FigureImage'
 
 
 function Copyright() {
@@ -75,6 +77,42 @@ export default function SignUp() {
   let [gender, setGender] = useState();
   let [usertype, setUserType] = useState();
   let history = useHistory();
+  let profile_preview = null;
+  let [file, setFile] = useState('');
+  let [previewURL, setPreviewURL] = useState();
+
+    if(file !== ''){
+      profile_preview = <Figure>
+      <Figure.Image
+        width={171}
+        height={180}
+        alt="171x180"
+        className='profile_preview' 
+        src={previewURL}
+      />
+      </Figure>
+    }
+
+  function handleFileOnChange(event){
+    event.preventDefault();
+    let reader = new FileReader();
+    let files = event.target.files[0];
+    
+
+    reader.onloadend = () => {
+     setFile(files);
+     setPreviewURL(reader.result);
+     console.log(reader.result);
+    }
+    reader.readAsDataURL(files); 
+  }
+  
+
+   const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
 
   
 
@@ -82,19 +120,19 @@ export default function SignUp() {
 
   function OnSubmit(e) {
     e.preventDefault();
+    let fd = new FormData();
+    fd.append("username",name);
+    fd.append("password1",pw);
+    fd.append("password2",pwc);
+    fd.append("email",email);
+    fd.append("gender",gender);
+    fd.append("birthDate",birth);
+    fd.append("userType",usertype);
+    fd.append("image",file);
     if(pw !== pwc){
       alert('비밀번호가 일치 하지 않습니다.')
     }
-    axios.post('http://127.0.0.1:8000/account/rest-auth/registration/',{
-      username : name,
-      password1 : pw,
-      password2 : pwc,
-      email : email,
-      gender: gender,
-      birthDate: birth,
-      userType : usertype,
-
-    })
+    axios.post('http://15.165.85.247:8000/account/rest-auth/registration/',fd,config)
     .then(function (response){
       console.log(response);
       console.log(response.data);
@@ -105,9 +143,9 @@ export default function SignUp() {
     })
 
     .catch(function (error){
+      console.log(file);
       console.log(error.response);
-      if (error.response) {
-        const { data } = error.response;
+      const { data } = error.response;
         if(data.email != null){
           console.error("error : ", data.email);
           alert(data.email);
@@ -132,8 +170,6 @@ export default function SignUp() {
           console.error("error : ", data.birthDate);
           alert(data.birthDate);
         }
-        
-      }
     });
   }
 
@@ -145,8 +181,18 @@ export default function SignUp() {
       <img src = "logo/3x/Sentio_horizontalxxhdpi.png" width="70%">
           </img>
           <br></br>
-        <form className={classes.form} noValidate onSubmit={OnSubmit}>
+        <form className={classes.form} noValidate onSubmit={OnSubmit} encType="multipart/form-data">
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <div>
+            {profile_preview}
+              </div>
+              <input type='file' 
+              accept='image/jpg,image/png,image/jpeg,image/gif' 
+              name='profile_img' 
+              onChange={handleFileOnChange}>
+              </input>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 autoComplete="name"
@@ -155,7 +201,7 @@ export default function SignUp() {
                 required="required"
                 fullWidth
                 id="name"
-                label="이름"
+                label="아이디"
                 color="secondary"
                 autoFocus
                 onChange={(e)=>{
