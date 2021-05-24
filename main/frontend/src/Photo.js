@@ -40,8 +40,8 @@ export default function Photo(){
          setLng(position.coords.longitude);
  
        }, () => {
-         setStatus('Unable to retrieve your location');
-         alert('위치를 알 수 없습니다.')
+         setLat(37.5665);
+        setLng(126.9780);
        });
      }
    }
