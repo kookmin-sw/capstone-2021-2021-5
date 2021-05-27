@@ -23,7 +23,7 @@ export default function WeatherChart() {
     axios.defaults.headers.common["Authorization"] = "jwt " + token;
     function selk(k){
         setKey(k);
-        axios.get('http://15.165.85.247:8000/analysis/emotion_statistic/?weather='+k)
+        axios.get('https://ksentio.com/analysis/emotion_statistic/?weather='+k)
         .then(function (response){
             setEmotions(response.data.emotions);
             let emos =response.data.emotions;

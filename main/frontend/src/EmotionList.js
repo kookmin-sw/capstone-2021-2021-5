@@ -18,7 +18,7 @@ export default function EmotionList() {
   let history = useHistory();
 
   function getEmoList (){
-    axios.get('http://15.165.85.247:8000/analysis/emotion_histroy/')
+    axios.get('https://ksentio.com/analysis/emotion_histroy/')
     .then(function(response){
       console.log(response.data)
       let emos = response.data
@@ -38,7 +38,7 @@ export default function EmotionList() {
 
   function OnDetail(id){
       console.log(id);
-      axios.post('http://15.165.85.247:8000/analysis/emotion_histroy/',{
+      axios.post('https://ksentio.com/analysis/emotion_histroy/',{
           pk:id
       })
       .then(function(response){

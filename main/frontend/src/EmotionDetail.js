@@ -29,7 +29,7 @@ export default function EmotionDetail() {
   const getResult = ()=>{
     console.log(result);
     setDate(result.pubDate);
-    setResultImg('http://15.165.85.247:8000'+result.image);
+    setResultImg('https://ksentio.com'+result.image);
     setEmotions(result.emotions);
     let urls = result.musics.map((music)=>  <div class=" container" >
     <iframe width="300" height="200" src={music.url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

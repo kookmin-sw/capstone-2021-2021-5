@@ -48,7 +48,7 @@ export default function DiaryEdit() {
     }
 
 
-    axios.put('http://15.165.85.247:8000/diary/crud/' + id + '/',{
+    axios.put('https://ksentio.com/diary/crud/' + id + '/',{
       title: title,
       body: content,
     })

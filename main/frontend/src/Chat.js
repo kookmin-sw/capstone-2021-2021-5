@@ -25,7 +25,7 @@ const Chat = () => {
   
 
   useEffect(()=>{
-    axios.get('http://15.165.85.247:8000/chat/crud/')
+    axios.get('https://ksentio.com/chat/crud/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -38,7 +38,7 @@ const Chat = () => {
     })
   },[]);
 
-  const webSocketUrl = 'ws://' + "15.165.85.247:8000" +
+  const webSocketUrl = 'ws://' + "ksentio.com" +
     '/ws/chat/' + ri + '/' + "?token="+ token;
 
 

@@ -28,7 +28,7 @@ export default function AdChatList(){
 
 
   useEffect(()=>{
-    axios.get('http://15.165.85.247:8000/chat/adviser/')
+    axios.get('https://ksentio.com/chat/adviser/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -41,7 +41,7 @@ export default function AdChatList(){
   },[]);
 
   useEffect(()=>{
-    axios.post('http://15.165.85.247:8000/analysis/data_injection/')
+    axios.post('https://ksentio.com/analysis/data_injection/')
     .then(function(response){
       console.log(response.data.result);
       const type = response.data.result;
@@ -76,7 +76,7 @@ export default function AdChatList(){
       return;
     }
 
-    axios.post('http://15.165.85.247:8000/chat/adviser/',{
+    axios.post('https://ksentio.com/chat/adviser/',{
       name: roomname,
 
     })
