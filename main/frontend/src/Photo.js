@@ -87,6 +87,7 @@ export default function Photo(){
     .catch(function (error){
       // console.log(file);
       console.log(error.response);
+      console.log(error.response.data);
       alert('감정분석이 완료되지않았습니다.');
     });
   }
