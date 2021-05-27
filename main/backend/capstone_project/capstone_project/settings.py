@@ -209,7 +209,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('15.165.85.247', 6379)],
+            "hosts": [('https://www.ksentio.com:80', 6379)],
         },
     },
 }
