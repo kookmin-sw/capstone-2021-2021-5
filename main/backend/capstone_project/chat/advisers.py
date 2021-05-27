@@ -23,7 +23,7 @@ class adviserConsumer(AsyncWebsocketConsumer):
        
         room.numbers -= 1
         room.save()
-        if room.numbers == 0:
+        if room.numbers == 0 or participant.userType == 'Adviser':
             room.delete() 
 
     async def connect(self):
