@@ -4,7 +4,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 import chat.routing
 
 from .middleware import TokenAuthMiddlewareStack
-ASGI_APPLICATION = "capstone_project.routing.application"
+
 application = ProtocolTypeRouter({
     # (http->django views is added by default)
     'websocket': TokenAuthMiddlewareStack(
