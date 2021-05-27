@@ -38,7 +38,7 @@ const Chat = () => {
     })
   },[]);
 
-  const webSocketUrl = 'ws://' + "www.ksentio.com:80" +
+  const webSocketUrl = 'wss://' + "www.ksentio.com:80" +
     '/ws/chat/' + ri + '/' + "?token="+ token;
 
 
