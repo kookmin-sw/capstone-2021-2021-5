@@ -1,4 +1,4 @@
-from pyowm import OWM
+import pyowm
 import requests
 from socket import timeout
 
