@@ -25,7 +25,7 @@ const AdChat = () => {
   let history = useHistory();
 
   useEffect(()=>{
-    axios.get('https://ksentio.com/chat/adviser/')
+    axios.get('https://www.ksentio.com:80/chat/adviser/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -38,7 +38,7 @@ const AdChat = () => {
     })
   },[]);
 
-  const webSocketUrl = 'ws://' + "ksentio.com" +
+  const webSocketUrl = 'ws://' + "www.ksentio.com:80" +
     '/ws/adviser/' + ri + '/' + "?token="+ token;
 
 

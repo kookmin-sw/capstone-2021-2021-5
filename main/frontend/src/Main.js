@@ -33,7 +33,7 @@ export default function Main(){
   axios.defaults.headers.common["Authorization"] = "jwt " + token;
 
   function getEmotions(){
-    axios.post('https://ksentio.com/analysis/emotion_statistic/')
+    axios.post('https://www.ksentio.com:80/analysis/emotion_statistic/')
     .then(function(response){
       let emotions = response.data.emotions;
       let max_emotions = response.data.max_emotion;
@@ -64,7 +64,7 @@ export default function Main(){
   }
   function getRandomMusics(){
     if(musics==null){
-      axios.get('https://ksentio.com/analysis/random_music/')
+      axios.get('https://www.ksentio.com:80/analysis/random_music/')
     .then(function(response){
       let random = response.data.musics;
       window.sessionStorage.setItem("randomMusic",JSON.stringify(randomMusic));
@@ -83,7 +83,7 @@ export default function Main(){
   }
 
   function getUserType(){
-    axios.post('https://ksentio.com/analysis/data_injection/')
+    axios.post('https://www.ksentio.com:80/analysis/data_injection/')
     .then(function(response){
       console.log(response.data.result);
       const type = response.data.result;
@@ -104,7 +104,7 @@ export default function Main(){
   },[])
 
    useEffect(() => {
-    axios.get('https://ksentio.com/analysis/tendancy/')
+    axios.get('https://www.ksentio.com:80/analysis/tendancy/')
     .then(function(response){
       let bool = response.data.exist;
       if(!bool){

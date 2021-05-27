@@ -36,7 +36,7 @@ export default function Diary() {
     }
 
 
-    axios.post('https://ksentio.com/diary/crud/',{
+    axios.post('https://www.ksentio.com:80/diary/crud/',{
       title: title,
       body: content,
 

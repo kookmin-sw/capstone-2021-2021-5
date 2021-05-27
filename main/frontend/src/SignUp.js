@@ -132,7 +132,7 @@ export default function SignUp() {
     if(pw !== pwc){
       alert('비밀번호가 일치 하지 않습니다.')
     }
-    axios.post('https://ksentio.com/account/rest-auth/registration/',fd,config)
+    axios.post('https://www.ksentio.com:80/account/rest-auth/registration/',fd,config)
     .then(function (response){
       console.log(response);
       console.log(response.data);

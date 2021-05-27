@@ -70,7 +70,7 @@ export default function Photo(){
     for (let value of fd.values()) {
     console.log(value);
     }
-    axios.post('https://ksentio.com/analysis/emotion_analyze/',fd,config)
+    axios.post('https://www.ksentio.com:80/analysis/emotion_analyze/',fd,config)
     .then(function (response){
       console.log(response.data.token);
       const emotions =response.data.emotions;

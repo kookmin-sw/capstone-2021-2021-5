@@ -61,7 +61,7 @@ export default function SignIn()  {
 
 
   const Check = (user) =>{
-    return fetch('https://ksentio.com/account/rest-auth/login/',{
+    return fetch('https://www.ksentio.com:80/account/rest-auth/login/',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json'

@@ -23,7 +23,7 @@ export default function ChangeUserInfo(){
   let history = useHistory();
   
   useEffect(()=>{
-    axios.get('https://ksentio.com/account/userinfo/')
+    axios.get('https://www.ksentio.com:80/account/userinfo/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -31,7 +31,7 @@ export default function ChangeUserInfo(){
         setUserImage('svg/fi-rr-user.svg')
       }
       else{
-        setUserImage('https://ksentio.com'+response.data.image);
+        setUserImage('https://www.ksentio.com:80'+response.data.image);
       }
       setUserE(response.data.email);
       // alert("Succ");
@@ -64,7 +64,7 @@ export default function ChangeUserInfo(){
     for (let value of fd.values()) {
     console.log(value);
     }
-    axios.put('https://ksentio.com/account/userinfo/',fd,config)
+    axios.put('https://www.ksentio.com:80/account/userinfo/',fd,config)
     .then(function (response){
       console.log(response);
       console.log(response.data);
