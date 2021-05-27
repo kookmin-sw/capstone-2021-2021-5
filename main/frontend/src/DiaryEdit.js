@@ -48,7 +48,7 @@ export default function DiaryEdit() {
     }
 
 
-    axios.put('https://ksentio.com/diary/crud/' + id + '/',{
+    axios.put('https://www.ksentio.com:80/diary/crud/' + id + '/',{
       title: title,
       body: content,
     })

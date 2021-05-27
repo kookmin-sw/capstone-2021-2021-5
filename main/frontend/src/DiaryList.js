@@ -18,7 +18,7 @@ export default function DiaryList() {
   let history = useHistory();
 
   useEffect(()=>{
-    axios.get('https://ksentio.com/diary/crud/')
+    axios.get('https://www.ksentio.com:80/diary/crud/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -35,7 +35,7 @@ export default function DiaryList() {
 
   function OnDetail(id) {
     console.log(id);
-    axios.get('https://ksentio.com/diary/crud/' + id +'/')
+    axios.get('https://www.ksentio.com:80/diary/crud/' + id +'/')
     .then(function(response){
       console.log(response);
       console.log(response.data);

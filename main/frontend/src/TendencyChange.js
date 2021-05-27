@@ -54,7 +54,7 @@ function TendencyChange() {
     value.push(q4);
     console.log(value.map(i=>Number(i)));
     event.preventDefault();
-    axios.put('https://ksentio.com/analysis/tendancy/',{
+    axios.put('https://www.ksentio.com:80/analysis/tendancy/',{
       answer: value.map(i=>Number(i))
 
     })

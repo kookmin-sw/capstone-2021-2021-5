@@ -31,7 +31,7 @@ export default function ChatList(){
 
 
   useEffect(()=>{
-    axios.get('https://ksentio.com/chat/crud/')
+    axios.get('https://www.ksentio.com:80/chat/crud/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -45,7 +45,7 @@ export default function ChatList(){
   },[]);
 
   useEffect(() => {
-    axios.get('https://ksentio.com/analysis/emotion_analyze/')
+    axios.get('https://www.ksentio.com:80/analysis/emotion_analyze/')
     .then(function(response){
       let bool = response.data.result;
       if(!bool){
@@ -62,7 +62,7 @@ export default function ChatList(){
 
   function ShowPI(idx) {
     console.log(idx)
-    axios.get('https://ksentio.com/chat/chat_statistic/?room_id='+idx)
+    axios.get('https://www.ksentio.com:80/chat/chat_statistic/?room_id='+idx)
     .then(function(response){
       console.log(response.data);
       setMaxEmotion(response.data.max_emotion);
@@ -90,7 +90,7 @@ export default function ChatList(){
       return;
     }
 
-    axios.post('https://ksentio.com/chat/crud/',{
+    axios.post('https://www.ksentio.com:80/chat/crud/',{
       name: roomname,
 
     })

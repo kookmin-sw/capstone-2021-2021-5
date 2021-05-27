@@ -21,7 +21,7 @@ export default function UserPage(){
 
 
   useEffect(()=>{
-    axios.get('https://ksentio.com/account/userinfo/')
+    axios.get('https://www.ksentio.com:80/account/userinfo/')
     .then(function(response){
       console.log(response);
       console.log(response.data);
@@ -30,7 +30,7 @@ export default function UserPage(){
         setUserImage('svg/fi-rr-user.svg')
       }
       else{
-        setUserImage('https://ksentio.com'+response.data.image);
+        setUserImage('https://www.ksentio.com:80'+response.data.image);
       }
       // alert("Succ");
     })

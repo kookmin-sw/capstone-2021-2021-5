@@ -22,7 +22,7 @@ export default function EmotionResult(){
     const emotions = JSON.parse(window.sessionStorage.getItem("emotions"));
     const musics = JSON.parse(window.sessionStorage.getItem("musics"));
     const picture = window.sessionStorage.getItem("picture");
-    const resultImg = 'https://ksentio.com'+picture
+    const resultImg = 'https://www.ksentio.com:80'+picture
     console.log(picture);
     console.log(emotions);
     console.log(musics);
