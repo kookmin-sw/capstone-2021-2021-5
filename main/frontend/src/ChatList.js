@@ -118,6 +118,8 @@ export default function ChatList(){
       <Row>
         <Col id="sub_title" style={{textAlign:'left'}}>
           채팅방 목록
+          <img src = "../svg/fi-rr-refresh.svg" width="2%" heigth="4%" onClick={()=>{window.location.reload()}} style={{marginLeft:"1.5%"}}></img>
+
         </Col>
       </Row>
       <br>

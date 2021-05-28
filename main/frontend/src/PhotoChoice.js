@@ -6,7 +6,8 @@ import {
     Container, 
     Row, 
     Col,
-    Button
+    Button,
+    Alert
   } from 'reactstrap';
 import Card from 'react-bootstrap/Card'
 import CNavbar from './custom_navbar';
@@ -36,6 +37,12 @@ export default function PhotoChoice() {
             </Col>
         </Row>
         <br></br>
+        <Alert color="danger">
+            <p>1. 아이폰은 사파리 브라우저, 안드로이드폰은 크롬 브라우저를 이용해 주세요.</p>
+            <br /> 
+            <p>2. 얼굴이 정확하게 분석될 수 있도록 올바른 사진과 카메라를 정확히 응시후 촬영해주세요.</p>
+        </Alert>
+       
         <br></br>
         <Row>
         <Col>

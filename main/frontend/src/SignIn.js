@@ -92,7 +92,7 @@ export default function SignIn()  {
       else{
         setEmail('');
         setPw('');
-        alert(response.error);
+        alert("로그인정보를 확인해주세요.");
         console.log(response.error);
         
       }

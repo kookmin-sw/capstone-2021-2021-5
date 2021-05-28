@@ -10,7 +10,8 @@ import {
   Container, 
   Row, 
   Col,
-  Button
+  Button,
+  Alert
 } from 'reactstrap';
 import { useHistory } from 'react-router';
 import { LaptopWindowsOutlined } from '@material-ui/icons';
@@ -20,6 +21,7 @@ import { LaptopWindowsOutlined } from '@material-ui/icons';
 
 
 export default function Main(){
+  const [alt,setAlt] = useState(true);
   const history = useHistory();
   const token = window.sessionStorage.getItem("Authorization");
   const [emo,setEmo] = useState('');
@@ -119,6 +121,12 @@ export default function Main(){
     })
   },[])
 
+  useEffect(()=>{
+       let timer = setTimeout(()=>{ setAlt(false) },5000);
+       console.log("hi");
+       return () => {clearTimeout(timer)}
+    },[alt]);
+
   
 
   return(
@@ -126,6 +134,11 @@ export default function Main(){
     <Container className="themed-container" fluid>
     <CNavbar maxEmo={maxEmo} userType={userType}></CNavbar>
     <br></br>
+    {
+            alt == true ?  <Alert color="danger"> <p>Sentio는 모바일 환경 접속을 권장합니다.</p> </Alert> : null
+
+        }
+   
     <br></br>
     <Row>
     <Col id="sub_title">
